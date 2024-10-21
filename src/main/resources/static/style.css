@@ -1,0 +1,230 @@
+body ,html{
+    background-color: rgb(247 248 36);
+    box-sizing: border-box;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    height: 100%;
+}
+
+*::after, *::before{
+    box-sizing: border-box;
+}
+
+
+#navbarText  a{
+    font-weight: 800;
+    margin-top: -2px;
+    text-align: end;
+}
+
+.menu-bar-container{
+    margin-top: 0;
+    background-color: rgb(247 248 36);
+}
+
+.logo{
+    max-width: 300px;
+    height: 60px;
+    height: auto;
+    margin-left: 5px;
+    margin-right: 200px;
+}
+
+.instagram-logo svg{
+    color: black;
+    height: 4px;
+}
+
+.instagram-logo span{
+    font-size: 1.2rem;
+    color: black;
+}
+
+.instagram-logo:hover{
+    color: white;
+}
+
+.order-btn{
+    text-decoration: none;
+    color: black;
+    font-weight: 800;
+    padding: 2px;
+}
+
+.nav-item a{
+    margin-right: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    transition: .3s ease-out;
+}
+
+.nav-item a:hover{
+    background-color: black;
+    color: gold;
+    transition: .3s ease-in-out;
+}
+
+.carousel{
+    margin-top: 80px;
+    height: 100vh;
+    max-height: 100vh;
+    width: 100%;
+}
+
+.carousel-item img{
+    width: 100%;
+    height: 100vh;
+}
+
+.carousel-item h5{
+    font-size: 4rem;
+    font-weight: 800;
+    margin-top: -40%;
+    transition: .2s ease-in-out;
+}
+
+.carousel-item p{
+    font-weight: 600;
+    transition: .2s ease-out;
+}
+
+.carousel-item h5:hover{
+    color: gold;
+    font-size: 4.5rem;
+    transition: .2s ease-in-out;
+    text-shadow: 1px 1px 2px black;
+}
+
+
+.carousel-item p:hover{
+    color: gold;
+    font-weight: 900;
+    font-size: 1.3rem;
+    text-shadow: 1px 1px 2px black;
+    transition: .2s ease-in;
+    transition: .2s ease-out;
+}
+
+.making-container{
+    margin-top: 0px;
+    margin-bottom: 40px;
+    padding: 60px;
+    padding-top: 60px;
+    background-color: gold;
+}
+
+.making-container img{
+    width: 100%;
+    height: auto;
+}
+
+.menu-pic{
+    width: 100%;
+    height: auto;
+}
+
+.menu-container{
+    margin-top: 20px;
+}
+
+.catering-container{
+    margin-bottom: 40px 0px;
+    padding: 20px;
+}
+
+.catering-container img{
+    width: 100%;
+    height: auto;
+}
+
+.about-container{
+    background-color: gold;
+    padding: 30px;
+}
+
+
+.contact-container{
+    background-color: goldenrod;
+    padding: 30px;
+}
+
+.contact-container svg{
+    height: 60px;
+    width: 80px;
+}
+
+.footer{
+    background-color: gold;
+    color: black;
+    padding: 10px;
+}
+
+/* Inventory page */
+
+.expenditure .row{ 
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 480px) {
+
+    .logo{
+        height: 40px;
+        width: 250px;
+        margin-right: 10px;
+    }
+
+    .carousel-item h5{
+        /* font-size: 4rem;
+        font-weight: 800; */
+        margin-top: -600px;
+    }
+
+    .menu-bar-container{
+        margin-top: -5px;
+    }
+
+    .making-container{
+        margin-top: 450px;
+        margin-bottom: 40px;
+        padding: 40px;
+        padding-top: 100px;
+        background-color: gold;
+    }
+    .menu-container{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .manu-bar{
+        min-height: 40px;
+    }
+
+    .nav-item a{
+        margin-left: 0;
+    }
+
+    .carousel{
+        margin-top: 60px;
+        height: 100vh;
+        width: 100%;
+        max-height: 300px;
+    }
+
+    .catering-container{
+        margin-bottom: 40px;
+    }
+
+    .carousel-item img {
+        height: 820px; /* Make sure the images don't exceed the container's height */
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .about-container{
+        margin-top: 20px;
+    }
+}
+

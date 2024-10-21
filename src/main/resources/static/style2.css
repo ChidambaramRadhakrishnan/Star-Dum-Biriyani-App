@@ -1,0 +1,15 @@
+.expenditure .row, .sales .row, .product-usage .row, .accounting .row{
+    margin-left: 12px;
+    margin-top: 12px;
+}
+
+input:valid{
+    border: 2px solid green;
+}
+
+
+
+
+input:invalid{
+    border: 0.5px solid darkgray;
+}
