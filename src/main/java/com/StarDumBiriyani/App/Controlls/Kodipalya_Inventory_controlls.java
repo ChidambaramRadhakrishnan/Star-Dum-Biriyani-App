@@ -10,5 +10,15 @@ public class Kodipalya_Inventory_controlls {
 	public String home() {
 		return "home";
 	}
+	
+	@GetMapping("/navigatetoLogin")
+	public String navigateadmin() {
+		return "index";
+	}
+	
+	@GetMapping("/navigateToInventoryManagement")
+	public String navigateToInventoryManagement() {
+		return "inventory";
+	}
 
 }
