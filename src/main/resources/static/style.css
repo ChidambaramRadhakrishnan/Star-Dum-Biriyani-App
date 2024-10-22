@@ -30,7 +30,7 @@ body ,html{
     height: 60px;
     height: auto;
     margin-left: 5px;
-    margin-right: 200px;
+    margin-right: 80px;
 }
 
 .instagram-logo svg{
@@ -55,9 +55,9 @@ body ,html{
 }
 
 .nav-item a{
-    margin-right: 3px;
-    padding-left: 3px;
-    padding-right: 3px;
+    margin-right: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
     transition: .3s ease-out;
 }
 
