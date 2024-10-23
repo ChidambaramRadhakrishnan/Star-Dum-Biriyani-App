@@ -2,7 +2,6 @@ package com.StarDumBiriyani.App.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.StarDumBiriyani.App.KodiPalya_Entries.Kodipalya_Expenditure_Inventory;
 import com.StarDumBiriyani.App.KodiPalya_Entries.Kodipalya_Sale_Inventory;
 import com.StarDumBiriyani.App.Repository.AllShop_Repository;

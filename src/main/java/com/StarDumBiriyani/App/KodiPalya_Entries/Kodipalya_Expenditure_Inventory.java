@@ -1,7 +1,6 @@
 package com.StarDumBiriyani.App.KodiPalya_Entries;
 
 import com.StarDumBiriyani.App.Shops.All_Shops;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
