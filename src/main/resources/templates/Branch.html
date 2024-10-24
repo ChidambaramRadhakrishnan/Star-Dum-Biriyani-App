@@ -17,7 +17,7 @@
             <h1 class="fw-bold fs-1 ">Star Dum Biriyani</h1>
             <h3 class="fw-bold fs-2 text-center text-primary">Choose Branch</h3>
             <div class="col-lg-12 mt-4" th:each="branch : ${branchs}">
-                <a th:href="@{/navigateToInventoryManagement}" th:text="${branch.BranchName}" class="border border-1 bg-success rounded p-2 text-white fw-bold text-decoration-none fs-4"></a>
+                <a th:href="@{/branch_specifications}" th:text="${branch.BranchName}" class="border border-1 bg-success rounded p-2 text-white fw-bold text-decoration-none fs-4"></a>
             </div>
         </div>
     </div>
