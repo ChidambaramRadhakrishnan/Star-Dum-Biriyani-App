@@ -1,11 +1,20 @@
 package com.StarDumBiriyani.App.Controlls;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.StarDumBiriyani.App.Repository.AllShop_Repository;
+import com.StarDumBiriyani.App.Services.All_Shop_Service;
 import com.StarDumBiriyani.App.Services.Inventory_Service_class;
+import com.StarDumBiriyani.App.Shops.All_Shops;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class Kodipalya_Inventory_controlls {
@@ -13,6 +22,9 @@ public class Kodipalya_Inventory_controlls {
 	
 	@Autowired
 	Inventory_Service_class inventory_Service_class;
+	
+	@Autowired
+	All_Shop_Service all_Shop_Service;
 	
 
 	@GetMapping("/")
@@ -29,6 +41,14 @@ public class Kodipalya_Inventory_controlls {
 	public String navigateToInventoryManagement() {
 		return "inventory";
 	}
+	
+	@GetMapping("/navigateToBranch")
+	public String navigateToBranch(Model model) {
+		List<All_Shops> branchs= all_Shop_Service.getAllBranch();
+		model.addAttribute("branchs", branchs);
+		return all_Shop_Service.getAllShop();
+	}
+	
 
 	@GetMapping("/addNewUser")
 	public String addnewUser(@RequestParam("totalSale") int totalSale, @RequestParam("totalCash") int totalCash,
