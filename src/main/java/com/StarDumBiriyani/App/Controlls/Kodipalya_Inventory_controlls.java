@@ -47,6 +47,11 @@ public class Kodipalya_Inventory_controlls {
 		return "branch_specifications";
 	}
 
+	@GetMapping("/navigateToStockManagement")
+	public String navigateToStockManagement() {
+		return "stock_management";
+	}
+
 	@GetMapping("/addNewUser")
 	public String addnewUser(@RequestParam("totalSale") int totalSale, @RequestParam("totalCash") int totalCash,
 			@RequestParam("totalUPI") int totalUPI, @RequestParam("cashBalance") int cashBalance,

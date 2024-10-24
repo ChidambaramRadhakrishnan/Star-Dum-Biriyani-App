@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Dum Briyani | Inventory Management</title>
+    <link rel="icon" href="/images/Star-concept-bulb-lighting-Clipart-PNG.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./style3.css">
+</head>
+
+<body>
+
+    <div class="container mt-2">
+        <div class="col-12 text-center">
+            <h2 class="text-message fs-lg-2 fs-sm-5">Star Dum Biriyani</h2>
+        </div>
+        <hr>
+        <div class="col-12 text-center text-uppercase m-0">
+            <h4 class="fw-bold text-secondary">Stock Management</h4>
+        </div>
+    </div>
+
+    <!-- Form  -->
+    <form action="addNewUser" method="get">
+        <div class="container fastmovingItems">
+            <h3 class="text-danger fw-bold mt-2 mb-2">Fast Moving Items</h3>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Rice</h5>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="riceExpense" placeholder="Rice Expense" aria-label="Username"
+                            aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-11">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control" name="riceQty" placeholder="1 Bag equal to 25Kg" aria-label="Username"
+                            aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Bag</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Oil</h5>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="oilExpense" placeholder="Oil Expense" aria-label="Username"
+                            aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control" name="oilQty" placeholder="Oil Qty" aria-label="Username"
+                            aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Litres</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Garlic & Ginger</h5>
+                </div>
+                <div class="col-lg-3 col-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="gingerGarlicExpense" placeholder="Ginger & Garlic Expense"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required>
+                        <span class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-9">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="gingerGarlicQty" placeholder="Ginger & Garlic Qty"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required>
+                        <span class="input-group-text" id="basic-addon1">Kg</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Onion</h5>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="Onion Expense" placeholder="Onion Expense"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required>
+                        <span class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="Onion Qty" placeholder="Onion Qty"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required>
+                        <span class="input-group-text" id="basic-addon1">Kg</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Eggs</h5>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="eggStock" placeholder="Egg Expense"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="eggTrayCount" placeholder="Tray Count"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Tray</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5 class="fw-medium">Masala Items</h5>
+                </div>
+                <div class="col-lg-3 col-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="masalaItems" placeholder="Masala Item Expense"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container essentialItems">
+            <h3 class="fw-bold text-primary mt-3 mb-3">Essential Items</h3>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Salt</h5>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="specialSalt" placeholder="Special Salt"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Permitted Food Colour</h5>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="foodColour" placeholder="Food Colour"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Tooth Stick</h5>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="toothStickExpense" placeholder="Tooth Stick Expemse"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Jeera & Sweet</h5>
+                </div>
+                <div class="col-lg-3 col-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="jeeraSweetExpense" placeholder="Jeera & Sweet Expense"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Water Bottle</h5>
+                </div>
+                <div class="col-lg-3 col-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="waterBottle" placeholder="Water Bottle Expense"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-3 packing-items">
+            <h3 class="fw-bold text-success mt-2 mb-2">Packaging Items</h3>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5 class="">Parcel Cover'S</h5>
+                </div>
+                <div class="col-lg-3 col-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="parcelCoverExpense"
+                            placeholder="Total Cover Expense" aria-label="Username" aria-describedby="basic-addon1"
+                            pattern="[0-9]+" required> <span class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="largeCover" placeholder="7X9 Qty"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Qty / Pcs</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="mediumCover" placeholder="6X8 Qty"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Qty / Pcs</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="smallCover" placeholder="5X7 Qty"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Qty / Pcs</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="gravyCover" placeholder="Gravy Cover Qty"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Qty / Pcs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5 class="">Carry Bags</h5>
+                </div>
+                <div class="col-lg-3 col-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="TotalCarryBagExpense"
+                            placeholder="Total Carry Bag Expense" aria-label="Username" aria-describedby="basic-addon1"
+                            pattern="[0-9]+" required> <span class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="largeCarryBag" placeholder="16X20 Carry Bag"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Qty / Pcs</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="mediumCarryBag" placeholder="13X16 Carry Bag"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Qty / Pcs</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="smallCarryBag" placeholder="9X13 Carry Bag"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Qty / Pcs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Butter Sheet / Plate Cover</h5>
+                </div>
+                <div class="col-lg-3 col-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="plateCoverExpense" placeholder="Butter Sheet / Plate Cover Expense"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="plateCoverQty" placeholder="Butter Sheet / Plate Cover"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Qty / Pcs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Food Container</h5>
+                </div>
+                <div class="col-lg-3 col-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="foodContainerExpense" placeholder="Food Container Expense"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-7">
+                    <div class="input-group mt-2 mt-lg-0">
+                        <input type="text" class="form-control " name="foodContainerQty" placeholder="Food Container Qty" aria-label="Username"
+                            aria-describedby="basic-addon1" pattern="[0-9]+" required> <span class="input-group-text"
+                            id="basic-addon1">Qty / Pcs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5>Rubber Band</h5>
+                </div>
+                <div class="col-lg-3 col-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Rubber Expense"
+                            aria-label="Username" aria-describedby="basic-addon1" pattern="[0-9]+" required> <span
+                            class="input-group-text" id="basic-addon1">Rs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container extra-note">
+            <h3 class="text-secondary fw-bold mt-2 mb-2">Extra Note</h3>
+            <div class="row align-items-center">
+                <div class="col-lg-12 col-12">
+					<textarea class="form-control border-1 border-dark" name="notes"
+						id="exampleFormControlTextarea1" rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary fw-bold">Submit
+                        Stock Entry</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Form End -->
+
+    <div class="container mt-5">
+        <h4>Notes</h4>
+        <ul>
+            <li>Please Enter all field's with respective values.</li>
+            <li>Do not insert invalid data.</li>
+            <li>Please make sure, have you entered correctly.</li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
