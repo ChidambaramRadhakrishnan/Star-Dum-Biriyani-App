@@ -16,7 +16,7 @@ public class Kodipalya_Expenditure_Inventory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private int total_Expenditure;
 	private int chicken_Expenses;
 	private int biriyani_Chicken_Kg;
@@ -34,7 +34,7 @@ public class Kodipalya_Expenditure_Inventory {
 	@ManyToOne
 	@JoinColumn(name = "shop_id")
 	private All_Shops all_Shops;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "sale_inventory_id")
 	private Kodipalya_Sale_Inventory kodipalya_Sale_Inventory;
