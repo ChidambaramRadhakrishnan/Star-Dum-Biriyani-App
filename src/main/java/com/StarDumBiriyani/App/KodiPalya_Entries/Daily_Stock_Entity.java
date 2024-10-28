@@ -1,5 +1,9 @@
 package com.StarDumBiriyani.App.KodiPalya_Entries;
 
+import java.util.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.StarDumBiriyani.App.Shops.All_Shops;
 
 import jakarta.persistence.Entity;
@@ -12,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Kodipalya_Daily_Stock {
+public class Daily_Stock_Entity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +29,10 @@ public class Kodipalya_Daily_Stock {
 	private int rice_Stock_Qty;
 	private int oil_Stock_Qty;
 	private int ginger_Garlic_Stock_Qty;
+
+	private String Stock_updated_Date;
+
+	private String updated = "No";
 
 	public int getId() {
 		return id;
@@ -64,6 +72,22 @@ public class Kodipalya_Daily_Stock {
 
 	public void setGinger_Garlic_Stock_Qty(int ginger_Garlic_Stock_Qty) {
 		this.ginger_Garlic_Stock_Qty = ginger_Garlic_Stock_Qty;
+	}
+
+	public String getStock_updated_Date() {
+		return Stock_updated_Date;
+	}
+
+	public void setStock_updated_Date(String stock_updated_Date) {
+		Stock_updated_Date = stock_updated_Date;
+	}
+
+	public String getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(String updated) {
+		this.updated = updated;
 	}
 
 }

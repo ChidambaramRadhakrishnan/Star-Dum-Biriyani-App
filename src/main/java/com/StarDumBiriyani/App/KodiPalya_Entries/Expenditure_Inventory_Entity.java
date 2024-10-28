@@ -1,5 +1,9 @@
 package com.StarDumBiriyani.App.KodiPalya_Entries;
 
+import java.util.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.StarDumBiriyani.App.Shops.All_Shops;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Kodipalya_Expenditure_Inventory {
+public class Expenditure_Inventory_Entity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +34,8 @@ public class Kodipalya_Expenditure_Inventory {
 	private String note;
 	private int biriyani_Chicken_Stock;
 	private int kabab_Chicken_Stock;
+	private String updated = "No";
+	private String Inventory_Date;
 
 	@ManyToOne
 	@JoinColumn(name = "shop_id")
@@ -37,11 +43,25 @@ public class Kodipalya_Expenditure_Inventory {
 
 	@ManyToOne
 	@JoinColumn(name = "sale_inventory_id")
-	private Kodipalya_Sale_Inventory kodipalya_Sale_Inventory;
+	private Sale_Inventory_Entity sale_Inventory;
 
 	public int getId() {
 		return id;
 	}
+
+	
+
+	public String getInventory_Date() {
+		return Inventory_Date;
+	}
+
+
+
+	public void setInventory_Date(String inventory_Date) {
+		Inventory_Date = inventory_Date;
+	}
+
+
 
 	public void setId(int id) {
 		this.id = id;
@@ -159,11 +179,27 @@ public class Kodipalya_Expenditure_Inventory {
 		this.kabab_Chicken_Stock = kabab_Chicken_Stock;
 	}
 
-	public Kodipalya_Sale_Inventory getKodipalya_Sale_Inventory() {
-		return kodipalya_Sale_Inventory;
+	public Sale_Inventory_Entity getSale_Inventory() {
+		return sale_Inventory;
 	}
 
-	public void setKodipalya_Sale_Inventory(Kodipalya_Sale_Inventory kodipalya_Sale_Inventory) {
-		this.kodipalya_Sale_Inventory = kodipalya_Sale_Inventory;
+	public void setSale_Inventory(Sale_Inventory_Entity sale_Inventory) {
+		this.sale_Inventory = sale_Inventory;
 	}
+
+
+
+	public String getUpdated() {
+		return updated;
+	}
+
+
+
+	public void setUpdated(String updated) {
+		this.updated = updated;
+	}
+
+
+
+	
 }

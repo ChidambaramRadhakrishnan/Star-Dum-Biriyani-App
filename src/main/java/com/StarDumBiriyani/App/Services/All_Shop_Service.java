@@ -22,4 +22,9 @@ public class All_Shop_Service {
 		return allShop_Repository.findAll();
 	}
 	
+	
+	public List<All_Shops> getAll_Shop(int id){
+		return allShop_Repository.findByid(id);
+	}
+	
 }

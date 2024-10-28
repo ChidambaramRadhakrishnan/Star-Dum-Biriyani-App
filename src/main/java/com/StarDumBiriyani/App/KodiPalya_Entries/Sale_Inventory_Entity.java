@@ -1,5 +1,9 @@
 package com.StarDumBiriyani.App.KodiPalya_Entries;
 
+import java.util.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.StarDumBiriyani.App.Shops.All_Shops;
 
 import jakarta.persistence.Entity;
@@ -12,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Kodipalya_Sale_Inventory {
+public class Sale_Inventory_Entity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +27,9 @@ public class Kodipalya_Sale_Inventory {
 	private int upi;
 	private int cash_balance;
 	private int upi_balance;
+	private String updated = "No";
+	
+	private String Sale_Inventory_Date;
 
 	@ManyToOne
 	@JoinColumn(name = "shop_id")
@@ -84,4 +91,21 @@ public class Kodipalya_Sale_Inventory {
 		this.upi_balance = upi_balance;
 	}
 
+	public String getSale_Inventory_Date() {
+		return Sale_Inventory_Date;
+	}
+
+	public void setSale_Inventory_Date(String sale_Inventory_Date) {
+		Sale_Inventory_Date = sale_Inventory_Date;
+	}
+
+	public String getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(String updated) {
+		this.updated = updated;
+	}
+
+	
 }

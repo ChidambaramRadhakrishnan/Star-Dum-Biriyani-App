@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class KodiPalya_Stock {
+public class Stock_Entity {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
@@ -55,6 +55,8 @@ public class KodiPalya_Stock {
 	private int rubberBand_Amount;
 	//
 	private String notes;
+	//
+	private String stock_Fill_Date;
 
 	@ManyToOne
 	@JoinColumn(name = "shop_id")
@@ -322,6 +324,14 @@ public class KodiPalya_Stock {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+
+	public String getStock_Fill_Date() {
+		return stock_Fill_Date;
+	}
+
+	public void setStock_Fill_Date(String stock_Fill_Date) {
+		this.stock_Fill_Date = stock_Fill_Date;
 	}
 	
 	

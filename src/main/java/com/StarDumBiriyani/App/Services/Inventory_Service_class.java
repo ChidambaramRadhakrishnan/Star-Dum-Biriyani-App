@@ -5,87 +5,125 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.StarDumBiriyani.App.KodiPalya_Entries.Kodipalya_Daily_Stock;
-import com.StarDumBiriyani.App.KodiPalya_Entries.Kodipalya_Expenditure_Inventory;
-import com.StarDumBiriyani.App.KodiPalya_Entries.Kodipalya_Sale_Inventory;
+import com.StarDumBiriyani.App.Functionalities.Essential_Operations;
+import com.StarDumBiriyani.App.KodiPalya_Entries.Daily_Stock_Entity;
+import com.StarDumBiriyani.App.KodiPalya_Entries.Expenditure_Inventory_Entity;
+import com.StarDumBiriyani.App.KodiPalya_Entries.Sale_Inventory_Entity;
 import com.StarDumBiriyani.App.Repository.AllShop_Repository;
-import com.StarDumBiriyani.App.Repository.Kodipalya_Daily_Stock_Repository;
-import com.StarDumBiriyani.App.Repository.Kodipalya_Expenditure_Inventory_Repository;
-import com.StarDumBiriyani.App.Repository.Kodipalya_Sale_Inventory_Repository;
+import com.StarDumBiriyani.App.Repository.Daily_Stock_Repository;
+import com.StarDumBiriyani.App.Repository.Expenditure_Inventory_Repository;
+import com.StarDumBiriyani.App.Repository.Sale_Inventory_Repository;
 import com.StarDumBiriyani.App.Shops.All_Shops;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
-public class Inventory_Service_class implements Inventory_Services {
+public class Inventory_Service_class {
 
 	@Autowired
 	AllShop_Repository allShop_Repository;
 
 	@Autowired
-	Kodipalya_Sale_Inventory_Repository kodipalya_Sale_Inventory_Repository;
+	Sale_Inventory_Repository sale_Inventory_Repository;
 
 	@Autowired
-	Kodipalya_Expenditure_Inventory_Repository kodipalya_Expenditure_Inventory_Repository;
+	Expenditure_Inventory_Repository expenditure_Inventory_Repository;
 
 	@Autowired
-	Kodipalya_Daily_Stock_Repository daily_Stock_Repository;
+	Daily_Stock_Repository daily_Stock_Repository;
 
-	public void addNewInventory(int totalSale, int totalCash, int totalUPI, int cashBalance, int upiBalance,
+	public void addNewInventory(Integer totalSale, int totalCash, int totalUPI, int cashBalance, int upiBalance,
 			int totalExpenditure, int chickenExpense, int biriyaniChicken, int kababChicken, int gasExpense,
 			int saltExpense, int corianderMintExpense, int GreenChillyExpense, int curdExpense, int otherExpense,
-			String notes, int biriyani_chicken_Stock, int kabab_chicken_Stock, int riceUsed, int oilUsed, int ginger_Garlic_Used) {
+			String notes, int biriyani_chicken_Stock, int kabab_chicken_Stock, int riceUsed, int oilUsed,
+			int ginger_Garlic_Used, int id) {
 
 		try {
 
-			All_Shops all_Shops = allShop_Repository.findById(1).get();
+			All_Shops all_Shops = allShop_Repository.findById(id).get();
 
-			List<Kodipalya_Daily_Stock> stock = daily_Stock_Repository.getAllDailyStock();
+			String expenditure_Status = expenditure_Inventory_Repository.get_Update_StatusByID(all_Shops.getId(), Essential_Operations.getToday_Date());
+
+			String Sale_Status = sale_Inventory_Repository.get_Update_StatusByID(all_Shops.getId(),Essential_Operations.getToday_Date());
+
+			List<Daily_Stock_Entity> stock = daily_Stock_Repository.getDailyStock(id);
 			int Existing_Rice_Qty = stock.stream().findFirst().get().getRice_Stock_Qty();
 			int Existing_Oil_Qty = stock.stream().findFirst().get().getOil_Stock_Qty();
-			int Existing_Ginger_Garlic_Qty =  stock.stream().findFirst().get().getGinger_Garlic_Stock_Qty();
-			
+			int Existing_Ginger_Garlic_Qty = stock.stream().findFirst().get().getGinger_Garlic_Stock_Qty();
+
 			int update_Rice_Used_Qty = Existing_Rice_Qty - riceUsed;
 			int update_Oil_Used_Qty = Existing_Oil_Qty - oilUsed;
 			int update_Ginger_Garlic_Used_Qty = Existing_Ginger_Garlic_Qty - ginger_Garlic_Used;
 
-			Kodipalya_Sale_Inventory kodipalya_Sale_Inventory = new Kodipalya_Sale_Inventory();
-
-			kodipalya_Sale_Inventory.setTotal_sale(totalSale);
-			kodipalya_Sale_Inventory.setCash(totalCash);
-			kodipalya_Sale_Inventory.setUpi(totalUPI);
-			kodipalya_Sale_Inventory.setCash_balance(cashBalance);
-			kodipalya_Sale_Inventory.setUpi_balance(upiBalance);
-			kodipalya_Sale_Inventory.setAll_Shops(all_Shops);
-
-			kodipalya_Sale_Inventory_Repository.save(kodipalya_Sale_Inventory);
-
-			Kodipalya_Expenditure_Inventory kodipalya_Expenditure_Inventory = new Kodipalya_Expenditure_Inventory();
-
-			kodipalya_Expenditure_Inventory.setTotal_Expenditure(totalExpenditure);
-			kodipalya_Expenditure_Inventory.setChicken_Expenses(chickenExpense);
-			kodipalya_Expenditure_Inventory.setBiriyani_Chicken_Kg(biriyaniChicken);
-			kodipalya_Expenditure_Inventory.setKabab_Chicken_Kg(kababChicken);
-			kodipalya_Expenditure_Inventory.setGas_Expenses(gasExpense);
-			kodipalya_Expenditure_Inventory.setSalt_Expenses(saltExpense);
-			kodipalya_Expenditure_Inventory.setCorianderLeaf_Mint_Expenses(corianderMintExpense);
-			kodipalya_Expenditure_Inventory.setGreenChilly_Expenses(GreenChillyExpense);
-			kodipalya_Expenditure_Inventory.setCurd_Expenses(curdExpense);
-			kodipalya_Expenditure_Inventory.setOther_Expenses(otherExpense);
-			kodipalya_Expenditure_Inventory.setNote(notes);
-			kodipalya_Expenditure_Inventory.setBiriyani_Chicken_Stock(biriyani_chicken_Stock);
-			kodipalya_Expenditure_Inventory.setKabab_Chicken_Stock(kabab_chicken_Stock);
-			kodipalya_Expenditure_Inventory.setAll_Shops(all_Shops);
-			kodipalya_Expenditure_Inventory.setKodipalya_Sale_Inventory(kodipalya_Sale_Inventory);
+			Sale_Inventory_Entity sale_Inventory = new Sale_Inventory_Entity();
 			
-			Kodipalya_Daily_Stock daily_Stock = new Kodipalya_Daily_Stock();
-			
-			daily_Stock.setRice_Stock_Qty(update_Rice_Used_Qty);
-			daily_Stock.setOil_Stock_Qty(update_Oil_Used_Qty);
-			daily_Stock.setGinger_Garlic_Stock_Qty(update_Ginger_Garlic_Used_Qty);
-			daily_Stock.setAll_Shops(all_Shops);
-			
-			daily_Stock_Repository.save(daily_Stock);
+			System.out.println("-------------- - --- " + totalExpenditure+"  -- -- "+ expenditure_Status  +" -- -- -"+"  --- Smiley : "+ Sale_Status);
 
-			kodipalya_Expenditure_Inventory_Repository.save(kodipalya_Expenditure_Inventory);
+			if ("Yes".equals(expenditure_Status) || expenditure_Status != null && "Yes".equals(Sale_Status) || Sale_Status != null) {
+				
+				int revised_Rice_Qty = Existing_Rice_Qty - riceUsed;
+				int revised_Oil_Qty = Existing_Oil_Qty - oilUsed;
+				int revised_Giner_Garlic_Qty = Existing_Ginger_Garlic_Qty - ginger_Garlic_Used;
+				
+				System.out.println("-------------"+" rice : "+ revised_Rice_Qty);
+				System.out.println("-------------"+" oil : "+ revised_Oil_Qty);
+				System.out.println("-------------"+" giner : "+ revised_Giner_Garlic_Qty);
+
+				sale_Inventory_Repository.updateExisting(totalCash, cashBalance, totalSale, totalUPI, upiBalance,
+						all_Shops.getId(), Essential_Operations.getToday_Date());
+				
+				expenditure_Inventory_Repository.updateExistingEntry(biriyaniChicken, biriyani_chicken_Stock, chickenExpense, 
+						corianderMintExpense, curdExpense, gasExpense, GreenChillyExpense, kababChicken, kabab_chicken_Stock, 
+						otherExpense, saltExpense, totalExpenditure, all_Shops.getId(), Essential_Operations.getToday_Date());
+				
+
+			} else {
+
+				sale_Inventory.setTotal_sale(totalSale);
+				sale_Inventory.setCash(totalCash);
+				sale_Inventory.setUpi(totalUPI);
+				sale_Inventory.setCash_balance(cashBalance);
+				sale_Inventory.setUpi_balance(upiBalance);
+				sale_Inventory.setSale_Inventory_Date(Essential_Operations.getToday_Date());
+				sale_Inventory.setUpdated("Yes");
+				sale_Inventory.setAll_Shops(all_Shops);
+
+				sale_Inventory_Repository.save(sale_Inventory);
+
+				Expenditure_Inventory_Entity Expenditure_Inventory = new Expenditure_Inventory_Entity();
+
+				Expenditure_Inventory.setTotal_Expenditure(totalExpenditure);
+				Expenditure_Inventory.setChicken_Expenses(chickenExpense);
+				Expenditure_Inventory.setBiriyani_Chicken_Kg(biriyaniChicken);
+				Expenditure_Inventory.setKabab_Chicken_Kg(kababChicken);
+				Expenditure_Inventory.setGas_Expenses(gasExpense);
+				Expenditure_Inventory.setSalt_Expenses(saltExpense);
+				Expenditure_Inventory.setCorianderLeaf_Mint_Expenses(corianderMintExpense);
+				Expenditure_Inventory.setGreenChilly_Expenses(GreenChillyExpense);
+				Expenditure_Inventory.setCurd_Expenses(curdExpense);
+				Expenditure_Inventory.setOther_Expenses(otherExpense);
+				Expenditure_Inventory.setNote(notes);
+				Expenditure_Inventory.setBiriyani_Chicken_Stock(biriyani_chicken_Stock);
+				Expenditure_Inventory.setKabab_Chicken_Stock(kabab_chicken_Stock);
+				Expenditure_Inventory.setInventory_Date(Essential_Operations.getToday_Date());
+				Expenditure_Inventory.setUpdated("Yes");
+				Expenditure_Inventory.setAll_Shops(all_Shops);
+				Expenditure_Inventory.setSale_Inventory(sale_Inventory);
+
+				Daily_Stock_Entity daily_Stock = new Daily_Stock_Entity();
+
+				daily_Stock.setRice_Stock_Qty(update_Rice_Used_Qty);
+				daily_Stock.setOil_Stock_Qty(update_Oil_Used_Qty);
+				daily_Stock.setGinger_Garlic_Stock_Qty(update_Ginger_Garlic_Used_Qty);
+				daily_Stock.setStock_updated_Date(Essential_Operations.getToday_Date());
+				daily_Stock.setUpdated("Yes");
+				daily_Stock.setAll_Shops(all_Shops);
+
+				daily_Stock_Repository.save(daily_Stock);
+
+				expenditure_Inventory_Repository.save(Expenditure_Inventory);
+			}
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
