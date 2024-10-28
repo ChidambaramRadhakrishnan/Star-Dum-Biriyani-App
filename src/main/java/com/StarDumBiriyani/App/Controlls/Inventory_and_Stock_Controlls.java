@@ -93,6 +93,8 @@ public class Inventory_and_Stock_Controlls {
 			@RequestParam("kabab_chicken_Stock") int kabab_chicken_Stock, @RequestParam("riceUsed") int riceUsed,
 			@RequestParam("oilUsed") int oilUsed, @RequestParam("ginger_garlic_Used") int ginger_garlic_Used,
 			Model model, HttpSession session) {
+	
+		session.setAttribute("rice_used_Qty", riceUsed);
 
 		inventory_Service_class.addNewInventory(totalSale, totalCash, totalUPI, cashBalance, upiBalance,
 				totalExpenditure, chickenExpense, biriyaniChicken, kababChicken, gasExpense, saltExpense,

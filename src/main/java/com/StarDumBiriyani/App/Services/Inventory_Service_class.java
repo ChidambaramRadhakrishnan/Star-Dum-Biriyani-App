@@ -15,7 +15,9 @@ import com.StarDumBiriyani.App.Repository.Expenditure_Inventory_Repository;
 import com.StarDumBiriyani.App.Repository.Sale_Inventory_Repository;
 import com.StarDumBiriyani.App.Shops.All_Shops;
 
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.Session;
 
 @Service
 public class Inventory_Service_class {
@@ -61,13 +63,14 @@ public class Inventory_Service_class {
 
 			if ("Yes".equals(expenditure_Status) || expenditure_Status != null && "Yes".equals(Sale_Status) || Sale_Status != null) {
 				
-				int revised_Rice_Qty = Existing_Rice_Qty - riceUsed;
-				int revised_Oil_Qty = Existing_Oil_Qty - oilUsed;
-				int revised_Giner_Garlic_Qty = Existing_Ginger_Garlic_Qty - ginger_Garlic_Used;
-				
-				System.out.println("-------------"+" rice : "+ revised_Rice_Qty);
-				System.out.println("-------------"+" oil : "+ revised_Oil_Qty);
-				System.out.println("-------------"+" giner : "+ revised_Giner_Garlic_Qty);
+//				int revised_Rice_Qty = (Integer) session.getAttribute("rice_used_Qty") - riceUsed;
+//				int revised_Oil_Qty = Existing_Oil_Qty - oilUsed;
+//				int revised_Giner_Garlic_Qty = Existing_Ginger_Garlic_Qty - ginger_Garlic_Used;
+//				
+//				System.out.println("-------------"+" rice : "+ riceUsed);
+//				System.out.println("-----  -- "+ "All Rice : "+ (Integer) session.getAttribute("rice_used_Qty"));
+//				System.out.println("-------------"+" oil : "+ revised_Oil_Qty);
+//				System.out.println("-------------"+" giner : "+ revised_Giner_Garlic_Qty);
 
 				sale_Inventory_Repository.updateExisting(totalCash, cashBalance, totalSale, totalUPI, upiBalance,
 						all_Shops.getId(), Essential_Operations.getToday_Date());
@@ -78,6 +81,8 @@ public class Inventory_Service_class {
 				
 
 			} else {
+				
+				System.out.println("I'm second");
 
 				sale_Inventory.setTotal_sale(totalSale);
 				sale_Inventory.setCash(totalCash);

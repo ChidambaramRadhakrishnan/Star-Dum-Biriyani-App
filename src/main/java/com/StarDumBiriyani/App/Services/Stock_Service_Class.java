@@ -108,6 +108,8 @@ public class Stock_Service_Class {
 		//
 		kodiPalya_Stock.setNotes(notes);
 		//
+		kodiPalya_Stock.setStock_Fill_Date(Essential_Operations.getToday_Date());
+		//
 		kodiPalya_Stock.setAll_Shops(all_Shops);
 		
 		Daily_Stock_Entity daily_Stock = new Daily_Stock_Entity();
@@ -116,6 +118,7 @@ public class Stock_Service_Class {
 		daily_Stock.setOil_Stock_Qty(update_Set_Oil_Qty);
 		daily_Stock.setRice_Stock_Qty(update_Set_Rice_Qty);
 		daily_Stock.setStock_updated_Date(Essential_Operations.getToday_Date());
+		daily_Stock.setUpdated("Yes");
 
 		daily_Stock_Repository.save(daily_Stock);
 		
