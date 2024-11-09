@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Admin Dashboard</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="./style_sheet.css">
+<link rel="stylesheet" href="./admin_dashboard_style.css">
+<link rel="stylesheet" href="./admin_or_login.css">
+
+</head>
+
+<body>
+
+	<!-- Sidebar -->
+	<nav id="sidebar">
+		<button
+			class="close-sidebar-btn close_arrow d-sm-block d-lg-none fw-bold"
+			id="close-sidebar-btn">&#9938;</button>
+		<h5 class="text-center fw-bold fs-4 me-4">Star Dum Biriyani</h5>
+		<hr>
+		<ul class="nav flex-column px-2 fw-medium fs-6">
+			<li class="nav-item py-0 dashboard-link mb-2"><a
+				class="nav-link" href="#"> <svg
+						xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+						fill="currentColor" class="bi bi-house-door mb-1"
+						viewBox="0 0 16 16">
+                        <path
+							d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
+                    </svg> Dashboard
+			</a></li>
+			<hr class="dropdown-divider">
+
+		</ul>
+	</nav>
+
+	<!-- Main Content -->
+	<div id="main-content" class="container-fluid overflow-hidden">
+		<!-- Top Navbar -->
+		<nav id="top-navbar"
+			class="navbar navbar-expand-lg navbar-light 
+        justify-content-lg-center align-items-center">
+			<div
+				class="index_container p-0 align-items-center justify-content-center">
+				<button class="btn btn-outline-secondary d-lg-none"
+					id="toggle-sidebar-btn">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<a class="navbar-brand ms-auto fs-6" href="#"></a>
+			</div>
+			<h3 class="text-center fw-bold d-lg-none d-block">Star Dum
+				Biriyani</h3>
+		</nav>
+
+		<!-- Content Section -->
+		<div class="content mt-4">
+			<div class="row row-cols-8 justify-content-center">
+				<div class="">
+					<h3 class="fw-bolder fs-3 text-center page_title">Admin or
+						Inventory Login</h3>
+				</div>
+				<!-- Initial Buttons -->
+				<div class="col-12 d-flex justify-content-center mt-3">
+					<a class="btn mb-3 admin-icon col-lg-3 col-8 p-2" role="button"
+						href="/admin_dashboard.html"> <svg
+							xmlns="http://www.w3.org/2000/svg" width="19" height="18"
+							fill="currentColor" class="bi bi-person mb-1 me-1"
+							viewBox="0 0 16 16">
+                            <path
+								d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                        </svg> Admin Login
+					</a>
+				</div>
+				<div class="col-12 d-flex justify-content-center">
+					<button id="manageInventoryBtn"
+						class="btn mb-3 ml-2 inventory-icon col-lg-3 col-8 p-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+							fill="currentColor" class="bi bi-grid-1x2 mb-1 me-1"
+							viewBox="0 0 16 16">
+                            <path
+								d="M6 1H1v14h5zm9 0h-5v5h5zm0 9v5h-5v-5zM0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1zm1 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1z" />
+                        </svg>
+						Manage Inventory
+					</button>
+				</div>
+
+
+			</div>
+
+			<!-- Inventory Management Form -->
+			<form id="inventoryForm" action="loginInventory" method="get"
+				class="d-none mt-4 row row-cols-2 justify-content-center">
+				<!-- Branch Selection -->
+				<div class="col-12 d-flex justify-content-center">
+					<div class="form-group col-lg-3 col-8">
+						<label for="branchSelect" class="fw-medium label_text">Select
+							Branch</label> 
+							<select id="branchSelect" class="form-control mt-2 p-2" name="branch_id">
+								<option selected disabled class="fw-bold">Select Branch</option>
+								<th:block th:each="shop: ${all_shop_Data}">
+									<option th:value="${shop.id}" th:text="${shop.BranchName}"></option>
+								</th:block>
+							</select>
+					</div>
+				</div>
+				<div class="col-12 d-flex justify-content-center">
+					<!-- Management Selection (initially hidden) -->
+					<div id="shopCode" class="form-group d-none mt-3 col-lg-3 col-8">
+						<label for="managementSelect" class="fw-medium label_text">Shop Code</label> 
+						<input type="password" class="form-control" name="shop_Code" id="exampleInputPassword1">
+					</div>
+				</div>
+				<div class="col-12 d-flex justify-content-center">
+					<!-- Submit Button (initially hidden) -->
+					<button type="submit" id="submitBtn" class="btn btn-primary mt-3 d-none col-lg-3 col-8 mt-2 fw-bold text-white p-2 submit-btn">Submit</button>
+				</div>
+			</form>
+
+			<!-- Footer -->
+			<footer class="bg-light text-dark">
+				<p>&copy; 2024 Admin Dashboard. All rights reserved.</p>
+			</footer>
+
+			<!-- JavaScript to handle visibility -->
+			<script>
+		
+                // Show form on "Manage Inventory" button click
+                document.getElementById('manageInventoryBtn').addEventListener('click', function () {
+                    document.getElementById('inventoryForm').classList.remove('d-none');
+                });
+
+               
+                // Show submit button on management type selection
+                document.getElementById('branchSelect').addEventListener('change', function () {
+                    document.getElementById('submitBtn').classList.remove('d-none');
+                });
+                
+             // Show management type select on branch selection
+                document.getElementById('branchSelect').addEventListener('change', function () {
+                    document.getElementById('shopCode').classList.remove('d-none');
+                });
+
+                document.getElementById('toggle-sidebar-btn').addEventListener('click', function () {
+                    var sidebar = document.getElementById('sidebar');
+                    sidebar.classList.toggle('active'); // Toggle sidebar
+                    document.getElementById('main-content').classList.toggle('active'); // Toggle content margin
+                });
+
+                // Close sidebar
+                document.getElementById('close-sidebar-btn').addEventListener('click', function () {
+                    var sidebar = document.getElementById('sidebar');
+                    sidebar.classList.remove('active'); // Hide sidebar
+                });
+
+                document.querySelectorAll('.sidebar-link[data-bs-toggle="collapse"]').forEach(link => {
+                    link.addEventListener('click', function () {
+                        document.querySelectorAll('.collapse').forEach(collapse => {
+                            if (collapse !== document.querySelector(link.getAttribute('data-bs-target'))) {
+                                new bootstrap.Collapse(collapse, { toggle: false }).hide();
+                            }
+                        });
+                    });
+                });
+            </script>
+</body>
+
+</html>

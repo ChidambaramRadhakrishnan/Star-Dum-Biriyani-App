@@ -1,7 +1,9 @@
 package com.StarDumBiriyani.App.Functionalities;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Essential_Operations {
 	
@@ -15,6 +17,15 @@ public class Essential_Operations {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         return date.format(formatter);
+	}
+	
+	public static String RupeeConvertion(int number) {
+		NumberFormat rupee = NumberFormat.getCurrencyInstance(new Locale("en","IN"));
+		
+		String INR = rupee.format(number);
+		
+		return INR;
+		
 	}
 
 }

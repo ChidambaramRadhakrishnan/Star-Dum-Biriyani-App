@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.StarDumBiriyani.App.Entries.All_Shops;
+import com.StarDumBiriyani.App.Entries.Daily_Stock_Entity;
+import com.StarDumBiriyani.App.Entries.Expenditure_Inventory_Entity;
+import com.StarDumBiriyani.App.Entries.Sale_Inventory_Entity;
 import com.StarDumBiriyani.App.Functionalities.Essential_Operations;
-import com.StarDumBiriyani.App.KodiPalya_Entries.Daily_Stock_Entity;
-import com.StarDumBiriyani.App.KodiPalya_Entries.Expenditure_Inventory_Entity;
-import com.StarDumBiriyani.App.KodiPalya_Entries.Sale_Inventory_Entity;
 import com.StarDumBiriyani.App.Repository.AllShop_Repository;
 import com.StarDumBiriyani.App.Repository.Daily_Stock_Repository;
 import com.StarDumBiriyani.App.Repository.Expenditure_Inventory_Repository;
 import com.StarDumBiriyani.App.Repository.Sale_Inventory_Repository;
-import com.StarDumBiriyani.App.Shops.All_Shops;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.servlet.http.HttpSession;
@@ -33,6 +33,17 @@ public class Inventory_Service_class {
 
 	@Autowired
 	Daily_Stock_Repository daily_Stock_Repository;
+	
+	
+	public List<Sale_Inventory_Entity> getAll_Sale_Inventory_Data(int id){
+		return sale_Inventory_Repository.getSale_Inventory_All_Data(id);
+	}
+	
+	public List<Expenditure_Inventory_Entity> getAll_Expenditure_Inventory_Data(int id){
+		return expenditure_Inventory_Repository.get_Expenditure_Inventory(id);
+	}
+	
+	
 
 	public void addNewInventory(Integer totalSale, int totalCash, int totalUPI, int cashBalance, int upiBalance,
 			int totalExpenditure, int chickenExpense, int biriyaniChicken, int kababChicken, int gasExpense,
@@ -83,6 +94,7 @@ public class Inventory_Service_class {
 			} else {
 				
 				System.out.println("I'm second");
+				
 
 				sale_Inventory.setTotal_sale(totalSale);
 				sale_Inventory.setCash(totalCash);

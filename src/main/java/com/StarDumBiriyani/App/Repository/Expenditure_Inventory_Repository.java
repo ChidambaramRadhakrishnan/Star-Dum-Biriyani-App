@@ -1,11 +1,13 @@
 package com.StarDumBiriyani.App.Repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.StarDumBiriyani.App.KodiPalya_Entries.Expenditure_Inventory_Entity;
+import com.StarDumBiriyani.App.Entries.Expenditure_Inventory_Entity;
 
 import jakarta.transaction.Transactional;
 
@@ -25,4 +27,7 @@ public interface Expenditure_Inventory_Repository extends JpaRepository<Expendit
 	int updateExistingEntry(int biriyani_chicken_kg, int biriyani_chicken_stock, int chicken_expenses, int coriander_leaf_mint_expenses,
 			int curd_expenses, int gas_expenses, int green_chilly_expenses, int kabab_chicken_kg, int kabab_chicken_stock, int other_expenses, 
 			int salt_expenses, int total_expenditure, int shop_id, String inventory_Date);
+	
+	@Query(value = "select * from expenditure_inventory_entity where shop_id = :id order by id desc limit 1;", nativeQuery = true)
+	List<Expenditure_Inventory_Entity> get_Expenditure_Inventory(int id);
 }

@@ -1,0 +1,312 @@
+
+.submenu-stock, .submenu-inventory{
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.submenu-inventory svg{
+    color: blueviolet;
+}
+
+.page_title{
+    font-size: 16px;
+}
+
+.inventory_title{
+    font-size: 15px;
+    margin: 8px 0px;
+    font-weight: 600;
+}
+
+textarea::placeholder{
+    font-size: 12px;
+}
+
+.nav-tabs .nav-item .nav-link{
+    border: none;
+    border-right: 0.5px solid #e2e2e2;
+    border-radius: 0px;
+    padding: 10px 10px;
+    /* margin-bottom: 15px; */
+    font-size: 13px;
+    font-weight: 700;
+    color: #5d5e5f;
+}
+
+.nav-tabs .nav-item .nav-link:hover{
+    background-color: #d6d6d6;
+}
+
+.nav-tabs .nav-item .nav-link.active{
+    color: #1F3BB3;
+    font-weight: 700;
+    background-color: #e9f1fd;
+}
+
+.nav-tabs .nav-item .nav-link .nav-text{
+    font-size: 12px;
+    text-decoration: none;
+}
+
+/* Accordion Style */
+
+#accordionExample .sale-accordion .accordion-button,
+#accordionExample .stock-chicken-accordion .accordion-button,
+#accordionExample .expenditure-accordion .accordion-button,
+#accordionExample .stock-usage-accordion .accordion-button
+{
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px;
+    color: #31374a;
+    background-color: #f5f7fa;
+    border: 0.1px solid #dbdbdd;
+    border-radius: 2px;
+}
+
+.sale-accordion input, span{
+    padding: 4px 12px;
+    border-radius: 0px;
+    height: 30px;
+}
+
+#myTabContent .daily_stock span{
+    padding: 0px;
+}
+
+.sale-accordion .accordion-button:focus, .expenditure-accordion .accordion-button:focus, .stock-usage-accordion .accordion-button:focus
+, .stock-chicken-accordion .accordion-button:focus{
+    border-color: transparent;
+    box-shadow: none;
+}
+
+
+#myTabContent .accordion{
+    --bs-accordion-border-color: none;
+    --bs-accordion-border-radius: 0px;
+    --bs-accordion-inner-border-radius: 0px;
+    --bs-accordion-btn-icon-width: 0.70rem;
+}
+
+/* form styles */
+
+.inventory_page .form-control{
+    font-weight: 500;
+}
+
+.inventory_page .form-control:target{
+    background-color: #338f6a;
+}
+
+.fl-input input{
+    padding: 4px 8px;
+    height: 10px;
+}
+
+.form-floating .form-control, .sales span, .expenditure span, .product-usage span, .stock-chicken span, .daily-neccesities span{
+    min-height: 10px;
+    height: 45px;
+    border-radius: 2px;
+    border-color: #e9f1fd;
+}
+
+/* Sale Accordion Style */
+
+.sale-accordion .sales span{
+    border-color: #E4FFF4;
+    background-color: #E4FFF4;
+    color: #1bb776;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/*  */
+
+/* Expenditure Accordion Style */
+
+.expenditure .chicken_ex .input-group{
+    width: 33%;
+}
+
+.expenditure-accordion .expenditure span{
+    border-color: #ededff;
+    background-color: #ededff;
+    color: #696cff;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/* #accordionExample .expenditure-accordion .accordion-button{
+    font-size: 16px;
+    font-weight: 700;
+    padding: 18px;
+    color: #696cff;
+    background-color: #ededff;
+} */
+
+/*  */
+
+/* Stock Usage Accordion Style */
+
+/* #accordionExample .stock-usage-accordion .accordion-button{
+    font-size: 16px;
+    font-weight: 700;
+    padding: 18px;
+    color: #df9501;
+    background-color: #fff9ec;
+} */
+
+.stock-usage-accordion .product-usage span{
+    border-color: #fff9ec;
+    background-color: #fff9ec;
+    color: #df9501;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/*  */
+
+/* Stock Chicken Accordion */
+
+/* #accordionExample .stock-chicken-accordion .accordion-button{
+    font-size: 16px;
+    font-weight: 700;
+    padding: 18px;
+    color: #ff3e1d ;
+    background-color: #fae9e6 ;
+} */
+
+.stock-chicken-accordion .stock-chicken span{
+    border-color: #fae9e6;
+    background-color: #fae9e6;
+    color: #ff3e1d ;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/*  */
+
+.form-floating label{
+    padding: 8px 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #5d5e5f;
+}
+
+.form-floating>.form-control:not(:placeholder-shown)~label::after{
+    background-color: transparent;
+}
+
+.note_title{
+    font-size: 16px;
+    font-weight: 600;
+    color: #5d5e5f;
+}
+
+.note-text{
+    border-radius: 2px;
+    border-color: #ababab;
+}
+
+
+.submit-btn{
+    border-radius: 2px;
+    padding: 8px 60px;
+    background-color: #1F3BB3;
+    margin-left: auto;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.submit-btn:hover{
+    background-color: #192f8d;
+}
+
+/* form styles */
+
+
+/* Stock Management Inventory */
+
+.stock-accordion .daily-neccesities .input-group{
+    width: 30%;
+}
+
+.stock-accordion .daily-neccesities span{
+    border-color: #E4FFF4;
+    background-color: #E4FFF4;
+    color: #1bb776;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/*  */
+
+.stock-usage-accordion .multi .input-group{
+    width: 50%;
+}
+
+/*  */
+
+/* Overview */
+
+.daily_stock .cards{
+    flex-direction: row;
+    background-color: #e7e7ff;
+    border-color: #e7e7ff;
+}
+
+/* Stock Details */
+
+.daily_stock h6{
+    font-size: 15px;
+    font-weight: 600;
+    color: #696cff;
+}
+
+.daily_stock span{
+    font-size: 16px;
+    font-weight: 700;
+    color: #384551;
+}
+
+.daily_stock .cards:hover{
+    box-shadow: #9799ff 0px 1px 4px;
+    
+}
+
+.daily_stock_title{
+    font-size: 22px;
+}
+
+
+
+/*  */
+
+/*  */
+
+
+
+
+
+
+/* Always show sidebar on large screens */
+@media (max-width: 768px) {
+    
+    .expenditure .chicken_ex .input-group{
+        width: 100%;
+    }
+
+    .stock-accordion .daily-neccesities .input-group{
+        width: 100%;
+    }
+
+    .stock-accordion .multi .input-group{
+        width: 50%;
+    }
+
+}

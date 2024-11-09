@@ -1,0 +1,73 @@
+
+.highlight-container{
+    background-color: rgb(216, 255, 216);
+    border-radius: 10px;
+}
+
+.highlight-container:hover{
+    box-shadow: rgba(187, 255, 187, 0.35) 0px 2px 5px -1px, rgba(45, 86, 45, 0.30) 0px 1px 3px 1.2px;
+}
+
+.sale-highlights .highlight-icon{
+    margin: 0;
+    border-radius: 10px;
+    color: lightgreen;
+}
+
+/* .highlight-container:hover .store_sales{
+    font-size: 28.2px;
+    transition: font-size 0.5s ease;
+} */
+
+.store_name{
+    color: darkgreen;
+}
+.store_title{
+    color: rgb(2, 65, 95);
+}
+.sale_date{
+    color: rgb(2, 69, 66);
+}
+
+.store_icon{
+    color: green;
+}
+.store_sales{
+    color: rgb(45, 45, 45);
+    font-size: calc(1.3rem + .6vw);
+    transition: font-size 0.5s ease;
+}
+
+.inventory_title{
+    font-size: 25px;
+    color: rgb(110, 110, 110);
+}
+
+.branch_title{
+    font-size: 20px;
+}
+
+.branch_details{
+    font-size: 18px;
+}
+
+
+@media (max-width: 768px) {
+    .inventory_title{
+        font-size: 10px;
+        font-weight: 800;
+    }
+
+    .inventory_details{
+        font-size: 10px;
+    }
+
+    .branch_title{
+        font-size: 16px;
+    }
+
+    .branch_details{
+        font-size: 16px;
+    }
+
+}

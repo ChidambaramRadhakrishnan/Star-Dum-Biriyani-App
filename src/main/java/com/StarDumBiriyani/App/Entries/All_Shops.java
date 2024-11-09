@@ -1,4 +1,4 @@
-package com.StarDumBiriyani.App.Shops;
+package com.StarDumBiriyani.App.Entries;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +16,8 @@ public class All_Shops {
 	
 	public String BranchName;
 	
+	private int shopCode;
+	
 	public int getId() {
 		return id;
 	}
@@ -31,5 +33,16 @@ public class All_Shops {
 	public void setBranchName(String branchName) {
 		BranchName = branchName;
 	}
+
+	public int getShopCode() {
+		return shopCode;
+	}
+
+	public void setShopCode(int shopCode) {
+		this.shopCode = shopCode;
+	}
+	
+	
+	
 	
 }

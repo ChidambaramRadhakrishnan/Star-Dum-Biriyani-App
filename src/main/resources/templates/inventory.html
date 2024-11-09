@@ -30,82 +30,47 @@
 
 	<!-- Form  -->
 	<form action="addNew_Inventory" method="get">
-		<div class="container sales">
+		<div class="container sales ">
 			<h3 class="fw-bold text-primary">Sales</h3>
-			<div class="row align-items-center">
-				<div class="col-12">
-					<h5 class="fw-bold">Total Sale</h5>
-				</div>
-				<div class="col-lg-3 col-7">
-					<div class="input-group">
-						<input type="text" class="form-control" name="totalSale" placeholder="Total Sales"
-							aria-label="Username" aria-describedby="basic-addon1"
-							pattern="[0-9]+" required> <span class="input-group-text"
-							id="basic-addon1">Rs</span>
-					</div>
-				</div>
+			<div class="input-group mb-2">
+				<input type="text" class="form-control" name="totalSale" placeholder="Total Sales"
+					aria-label="Username" aria-describedby="basic-addon1"
+					pattern="[0-9]+" required> <span class="input-group-text"
+					id="basic-addon1">Rs</span>
+			</div>
+			<div class="input-group mb-2">
+				<input type="text" class="form-control" name="totalCash" placeholder="Cash Sale"
+					aria-label="Username" aria-describedby="basic-addon1"
+					pattern="[0-9]+" required> <span class="input-group-text"
+					id="basic-addon1">Rs</span>
+			</div>
+			<div class="input-group mb-2">
+				<input type="text" class="form-control" name="totalUPI" placeholder="UPI Sale"
+					aria-label="Username" aria-describedby="basic-addon1"
+					pattern="[0-9]+" required> <span class="input-group-text"
+					id="basic-addon1">Rs</span>
 			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Cash</h5>
-				</div>
-				<div class="col-lg-3 col-7">
-					<div class="input-group">
-						<input type="text" class="form-control" name="totalCash" placeholder="Cash Sale"
-							aria-label="Username" aria-describedby="basic-addon1"
-							pattern="[0-9]+" required> <span class="input-group-text"
-							id="basic-addon1">Rs</span>
-					</div>
-				</div>
-			</div>
-			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>UPI</h5>
-				</div>
-				<div class="col-lg-3 col-7">
-					<div class="input-group">
-						<input type="text" class="form-control" name="totalUPI" placeholder="UPI Sale"
-							aria-label="Username" aria-describedby="basic-addon1"
-							pattern="[0-9]+" required> <span class="input-group-text"
-							id="basic-addon1">Rs</span>
-					</div>
-				</div>
-			</div>
-			<div class="row align-items-center">
-				<div class="col-12">
-					<h5 class="">Cash Balance</h5>
-				</div>
-				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="cashBalance" placeholder="Cash Balance"
 							aria-label="Username" aria-describedby="basic-addon1"
 							pattern="[0-9]+" required> <span class="input-group-text"
 							id="basic-addon1">Rs</span>
 					</div>
-				</div>
 			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>UPI Balance</h5>
-				</div>
-				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="upiBalance" placeholder="UPI Balance"
 							aria-label="Username" aria-describedby="basic-addon1"
 							pattern="[0-9]+" required> <span class="input-group-text"
 							id="basic-addon1">Rs</span>
 					</div>
-				</div>
 			</div>
 		</div>
 
 		<div class="container mt-3 expenditure">
 			<h3 class="fw-bold text-success mt-2 mb-2">Expenditure</h3>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5 class="fw-bold">Total Expenditure</h5>
-				</div>
-				<div class="col-lg-3  col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="totalExpenditure"
 							placeholder="Total Expense" aria-label="Username"
@@ -113,11 +78,7 @@
 						<span class="input-group-text" id="basic-addon1">Rs</span>
 					</div>
 				</div>
-			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Chicken</h5>
-				</div>
 				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="chickenExpense"
@@ -145,9 +106,6 @@
 				</div>
 			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Gas (Cylinder)</h5>
-				</div>
 				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="gasExpense" placeholder="Gas Expense"
@@ -158,9 +116,6 @@
 				</div>
 			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Salt</h5>
-				</div>
 				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="saltExpense" placeholder="Salt Expense"
@@ -171,9 +126,6 @@
 				</div>
 			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Coriander Leaf & Mint</h5>
-				</div>
 				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="corianderMintExpense"
@@ -184,9 +136,6 @@
 				</div>
 			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Green Chilly</h5>
-				</div>
 				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="GreenChillyExpense"
@@ -197,9 +146,6 @@
 				</div>
 			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Curd</h5>
-				</div>
 				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="curdExpense" placeholder="Curd Expense"
@@ -210,9 +156,6 @@
 				</div>
 			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Others</h5>
-				</div>
 				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="otherExpense" placeholder="Others"
@@ -231,24 +174,14 @@
 		</div>
 
 		<div class="container product-usage">
-			<h3 class="text-danger fw-bold mt-2 mb-2">Stock Usage</h3>
-			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Rice</h5>
-				</div>
-				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name = "riceUsed" placeholder="Rice Usage"
 							aria-label="Username" aria-describedby="basic-addon1"
 							pattern="[0-9]+" required> <span class="input-group-text"
 							id="basic-addon1">KG</span>
 					</div>
-				</div>
 			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Oil</h5>
-				</div>
 				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name="oilUsed" placeholder="Oil Usage"
@@ -259,9 +192,6 @@
 				</div>
 			</div>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Garlic & Ginger</h5>
-				</div>
 				<div class="col-lg-3 col-7">
 					<div class="input-group">
 						<input type="text" class="form-control" name = "ginger_garlic_Used"
@@ -276,9 +206,6 @@
 		<div class="container stock-chicken">
 			<h3 class="text-secondary fw-bold mt-2 mb-2">Stock Chicken</h3>
 			<div class="row align-items-center">
-				<div class="col-12">
-					<h5>Remaining Chicken</h5>
-				</div>
 				<div class="col-lg-3 col-6">
 					<div class="input-group">
 						<input type="text" class="form-control" name="biriyani_chicken_Stock"

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.StarDumBiriyani.App.Entries.All_Shops;
 import com.StarDumBiriyani.App.Repository.AllShop_Repository;
-import com.StarDumBiriyani.App.Shops.All_Shops;
 
 @Service
 public class All_Shop_Service {
@@ -27,4 +27,26 @@ public class All_Shop_Service {
 		return allShop_Repository.findByid(id);
 	}
 	
+	public String validateShopCode(int id, int shopCode) {
+		String page = "";
+		int actual_Shop_Code = allShop_Repository.findshop_CodeById(id);
+		if(shopCode == actual_Shop_Code) {
+			System.out.println("--------------------- shop id is not fonud");
+			page = "Inventory_index";
+		}
+		return page;
+	}
+	
+	public List<All_Shops> getShop_Data(){
+		return allShop_Repository.findAll();
+	}
+	
+	
+	public String getBranchName(int id) {
+		return allShop_Repository.getBranchName(id);
+	}
+	
+	public String getCommonDate(int id) {
+		return allShop_Repository.getMatchDate(id);
+	}
 }

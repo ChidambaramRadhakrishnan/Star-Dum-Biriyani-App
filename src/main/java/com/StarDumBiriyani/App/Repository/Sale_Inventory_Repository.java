@@ -1,13 +1,13 @@
 package com.StarDumBiriyani.App.Repository;
 
-import java.sql.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.StarDumBiriyani.App.KodiPalya_Entries.Sale_Inventory_Entity;
+import com.StarDumBiriyani.App.Entries.Sale_Inventory_Entity;
 
 import jakarta.transaction.Transactional;
 
@@ -23,5 +23,8 @@ public interface Sale_Inventory_Repository extends JpaRepository<Sale_Inventory_
 	
 	@Query(value = "select updated from sale_inventory_entity where shop_id =:shop_Id and sale_inventory_date=:inventory_date order by id desc limit 1;",nativeQuery = true)
 	String get_Update_StatusByID(int shop_Id, String inventory_date);
+	
+	@Query(value = "select * from sale_inventory_entity where shop_id = :id order by id desc limit 1;", nativeQuery = true)
+	List<Sale_Inventory_Entity> getSale_Inventory_All_Data(int id);
 	
 }

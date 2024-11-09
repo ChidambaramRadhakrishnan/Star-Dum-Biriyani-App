@@ -1,5 +1,10 @@
 package com.StarDumBiriyani.App.Controlls;
 
-public class Admin_Controls {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class Admin_Controls {
+	
+	
+	
 }

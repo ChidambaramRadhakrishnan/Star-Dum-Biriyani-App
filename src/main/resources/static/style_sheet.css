@@ -1,0 +1,257 @@
+        body,
+        html {
+            max-width: 100%;
+            width: 100vw;
+            font-family: "Inter Tight", sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            overflow-y: auto;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+
+        /* Basic sidebar styling */
+        #sidebar {
+            height: 100vh;
+            width: 240px;
+            position: absolute;
+            /* Positioning */
+            top: 0;
+            left: -240px;
+            /* Hidden by default on small screens */
+            background-color: #fff;
+            color: #343a40;
+            padding-top: 1rem;
+            border-right: 1px solid #ddd;
+            font-size: 0.875rem;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            z-index: 1050;
+            /* Ensure sidebar is above content */
+        }
+
+        #sidebar .close_arrow {
+            margin-top: 5px;
+            border: 3px solid #898bfc;
+            padding: 0px;
+            border-radius: 60%;
+            height: 30px;
+            width: 30px;
+            line-height: 18px;
+            /* position: absolute; */
+            color: white;
+            background-color: #898bfc;
+        }
+
+        .dropdown .user-dropdown {
+            padding: 5px;
+            padding-left: 0px;
+            padding-right: 0px;
+            margin-left: -30px;
+            max-width: 20%;
+            background-color: #898bfc;
+        }
+
+        .dropdown a svg {
+            color: #898bfc;
+        }
+
+        .user-dropdown a {
+            color: white;
+        }
+
+        .user-dropdown a:hover {
+            color: #29343d;
+            background-color: #898bfc;
+        }
+
+        /* Show sidebar when active */
+        #sidebar.active {
+            left: 0;
+            /* Show sidebar */
+        }
+
+        .sidebar-link {
+            font-size: 14px;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            display: block;
+        }
+
+        .submenu-link {
+            font-size: 12px;
+            padding-left: 30px;
+            color: black;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Always show sidebar on large screens */
+        @media (min-width: 768px) {
+            #sidebar {
+                left: 0;
+                /* Show sidebar */
+            }
+
+            #main-content {
+                margin-left: 250px;
+                width:calc(100% - 280px)
+                /* Adjust margin to avoid overlap */
+            }
+
+        }
+
+        /* Top navbar styling */
+        #top-navbar {
+            /* padding: 0.5rem 1rem; */
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            /* Lower than sidebar */
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 5px 0;
+            text-align: center;
+            font-size: 0.75rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Hamburger button */
+        #toggle-sidebar-btn {
+            display: inline-block;
+        }
+
+        /* Close button for sidebar */
+        .close-sidebar-btn {
+            cursor: pointer;
+            padding: 0.5rem;
+            background-color: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: #343a40;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1060;
+            /* Above sidebar */
+        }
+
+        /* Overflow control */
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Main content styling */
+        #main-content {
+            padding: 5px;
+            transition: margin-left 0.3s ease;
+            
+            /* Smooth transition for margin */
+        }
+
+        .sidebar {
+            border-right: 1px solid black;
+            box-shadow: 27px 4px 15px -34px rgba(0, 0, 0, 0.45),
+                0px 255px 255px -141px rgba(0, 0, 0, 0.45);
+        }
+
+        .nav-item:hover {
+            color: white;
+        }
+
+        .nav-item .nav-link {
+            color: #29343d;
+        }
+
+        .nav-item .nav-link:hover {
+            background-color: #898bfc;
+            color: white;
+        }
+
+        .shop-link svg {
+            margin-left: 40px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .dashboard-link svg {
+            margin-right: 10px;
+            color: lightcoral;
+            transition: color 0.3s ease;
+        }
+
+        .report-link svg {
+            margin-right: 10px;
+            color: darkviolet;
+            transition: color 0.9s ease;
+        }
+
+        .report-link:hover svg {
+            color: white;
+            transition: color 0.5s ease;
+        }
+
+        .user-link svg {
+            color: darkslateblue;
+            margin-right: 10px;
+            transition: color 0.5s ease;
+        }
+
+        .submenu-link svg {
+            margin-left: 0;
+            margin-right: 10px;
+            color: darkorange;
+            transition: color 0.6s ease;
+        }
+
+        .submenu-link:hover svg {
+            color: white;
+            transition: color 0.6s ease;
+        }
+
+        .user-link:hover svg {
+            color: white;
+            transition: color 0.5s ease;
+        }
+
+        .dashboard-link:hover svg {
+            color: white;
+            font-weight: 900;
+            transition: color 0.3s ease;
+        }
+
+        .store_icon svg {
+            margin-left: 0;
+            margin-right: 13px;
+            color: green;
+            transition: color 0.3s ease;
+        }
+
+        .shop-link:hover .store_icon svg {
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item .sidebar-link:hover .option_arrow svg {
+            margin-left: 135px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .nav-item .sidebar-link:active svg {
+            margin-left: 140px;
+        }
+
+        .nav-item a:hover {
+            background-color: #898bfc;
+            color: white;
+        }

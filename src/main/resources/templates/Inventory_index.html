@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Admin Dashboard</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./style_sheet.css">
+    <link rel="stylesheet" href="./admin_dashboard_style.css">
+    <link rel="stylesheet" href="./inventory_index.css">
+</head>
+
+<body>
+
+    <div class="row row-cols-1">
+
+        <!-- Sidebar -->
+        <nav id="sidebar" class="">
+            <button class="close-sidebar-btn close_arrow d-sm-block d-lg-none fw-bold"
+                id="close-sidebar-btn">&#9938;</button>
+            <h5 class="text-center fw-bold fs-4 me-4">Star Dum Biriyani</h5>
+            <hr>
+            <ul class="nav flex-column px-2 fw-medium fs-6">
+                <li class="nav-item py-0 dashboard-link mb-2">
+                    <a class="nav-link" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-house-door mb-1" viewBox="0 0 16 16">
+                            <path
+                                d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
+                        </svg>
+                        Dashboard</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div id="main-content" class="container col-11">
+            <!-- Top Navbar -->
+            <nav id="top-navbar"
+                class="navbar navbar-expand-lg navbar-light  align-items-center justify-content-sm-between justify-content-lg-end">
+                <div class="fw-bold d-lg-none d-block">
+                    <h5 class="fw-bold m-0">Star Dum Biriyani</h5>
+                </div>
+                <div class="user_container p-0">
+                    <div class="dropdown">
+                        <a class="text-decoration-none text-dark bg-light fw-bold fs-6" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="fw-bold p-0" th:text="${branchName}"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-caret-down ms-2" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659" />
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu user-dropdown">
+                            <li><a class="dropdown-item fw-bold text-center p-0" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Section -->
+            <div class="content row row-cols-1">
+                <div class="col-12">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                data-bs-target="#overview" type="button" role="tab" aria-controls="home"
+                                aria-selected="true">Overview</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#Inventory"
+                                type="button" role="tab" aria-controls="profile"
+                                aria-selected="false">Inventory</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#Stock"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">Stock</button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="myTabContent">
+                        <!-- Overview Container -->
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
+                            <h3 class="inventory_title">Overview</h3>
+                            <div class="container">
+                                <div class="row py-2 px-1 gap-2">
+                                    <div class="col-lg-5 col-sm-12 card p-3">
+                                        <h6 class="m-0">Last Inventory Updated Date</h6>
+                                        <h5 class="my-2" th:text="${last_inventory_updated_Date}">24/04/2024</h5>
+                                    </div>
+                                    <div class="col-lg-5 col-sm-12 card p-3">
+                                        <h6 class="m-0">Last Stock Updated Date</h6>
+                                        <h5 class="my-2" th:text="${last_Stock_Update_Date}">25/05/2024</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container daily_stock">
+                                <h5 class="daily_stock_title">Your Shop Stocks</h5>
+                                <div class="row justify-content-lg-start justify-content-sm-center align-items-center py-1 gap-3 px-1"
+                                    th:each="stock_details :${daily_stock_details}">
+                                    <div class="col-lg-3 col-12 border-1 border rounded p-2 cards">
+                                        <h6>Rice Stock [Kg]</h6>
+                                        <span th:text="${stock_details.rice_Stock_Qty}"></span>
+                                    </div>
+                                    <div class="col-lg-3 col-12 border-1 border rounded p-2 cards">
+                                        <h6>Oil Stock [Kg]</h6>
+                                        <span th:text="${stock_details.oil_Stock_Qty}"></span>
+                                    </div>
+                                    <div class="col-lg-3 col-12 border-1 border rounded p-2 cards">
+                                        <h6>Ginger & Garlic Stock [Kg]</h6>
+                                        <span th:text="${stock_details.ginger_Garlic_Stock_Qty}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container mt-2 mb-5 p-0">
+                                <h5 class="">Your Last Inventory</h5>
+                                <div class="col-lg-7 col-sm-6 card p-3">
+                                    <div class="row text-start p-2">
+                                        <!-- Sales Container -->
+                                        <h6 class="fw-bold fs-5">Sales</h6>
+                                        <div class="row sale_details">
+                                            <dt class="col-6 col-lg-6">Total Sales</dt>
+                                            <dd class="col-6 col-lg-6 price-field" th:text="${total_Sales}">
+                                            </dd>
+                                            <dt class="col-6 col-lg-6">Cash Sales</dt>
+                                            <dd class="col-6 col-lg-6 price-field" th:text="${total_Cash}"></dd>
+                                            <dt class="col-6 col-lg-6">UPI Sales</dt>
+                                            <dd class="col-6 col-lg-6 price-field" th:text="${total_UPI}"></dd>
+                                            <dt class="col-6 col-lg-6">Cash Balance</dt>
+                                            <dd class="col-6 col-lg-6 price-field" th:text="${cash_Balance}"></dd>
+                                            <dt class="col-6 col-lg-6">UPI Balance</dt>
+                                            <dd class="col-6 col-lg-6 price-field" th:text="${upi_Balance}"></dd>
+                                        </div>
+                                        <hr>
+                                        <!-- Expenditure Container -->
+                                        <h6 class="fw-bold fs-5">Expenditure</h6>
+                                        <div class="row">
+                                            <dt class="col-6 col-lg-6">Total Expense</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${total_Expense}"></dd>
+                                            <dt class="col-6 col-lg-6">Chicken Expense</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${chicken_expense}"></dd>
+                                            <dt class="col-6 col-lg-6">Biriyani Chicken [Kg]</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${biriyani_Chicken_Kg}"></dd>
+                                            <dt class="col-6 col-lg-6">Kabab Chicken [Kg]</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${kabab_Chicken_Kg}"></dd>
+                                            <dt class="col-6 col-lg-6">Gas Expense</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${gas_Expense}">544.00</dd>
+                                            <dt class="col-6 col-lg-6">Salt Expense</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${salt_expense}">544.00</dd>
+                                            <dt class="col-6 col-lg-6">Coriander & Leaf Expense</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${corianderandmint_Expense}">544.00</dd>
+                                            <dt class="col-6 col-lg-6">Green Chilly Expense</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${greenchilly_Expense}">544.00</dd>
+                                            <dt class="col-6 col-lg-6">Curd Expense</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${curd_Expense}">544.00</dd>
+                                            <dt class="col-6 col-lg-6">Others Expense</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${other_Expense}">544.00</dd>
+                                        </div>
+                                        <hr>
+                                        <h6 class="fw-bold fs-5">Stock Chicken</h6>
+                                        <div class="row">
+                                        <dt class="col-6 col-lg-6">Biriyani Chicken Stock [Kg]</dt>
+                                        <dd class="col-6 col-lg-6" th:text="${chicken_Stock}">5</dd>
+                                        <dt class="col-6 col-lg-6">Kabab Chicken Stock [Kg]</dt>
+                                        <dd class="col-6 col-lg-6" th:text="${Kabab_Stock}">3</dd>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Inventroy Management Container -->
+                        <div class="tab-pane fade inventory_page" id="Inventory" role="tabpanel"
+                            aria-labelledby="profile-tab">
+                            <h3 class="inventory_title">Manage Inventory</h3>
+                            <form action="addNew_Inventory" method="get" class="" id="stockForm"
+                                oninput="checkInputs()">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item sale-accordion mb-1">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                Sales
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show sale-accordion "
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body m-0 p-1">
+                                                <div class="sales">
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control" name="totalSale"
+                                                                    id="floatingInput" placeholder="Total Sales"
+                                                                    pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Total Sales</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control" name="totalCash"
+                                                                    id="floatingInput" placeholder="Total Cash"
+                                                                    pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Total Cash</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control" name="totalUPI"
+                                                                    id="floatingInput" placeholder="Total UPI"
+                                                                    pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Total UPI</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="cashBalance" id="floatingInput"
+                                                                    placeholder="Cash Balance" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Cash Balance</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="upiBalance" id="floatingInput"
+                                                                    placeholder="UPI Balance" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">UPI Balance</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item expenditure-accordion mb-1">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                Expenditure
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body m-0 p-1">
+                                                <div class="expenditure">
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="totalExpenditure" id="floatingInput"
+                                                                    placeholder="Total Expenditure" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Total Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Chicken Expense -->
+                                                    <div class="row form-floating mt-2 mb-2 chicken_ex">
+                                                        <div class="input-group col-lg-3 col-12">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="chickenExpense" id="floatingInput"
+                                                                    placeholder="Chicken Expense" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Chicken Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                        <div
+                                                            class="input-group mt-lg-0 mt-2 mb-lg-0 mb-2 col-lg-3 col-12">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="biriyaniChicken" id="floatingInput"
+                                                                    placeholder="Biriyani Chicken" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Biriyani Chicken</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                        <div class="input-group col-lg-3 col-12">
+                                                            <div class="form-floating ">
+                                                                <input type="text" class="form-control"
+                                                                    name="kababChicken" id="floatingInput"
+                                                                    placeholder="Kabab Chicken" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Kabab Chicken</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Gas Expense -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="gasExpense"
+                                                                    placeholder="Gas Expense" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Gas Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Salt Expense -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="saltExpense"
+                                                                    placeholder="Salt Expense" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Salt Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Coriander Leaf & Mint Expense -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="corianderMintExpense"
+                                                                    placeholder="Coriander Leaf & Mint Expense"
+                                                                    pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Coriander Leaf & Mint
+                                                                    Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Green Chilly Expense -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="GreenChillyExpense"
+                                                                    placeholder="Green Chilly Expense" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Green Chilly Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Curd Expense -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="curdExpense"
+                                                                    placeholder="Curd Expense" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Curd Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Other Expenses -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="otherExpense"
+                                                                    placeholder="Others" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Other Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <div class="col-lg-12 col-12 note-section">
+                                                        <label for="exampleFormControlTextarea1"
+                                                            class="form-label mt-2 note_title">Notes</label>
+                                                        <textarea class="form-control note-text" name="notes"
+                                                            id="exampleFormControlTextarea1" rows="2"
+                                                            placeholder="Other expenses breakthrough needed here or other updates write here."></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item stock-usage-accordion mb-1">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree">
+                                                Stock Usage
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body p-1 m-0">
+                                                <div class="product-usage">
+                                                    <!--  -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control" name="riceUsed"
+                                                                    id="floatingInput" placeholder="Rice Usage"
+                                                                    pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Rice Used</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control" name="oilUsed"
+                                                                    id="floatingInput" placeholder="Oil Usage"
+                                                                    pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Oil Used</label>
+                                                            </div>
+                                                            <span class="input-group-text "
+                                                                id="basic-addon1">Liters</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="ginger_garlic_Used" id="floatingInput"
+                                                                    placeholder="Ginger & Garlic usage" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Ginger & Garlic usage</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item stock-chicken-accordion mb-1">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapsefour"
+                                                aria-expanded="false" aria-controls="collapseThree">
+                                                Stock Chicken
+                                            </button>
+                                        </h2>
+                                        <div id="collapsefour" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body p-1 m-0">
+                                                <div class="stock-chicken">
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="biriyani_chicken_Stock" id="floatingInput"
+                                                                    placeholder="Biriyani Chicken Stock"
+                                                                    pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Biriyani Chicken
+                                                                    Stock</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="kabab_chicken_Stock" id="floatingInput"
+                                                                    placeholder="Kabab Chicken Stock" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Kabab Chicken Stock</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <div class="container">
+                                        <button type="submit" class="btn btn-primary submit-btn col-4">Submit</button>
+                                        <button type="button" id="viewInventoryBtn"
+                                            class="btn btn-info col-4 submit-btn" onclick="showModal()">View
+                                            Inventory</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!--  -->
+                            <div class="modal fade" id="inventoryModal" tabindex="-1" role="dialog"
+                                aria-labelledby="inventoryModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="inventoryModalLabel">Inventory Data</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" id="modalBody">
+                                            <!-- Dynamic content will be injected here -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" mt-5 mb-5">
+                                <ul>
+                                    <li>
+                                        Please enter all fields with respective values.
+                                    </li>
+                                    <li>
+                                        Don't enter invalid values.
+                                    </li>
+                                    <li>
+                                        You are inputs will forwared.
+                                    </li>
+                                    <li>
+                                        After enter inputs you can log out.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Stock Manangement Container -->
+                        <div class="tab-pane fade" id="Stock" role="tabpanel" aria-labelledby="contact-tab">
+                            <h3 class="inventory_title">Manage Stock</h3>
+                            <form class="" action="stockUpdation" method="get">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item sale-accordion daily-necessities">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                Daily Necessities
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show stock-accordion"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body m-0 p-1">
+                                                <div class="daily-neccesities">
+                                                    <div class="row form-floating mt-2 mb-2 ">
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="riceExpense"
+                                                                    placeholder="Rice Expense" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Rice Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                        <div class="input-group mt-lg-0 mb-lg-0 mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="riceQty"
+                                                                    placeholder="Rice Stocked Quantity" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Rice Stock Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row form-floating mt-2 mb-2 ">
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="oilExpense"
+                                                                    placeholder="Oil Expense" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Oil Expenses</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                        <div class="input-group mt-lg-0 mb-lg-0 mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="oilQty"
+                                                                    placeholder="Oil Qty" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Oil Stock Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text "
+                                                                id="basic-addon1">Liters</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row form-floating mt-2 mb-2 ">
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="gingerGarlicExpense"
+                                                                    placeholder="Ginger & Garlic Expense"
+                                                                    pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Ginger & Garlic
+                                                                    Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                        <div class="input-group mt-lg-0 mb-lg-0 mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="gingerGarlicQty"
+                                                                    placeholder="Ginger & Garlic Qty" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Ginger and Garlic Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row form-floating mt-2 mb-2">
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="OnionExpense"
+                                                                    placeholder="Onion Expense" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Onion Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                        <div class="input-group mb-lg-0 mb-2 ">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="OnionQty"
+                                                                    placeholder="Onion Qty" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Onion Stock Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row row-cols-2 form-floating mt-2 mb-2">
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="eggStock"
+                                                                    placeholder="Egg Expense" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Eggs Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                        <div class="input-group mb-lg-0 mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="eggTrayCount"
+                                                                    placeholder="Tray Count" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Eggs Stock Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group mb-lg-0 mb-2">
+                                                        <div class="form-floating">
+                                                            <input type="text" class="form-control" id="floatingInput"
+                                                                name="masalaItems" placeholder="Masala Item Expense"
+                                                                pattern="[0-9]+" required>
+                                                            <label for="floatingInput">Masala Items Expense</label>
+                                                        </div>
+                                                        <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item expenditure-accordion essential-items">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                Essential
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body m-0 p-1">
+                                                <div class="expenditure">
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" pattern="[0-9]+"
+                                                                    name="specialSalt" placeholder="Special Salt"
+                                                                    required>
+                                                                <label for="floatingInput">Special Salt</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Chicken Expense -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group col-lg-3 col-12">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" pattern="[0-9]+"
+                                                                    name="foodColour" placeholder="Food Colour"
+                                                                    required>
+                                                                <label for="floatingInput">Food Colour</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Gas Expense -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="toothStickExpense"
+                                                                    placeholder="Tooth Stick Expemse" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Tooth Stick Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Salt Expense -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="jeeraSweetExpense"
+                                                                    placeholder="Jeera & Sweet Expense" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Jeera and Sweet
+                                                                    Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Coriander Leaf & Mint Expense -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="waterBottle"
+                                                                    placeholder="Water Bottle Expense" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Water Bottle
+                                                                    Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item stock-usage-accordion ">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree">
+                                                Packing
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body p-1 m-0">
+                                                <div class="product-usage">
+                                                    <!--  -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="parcelCoverExpense"
+                                                                    placeholder="Total Cover Expense" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Total Plastic Cover
+                                                                    Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Kg</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-floating mt-2 mb-2 multi">
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="largeCover"
+                                                                    placeholder="7X9 Qty" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">7X9 Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Pcs</span>
+                                                        </div>
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="mediumCover"
+                                                                    placeholder="6X8 Qty" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">6X8 Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Pcs</span>
+                                                        </div>
+                                                        <div class="input-group mt-lg-0 mb-lg-0 mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="smallCover"
+                                                                    placeholder="5X7 Qty" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">5X7 Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Pcs</span>
+                                                        </div>
+                                                        <div class="input-group mt-lg-0 mb-lg-0 mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="gravyCover"
+                                                                    placeholder="Gravy Cover Qty" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Gravy Cover Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Pcs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="TotalCarryBagExpense"
+                                                                    placeholder="Total Carry Bag Expense"
+                                                                    pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Total Carry Bag
+                                                                    Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-floating mt-2 mb-2 multi">
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="largeCarryBag"
+                                                                    placeholder="16X20 Carry Bag" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">16X20 Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Pcs</span>
+                                                        </div>
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="mediumCarryBag"
+                                                                    placeholder="13X16 Carry Bag" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">13X16 Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Pcs</span>
+                                                        </div>
+                                                        <div class="input-group mt-lg-0 mb-lg-0 mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="smallCarryBag"
+                                                                    placeholder="9X13 Carry Bag" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">9X13 Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Pcs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <div class="row form-floating mt-2 mb-2 multi">
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="plateCoverExpense"
+                                                                    placeholder="Butter Sheet / Plate Cover Expense"
+                                                                    id="floatingInput" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Plate Cover Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                        <div class="input-group mt-lg-0 mb-lg-0 mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="plateCoverQty"
+                                                                    placeholder="Butter Sheet / Plate Cover"
+                                                                    pattern="[0-9]+" required>
+                                                                <label for="floatingInput">PlateCover Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Pcs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                    <div class="row form-floating mt-2 mb-2 multi">
+                                                        <div class="input-group mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="foodContainerExpense"
+                                                                    placeholder="Food Container Expense"
+                                                                    id="floatingInput" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Food Container
+                                                                    Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                        <div class="input-group mt-lg-0 mb-lg-0 mb-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="foodContainerQty"
+                                                                    placeholder="Food Container Qty" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Food Container Qty</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Pcs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="RubberExpense" placeholder="RubberExpense"
+                                                                    id="floatingInput" pattern="[0-9]+" required>
+                                                                <label for="floatingInput">Rubber Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-12 note-section">
+                                                        <label for="exampleFormControlTextarea1"
+                                                            class="form-label mt-2 note_title">Notes</label>
+                                                        <textarea class="form-control note-text" name="notes"
+                                                            id="exampleFormControlTextarea1" rows="2"
+                                                            placeholder="You can write here."></textarea>
+                                                    </div>
+
+                                                </div>
+                                                <!--  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                                    <button type="button" id="viewStockBtn" class="btn btn-info col-4 submit-btn"
+                                        onclick="showModal1()">View Inventory</button>
+
+                                </div>
+                            </form>
+
+                            <!--  -->
+                            <div class="modal fade" id="inventoryModal1" tabindex="-1" role="dialog"
+                                aria-labelledby="inventoryModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="inventoryModalLabel1">Inventory Data</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" id="modalBody1">
+                                            <!-- Dynamic content will be injected here -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <div class=" mt-5 mb-5">
+                                <ul>
+                                    <li>
+                                        Please enter all fields with respective values.
+                                    </li>
+                                    <li>
+                                        Don't enter invalid values.
+                                    </li>
+                                    <li>
+                                        You are inputs will forwared.
+                                    </li>
+                                    <li>
+                                        After enter inputs you can log out.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-dark">
+        <p>&copy; 2024 Admin Dashboard. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script> -->
+    <script>
+
+        console.log("Script is working / Loading");
+
+        //
+
+        function showModal() {
+            const inputs = document.querySelectorAll('#Inventory input');
+            let modalBody = '<ul>';
+            inputs.forEach(input => {
+                modalBody += `<li>${input.placeholder}: ${input.value}</li>`;
+            });
+            modalBody += '</ul>';
+            document.getElementById('modalBody').innerHTML = modalBody;
+            $('#inventoryModal').modal('show');
+        }
+
+        // Stock Management Button
+
+        function showModal1() {
+            const inputs = document.querySelectorAll('#Stock input');
+            let modalBody = '<ul>';
+            inputs.forEach(input => {
+                modalBody += `<li>${input.placeholder}: ${input.value}</li>`;
+            });
+            modalBody += '</ul>';
+            document.getElementById('modalBody1').innerHTML = modalBody;
+            $('#inventoryModal1').modal('show');
+        }
+
+        // 
+
+        // Attach the checkInputs function to input events
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('#Inventory input');
+            inputs.forEach(input => {
+                input.addEventListener('#Inventory input', checkInputs); // Check inputs on input event
+            });
+        });
+
+        // Attach the checkInputs function to input events
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('#Inventory input');
+            inputs.forEach(input => {
+                input.addEventListener('#Inventory input', checkInputs);
+            });
+        });
+
+        //
+        // Toggle sidebar visibility
+        document.getElementById('toggle-sidebar-btn').addEventListener('click', function () {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active'); // Toggle sidebar
+            document.getElementById('main-content').classList.toggle('active'); // Toggle content margin
+        });
+
+        // Close sidebar
+        document.getElementById('close-sidebar-btn').addEventListener('click', function () {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.remove('active'); // Hide sidebar
+        });
+
+        document.querySelectorAll('.sidebar-link[data-bs-toggle="collapse"]').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.collapse').forEach(collapse => {
+                    if (collapse !== document.querySelector(link.getAttribute('data-bs-target'))) {
+                        new bootstrap.Collapse(collapse, { toggle: false }).hide();
+                    }
+                });
+            });
+        });
+
+        // Price Convertion 
+
+        // Function to format numbers as Rupees (INR)
+    
+
+
+        //
+    </script>
+</body>
+
+</html>

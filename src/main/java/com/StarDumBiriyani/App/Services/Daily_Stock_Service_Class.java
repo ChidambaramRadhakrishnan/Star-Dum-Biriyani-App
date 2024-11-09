@@ -1,14 +1,16 @@
 package com.StarDumBiriyani.App.Services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.StarDumBiriyani.App.KodiPalya_Entries.Daily_Stock_Entity;
+import com.StarDumBiriyani.App.Entries.All_Shops;
+import com.StarDumBiriyani.App.Entries.Daily_Stock_Entity;
 import com.StarDumBiriyani.App.Repository.AllShop_Repository;
 import com.StarDumBiriyani.App.Repository.Daily_Stock_Repository;
 import com.StarDumBiriyani.App.Repository.Stock_Management_Repository;
-import com.StarDumBiriyani.App.Shops.All_Shops;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -42,5 +44,10 @@ public class Daily_Stock_Service_Class {
 
 		return ResponseEntity.ok(daily_Stock);
 
+	}
+	
+	
+	public List<Daily_Stock_Entity> getDaily_Stock(int id){
+		return daily_Stock_Repository.getDailyStock(id);
 	}
 }

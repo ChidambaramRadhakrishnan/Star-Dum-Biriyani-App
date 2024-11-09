@@ -1,10 +1,9 @@
-package com.StarDumBiriyani.App.KodiPalya_Entries;
+package com.StarDumBiriyani.App.Entries;
 
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.StarDumBiriyani.App.Shops.All_Shops;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

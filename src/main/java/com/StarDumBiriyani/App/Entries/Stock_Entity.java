@@ -1,6 +1,4 @@
-package com.StarDumBiriyani.App.KodiPalya_Entries;
-
-import com.StarDumBiriyani.App.Shops.All_Shops;
+package com.StarDumBiriyani.App.Entries;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
