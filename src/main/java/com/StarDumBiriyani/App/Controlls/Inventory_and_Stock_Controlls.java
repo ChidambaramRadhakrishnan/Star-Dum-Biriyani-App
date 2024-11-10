@@ -95,24 +95,38 @@ public class Inventory_and_Stock_Controlls {
 		String branch_Name = all_Shop_Service.getBranchName(id);
 		model.addAttribute("branchName", branch_Name);
 		
+		session.setAttribute("shop_id", id);
+		
+		int session_id = (int)session.getAttribute("shop_id");
+		
+		System.out.println("----------------------------------");
+		System.out.println(session_id+"------------------ --------------------------");
+		System.out.println("---------------------------------------------");
+		
 		//
-		String last_inventory_update_date = all_Shop_Service.getCommonDate(id);
+		String last_inventory_update_date = all_Shop_Service.getCommonDate(session_id);
 		
 		if(last_inventory_update_date == null || last_inventory_update_date.isEmpty()) {
+			
+			String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(session_id);
+			model.addAttribute("last_Stock_Update_Date", last_Stock_Updated_Date);
+//			
+			List<Daily_Stock_Entity> all_Stock_details = daily_Stock_Service.getDaily_Stock(session_id);
+			model.addAttribute("daily_stock_details", all_Stock_details);
 			
 		}else {
 			
 		model.addAttribute("last_inventory_updated_Date", last_inventory_update_date);
 		//
-		String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(id);
+		String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(session_id);
 		model.addAttribute("last_Stock_Update_Date", last_Stock_Updated_Date);
 		//
-		List<Daily_Stock_Entity> all_Stock_details = daily_Stock_Service.getDaily_Stock(id);
+		List<Daily_Stock_Entity> all_Stock_details = daily_Stock_Service.getDaily_Stock(session_id);
 		model.addAttribute("daily_stock_details", all_Stock_details);
 		
 		// Sale Inventory Data's
 		
-		List<Sale_Inventory_Entity> sale_Inventory_Details = inventory_Service_class.getAll_Sale_Inventory_Data(id);
+		List<Sale_Inventory_Entity> sale_Inventory_Details = inventory_Service_class.getAll_Sale_Inventory_Data(session_id);
 		
 		int total_Sale = sale_Inventory_Details.stream().findFirst().get().getTotal_sale();
 		int total_cash = sale_Inventory_Details.stream().findFirst().get().getCash();
@@ -128,7 +142,7 @@ public class Inventory_and_Stock_Controlls {
 		
 		//Expenditure Inventory Data's
 		
-		List<Expenditure_Inventory_Entity> expenditure_Inventory_Details = inventory_Service_class.getAll_Expenditure_Inventory_Data(id);
+		List<Expenditure_Inventory_Entity> expenditure_Inventory_Details = inventory_Service_class.getAll_Expenditure_Inventory_Data(session_id);
 		
 		model.addAttribute("total_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getTotal_Expenditure()));
 		model.addAttribute("chicken_expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getChicken_Expenses()));
@@ -143,6 +157,10 @@ public class Inventory_and_Stock_Controlls {
 		
 		model.addAttribute("chicken_Stock", expenditure_Inventory_Details.stream().findFirst().get().getBiriyani_Chicken_Stock());
 		model.addAttribute("Kabab_Stock", expenditure_Inventory_Details.stream().findFirst().get().getKabab_Chicken_Stock());
+		
+		model.addAttribute("riceUsed", expenditure_Inventory_Details.stream().findFirst().get().getRice_Used());
+		model.addAttribute("oilUsed", expenditure_Inventory_Details.stream().findFirst().get().getOil_Used());
+		model.addAttribute("ginger_garlic_used", expenditure_Inventory_Details.stream().findFirst().get().getGinger_Garlic_used());
 		
 		
 //		Daily Stock Data's
@@ -208,7 +226,7 @@ public class Inventory_and_Stock_Controlls {
 				toothStickExpense, jeeraSweetExpense, waterBottle, parcelCoverExpense, largeCover, mediumCover,
 				smallCover, gravyCover, TotalCarryBagExpense, largeCarryBag, mediumCarryBag, smallCarryBag,
 				plateCoverExpense, plateCoverQty, foodContainerExpense, foodContainerQty, RubberExpense, notes,
-				 (Integer) session.getAttribute("shop_Id"));
+				 (Integer) session.getAttribute("shop_Id"),session);
 
 	}
 

@@ -33,6 +33,9 @@ public class Expenditure_Inventory_Entity {
 	private String note;
 	private int biriyani_Chicken_Stock;
 	private int kabab_Chicken_Stock;
+	private int rice_Used;
+	private int oil_Used;
+	private int ginger_Garlic_used;
 	private String updated = "No";
 	private String Inventory_Date;
 
@@ -196,6 +199,42 @@ public class Expenditure_Inventory_Entity {
 
 	public void setUpdated(String updated) {
 		this.updated = updated;
+	}
+
+
+
+	public int getGinger_Garlic_used() {
+		return ginger_Garlic_used;
+	}
+
+
+
+	public void setGinger_Garlic_used(int ginger_Garlic_used) {
+		this.ginger_Garlic_used = ginger_Garlic_used;
+	}
+
+
+
+	public int getOil_Used() {
+		return oil_Used;
+	}
+
+
+
+	public void setOil_Used(int oil_Used) {
+		this.oil_Used = oil_Used;
+	}
+
+
+
+	public int getRice_Used() {
+		return rice_Used;
+	}
+
+
+
+	public void setRice_Used(int rice_Used) {
+		this.rice_Used = rice_Used;
 	}
 
 

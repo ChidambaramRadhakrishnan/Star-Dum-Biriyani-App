@@ -61,12 +61,17 @@ public class Inventory_Service_class {
 
 			List<Daily_Stock_Entity> stock = daily_Stock_Repository.getDailyStock(id);
 			int Existing_Rice_Qty = stock.stream().findFirst().get().getRice_Stock_Qty();
+			
+			
 			int Existing_Oil_Qty = stock.stream().findFirst().get().getOil_Stock_Qty();
 			int Existing_Ginger_Garlic_Qty = stock.stream().findFirst().get().getGinger_Garlic_Stock_Qty();
+			
 
 			int update_Rice_Used_Qty = Existing_Rice_Qty - riceUsed;
 			int update_Oil_Used_Qty = Existing_Oil_Qty - oilUsed;
 			int update_Ginger_Garlic_Used_Qty = Existing_Ginger_Garlic_Qty - ginger_Garlic_Used;
+			
+			
 
 			Sale_Inventory_Entity sale_Inventory = new Sale_Inventory_Entity();
 			
@@ -74,28 +79,20 @@ public class Inventory_Service_class {
 
 			if ("Yes".equals(expenditure_Status) || expenditure_Status != null && "Yes".equals(Sale_Status) || Sale_Status != null) {
 				
-//				int revised_Rice_Qty = (Integer) session.getAttribute("rice_used_Qty") - riceUsed;
-//				int revised_Oil_Qty = Existing_Oil_Qty - oilUsed;
-//				int revised_Giner_Garlic_Qty = Existing_Ginger_Garlic_Qty - ginger_Garlic_Used;
-//				
-//				System.out.println("-------------"+" rice : "+ riceUsed);
-//				System.out.println("-----  -- "+ "All Rice : "+ (Integer) session.getAttribute("rice_used_Qty"));
-//				System.out.println("-------------"+" oil : "+ revised_Oil_Qty);
-//				System.out.println("-------------"+" giner : "+ revised_Giner_Garlic_Qty);
-
+				
+				
 				sale_Inventory_Repository.updateExisting(totalCash, cashBalance, totalSale, totalUPI, upiBalance,
 						all_Shops.getId(), Essential_Operations.getToday_Date());
 				
 				expenditure_Inventory_Repository.updateExistingEntry(biriyaniChicken, biriyani_chicken_Stock, chickenExpense, 
 						corianderMintExpense, curdExpense, gasExpense, GreenChillyExpense, kababChicken, kabab_chicken_Stock, 
-						otherExpense, saltExpense, totalExpenditure, all_Shops.getId(), Essential_Operations.getToday_Date());
-				
+						otherExpense, saltExpense, totalExpenditure,riceUsed, oilUsed, ginger_Garlic_Used, all_Shops.getId(), 
+						Essential_Operations.getToday_Date());				
 
 			} else {
 				
 				System.out.println("I'm second");
 				
-
 				sale_Inventory.setTotal_sale(totalSale);
 				sale_Inventory.setCash(totalCash);
 				sale_Inventory.setUpi(totalUPI);
@@ -122,6 +119,9 @@ public class Inventory_Service_class {
 				Expenditure_Inventory.setNote(notes);
 				Expenditure_Inventory.setBiriyani_Chicken_Stock(biriyani_chicken_Stock);
 				Expenditure_Inventory.setKabab_Chicken_Stock(kabab_chicken_Stock);
+				Expenditure_Inventory.setRice_Used(riceUsed);
+				Expenditure_Inventory.setOil_Used(oilUsed);
+				Expenditure_Inventory.setGinger_Garlic_used(ginger_Garlic_Used);
 				Expenditure_Inventory.setInventory_Date(Essential_Operations.getToday_Date());
 				Expenditure_Inventory.setUpdated("Yes");
 				Expenditure_Inventory.setAll_Shops(all_Shops);

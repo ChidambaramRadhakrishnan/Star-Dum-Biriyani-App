@@ -97,42 +97,43 @@
                         <!-- Overview Container -->
                         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
                             <h3 class="inventory_title">Overview</h3>
-                            <div class="container">
+                            <div class="container update_date mb-1">
                                 <div class="row py-2 px-1 gap-2">
-                                    <div class="col-lg-5 col-sm-12 card p-3">
+                                    <h5 class="update_date_title ps-2">Update Status</h5>
+                                    <div class="col-lg-5 col-sm-12 card p-3 update_date_card">
                                         <h6 class="m-0">Last Inventory Updated Date</h6>
                                         <h5 class="my-2" th:text="${last_inventory_updated_Date}">24/04/2024</h5>
                                     </div>
-                                    <div class="col-lg-5 col-sm-12 card p-3">
+                                    <div class="col-lg-5 col-sm-12 card p-3 update_date_card update-card-1">
                                         <h6 class="m-0">Last Stock Updated Date</h6>
                                         <h5 class="my-2" th:text="${last_Stock_Update_Date}">25/05/2024</h5>
                                     </div>
                                 </div>
                             </div>
                             <div class="container daily_stock">
-                                <h5 class="daily_stock_title">Your Shop Stocks</h5>
+                                <h5 class="daily_stock_title ">Your Shop Stocks</h5>
                                 <div class="row justify-content-lg-start justify-content-sm-center align-items-center py-1 gap-3 px-1"
                                     th:each="stock_details :${daily_stock_details}">
-                                    <div class="col-lg-3 col-12 border-1 border rounded p-2 cards">
-                                        <h6>Rice Stock [Kg]</h6>
+                                    <div class="col-lg-3 col-12  p-2 cards card-1">
+                                        <h6>Rice [Kg]</h6>
                                         <span th:text="${stock_details.rice_Stock_Qty}"></span>
                                     </div>
-                                    <div class="col-lg-3 col-12 border-1 border rounded p-2 cards">
-                                        <h6>Oil Stock [Kg]</h6>
+                                    <div class="col-lg-3 col-12  p-2 cards card-2">
+                                        <h6>Oil [Liters]</h6>
                                         <span th:text="${stock_details.oil_Stock_Qty}"></span>
                                     </div>
-                                    <div class="col-lg-3 col-12 border-1 border rounded p-2 cards">
-                                        <h6>Ginger & Garlic Stock [Kg]</h6>
+                                    <div class="col-lg-3 col-12 p-2 cards card-3">
+                                        <h6>Ginger & Garlic [Kg]</h6>
                                         <span th:text="${stock_details.ginger_Garlic_Stock_Qty}"></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="container mt-2 mb-5 p-0">
-                                <h5 class="">Your Last Inventory</h5>
+                            <div class="container mt-2 mb-5 last_inventory">
+                                <h5 class="p-0 last_inventory_title">Your Last Inventory</h5>
                                 <div class="col-lg-7 col-sm-6 card p-3">
                                     <div class="row text-start p-2">
                                         <!-- Sales Container -->
-                                        <h6 class="fw-bold fs-5">Sales</h6>
+                                        <h6 class="fw-bold">Sales</h6>
                                         <div class="row sale_details">
                                             <dt class="col-6 col-lg-6">Total Sales</dt>
                                             <dd class="col-6 col-lg-6 price-field" th:text="${total_Sales}">
@@ -148,7 +149,7 @@
                                         </div>
                                         <hr>
                                         <!-- Expenditure Container -->
-                                        <h6 class="fw-bold fs-5">Expenditure</h6>
+                                        <h6 class="fw-bold">Expenditure</h6>
                                         <div class="row">
                                             <dt class="col-6 col-lg-6">Total Expense</dt>
                                             <dd class="col-6 col-lg-6" th:text="${total_Expense}"></dd>
@@ -172,7 +173,17 @@
                                             <dd class="col-6 col-lg-6" th:text="${other_Expense}">544.00</dd>
                                         </div>
                                         <hr>
-                                        <h6 class="fw-bold fs-5">Stock Chicken</h6>
+                                        <h6 class="fw-bold">Stock Usage</h6>
+                                        <div class="row">
+                                        <dt class="col-6 col-lg-6">Rice Used [Kg]</dt>
+                                        <dd class="col-6 col-lg-6" th:text="${riceUsed}">5</dd>
+                                        <dt class="col-6 col-lg-6">Oil Used[Kg]</dt>
+                                        <dd class="col-6 col-lg-6" th:text="${oilUsed}">3</dd>
+                                        <dt class="col-6 col-lg-6">Ginger & Garlic Used [Kg]</dt>
+                                        <dd class="col-6 col-lg-6" th:text="${ginger_garlic_used}">3</dd>
+                                        </div>
+                                        <hr>
+                                        <h6 class="fw-bold">Stock Chicken</h6>
                                         <div class="row">
                                         <dt class="col-6 col-lg-6">Biriyani Chicken Stock [Kg]</dt>
                                         <dd class="col-6 col-lg-6" th:text="${chicken_Stock}">5</dd>
@@ -507,11 +518,12 @@
                                         </div>
                                         <!--  -->
                                     </div>
-                                    <div class="container">
-                                        <button type="submit" class="btn btn-primary submit-btn col-4">Submit</button>
-                                        <button type="button" id="viewInventoryBtn"
-                                            class="btn btn-info col-4 submit-btn" onclick="showModal()">View
-                                            Inventory</button>
+                                    <div class="container justify-content-center">
+                                        <div class="row">
+                                            <button type="submit" class="btn btn-primary submit-btn col-auto">Submit</button>
+                                            <button type="button" id="viewInventoryBtn"
+                                                class="btn col-auto submit-btn ms-2 text-white" onclick="showModal()">ViewInventory</button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -521,7 +533,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="inventoryModalLabel">Inventory Data</h5>
+                                            <h5 class="modal-title" id="inventoryModalLabel">Daily Inventory</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close">
                                             </button>
@@ -554,20 +566,19 @@
                             </div>
                         </div>
                         <!-- Stock Manangement Container -->
-                        <div class="tab-pane fade" id="Stock" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="tab-pane fade stock_page" id="Stock" role="tabpanel" aria-labelledby="contact-tab">
                             <h3 class="inventory_title">Manage Stock</h3>
                             <form class="" action="stockUpdation" method="get">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="accordion-item sale-accordion daily-necessities">
+                                <div class="accordion" id="accordionExample2">
+                                    <div class="accordion-item sale-accordion daily-necessities mb-1">
                                         <h2 class="accordion-header">
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseOne" aria-expanded="true"
-                                                aria-controls="collapseOne">
+                                                data-bs-target="#collapse1" aria-expanded="true"
+                                                aria-controls="collapse1">
                                                 Daily Necessities
                                             </button>
                                         </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse show stock-accordion"
-                                            data-bs-parent="#accordionExample">
+                                        <div id="collapse1" class="accordion-collapse collapse show stock-accordion" data-bs-parent="#accordionExample2">
                                             <div class="accordion-body m-0 p-1">
                                                 <div class="daily-neccesities">
                                                     <div class="row form-floating mt-2 mb-2 ">
@@ -680,29 +691,30 @@
                                                             <span class="input-group-text " id="basic-addon1">Kg</span>
                                                         </div>
                                                     </div>
-                                                    <div class="input-group mb-lg-0 mb-2">
-                                                        <div class="form-floating">
-                                                            <input type="text" class="form-control" id="floatingInput"
+                                                    <div class="row row-cols-2 form-floating mt-2 mb-2">
+                                                        <div class="input-group mb-lg-0 mb-2">
+                                                            <div class="form-floating">
+                                                             <input type="text" class="form-control" id="floatingInput"
                                                                 name="masalaItems" placeholder="Masala Item Expense"
                                                                 pattern="[0-9]+" required>
-                                                            <label for="floatingInput">Masala Items Expense</label>
+                                                                <label for="floatingInput">Masala Items Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
                                                         </div>
-                                                        <span class="input-group-text " id="basic-addon1">Rs</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item expenditure-accordion essential-items">
+                                    <div class="accordion-item expenditure-accordion essential-items mb-1">
                                         <h2 class="accordion-header">
                                             <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                data-bs-toggle="collapse" data-bs-target="#collapse2"
+                                                aria-expanded="false" aria-controls="collapse2">
                                                 Essential
                                             </button>
                                         </h2>
-                                        <div id="collapseTwo" class="accordion-collapse collapse"
-                                            data-bs-parent="#accordionExample">
+                                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
                                             <div class="accordion-body m-0 p-1">
                                                 <div class="expenditure">
                                                     <div class="form-floating mt-2 mb-2">
@@ -776,16 +788,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item stock-usage-accordion ">
+                                    <div class="accordion-item stock-usage-accordion mb-1 ">
                                         <h2 class="accordion-header">
                                             <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                                aria-expanded="false" aria-controls="collapseThree">
+                                                data-bs-toggle="collapse" data-bs-target="#collapse3"
+                                                aria-expanded="false" aria-controls="collapse3">
                                                 Packing
                                             </button>
                                         </h2>
-                                        <div id="collapseThree" class="accordion-collapse collapse"
-                                            data-bs-parent="#accordionExample">
+                                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
                                             <div class="accordion-body p-1 m-0">
                                                 <div class="product-usage">
                                                     <!--  -->
@@ -960,9 +971,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-                                    <button type="button" id="viewStockBtn" class="btn btn-info col-4 submit-btn"
-                                        onclick="showModal1()">View Inventory</button>
+                                    <div class="container justify-content-center">
+                                        <div class="row">
+                                            <button type="submit" class="btn btn-primary submit-btn col-auto">Submit</button>
+                                            <button type="button" id="viewStockBtn" class="btn btn-info col-auto submit-btn text-white ms-2"
+                                                onclick="showModal1()">View Inventory</button>
+                                        </div>
+                                    </div>
+                                    
 
                                 </div>
                             </form>
@@ -973,7 +989,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="inventoryModalLabel1">Inventory Data</h5>
+                                            <h5 class="modal-title" id="inventoryModalLabel1">Stock Inventory</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close">
                                             </button>

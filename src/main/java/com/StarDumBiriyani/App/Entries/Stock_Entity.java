@@ -55,6 +55,8 @@ public class Stock_Entity {
 	private String notes;
 	//
 	private String stock_Fill_Date;
+	//
+	private String updated = "No";
 
 	@ManyToOne
 	@JoinColumn(name = "shop_id")
@@ -330,6 +332,14 @@ public class Stock_Entity {
 
 	public void setStock_Fill_Date(String stock_Fill_Date) {
 		this.stock_Fill_Date = stock_Fill_Date;
+	}
+
+	public String getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(String updated) {
+		this.updated = updated;
 	}
 	
 	
