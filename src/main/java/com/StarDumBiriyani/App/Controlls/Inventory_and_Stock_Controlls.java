@@ -99,10 +99,6 @@ public class Inventory_and_Stock_Controlls {
 		
 		int session_id = (int)session.getAttribute("shop_id");
 		
-		System.out.println("----------------------------------");
-		System.out.println(session_id+"------------------ --------------------------");
-		System.out.println("---------------------------------------------");
-		
 		//
 		String last_inventory_update_date = all_Shop_Service.getCommonDate(session_id);
 		
@@ -161,6 +157,8 @@ public class Inventory_and_Stock_Controlls {
 		model.addAttribute("riceUsed", expenditure_Inventory_Details.stream().findFirst().get().getRice_Used());
 		model.addAttribute("oilUsed", expenditure_Inventory_Details.stream().findFirst().get().getOil_Used());
 		model.addAttribute("ginger_garlic_used", expenditure_Inventory_Details.stream().findFirst().get().getGinger_Garlic_used());
+		model.addAttribute("cashExpense", expenditure_Inventory_Details.stream().findFirst().get().getCashExpense());
+		model.addAttribute("upiExpense", expenditure_Inventory_Details.stream().findFirst().get().getUpiExpense());
 		
 		
 //		Daily Stock Data's
@@ -180,13 +178,13 @@ public class Inventory_and_Stock_Controlls {
 			@RequestParam("upiBalance") int upiBalance, @RequestParam("totalExpenditure") int totalExpenditure,
 			@RequestParam("chickenExpense") int chickenExpense, @RequestParam("biriyaniChicken") int biriyaniChicken,
 			@RequestParam("kababChicken") int kababChicken, @RequestParam("gasExpense") int gasExpense,
-			@RequestParam("saltExpense") int saltExpense,
-			@RequestParam("corianderMintExpense") int corianderMintExpense,
+			@RequestParam("saltExpense") int saltExpense, @RequestParam("corianderMintExpense") int corianderMintExpense,
 			@RequestParam("GreenChillyExpense") int GreenChillyExpense, @RequestParam("curdExpense") int curdExpense,
 			@RequestParam("otherExpense") int otherExpense, @RequestParam("notes") String notes,
 			@RequestParam("biriyani_chicken_Stock") int biriyani_chicken_Stock,
 			@RequestParam("kabab_chicken_Stock") int kabab_chicken_Stock, @RequestParam("riceUsed") int riceUsed,
 			@RequestParam("oilUsed") int oilUsed, @RequestParam("ginger_garlic_Used") int ginger_garlic_Used,
+			@RequestParam("cashExpense") int cashExpense, @RequestParam("upiExpense") int upiExpense,
 			Model model, HttpSession session) {
 
 		session.setAttribute("rice_used_Qty", riceUsed);
@@ -194,7 +192,7 @@ public class Inventory_and_Stock_Controlls {
 		inventory_Service_class.addNewInventory(totalSale, totalCash, totalUPI, cashBalance, upiBalance,
 				totalExpenditure, chickenExpense, biriyaniChicken, kababChicken, gasExpense, saltExpense,
 				corianderMintExpense, GreenChillyExpense, curdExpense, otherExpense, notes, biriyani_chicken_Stock,
-				kabab_chicken_Stock, riceUsed, oilUsed, ginger_garlic_Used, (Integer) session.getAttribute("shop_Id"));
+				kabab_chicken_Stock, riceUsed, oilUsed, ginger_garlic_Used,cashExpense, upiExpense, (Integer) session.getAttribute("shop_Id"));
 
 		return "success";
 	}

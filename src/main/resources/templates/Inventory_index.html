@@ -155,6 +155,12 @@
                                             <dd class="col-6 col-lg-6" th:text="${total_Expense}"></dd>
                                             <dt class="col-6 col-lg-6">Chicken Expense</dt>
                                             <dd class="col-6 col-lg-6" th:text="${chicken_expense}"></dd>
+                                            <!--  -->
+                                            <dt class="col-6 col-lg-6">Cash Expense</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${cashExpense}"></dd>
+                                            <dt class="col-6 col-lg-6">UPI Expense</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${upiExpense}"></dd>
+                                            <!--  -->
                                             <dt class="col-6 col-lg-6">Biriyani Chicken [Kg]</dt>
                                             <dd class="col-6 col-lg-6" th:text="${biriyani_Chicken_Kg}"></dd>
                                             <dt class="col-6 col-lg-6">Kabab Chicken [Kg]</dt>
@@ -294,6 +300,31 @@
                                                                     placeholder="Total Expenditure" pattern="[0-9]+"
                                                                     required>
                                                                 <label for="floatingInput">Total Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Expense -->
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="cashExpense" id="floatingInput"
+                                                                    placeholder="Total Expenditure" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">Cash Expense</label>
+                                                            </div>
+                                                            <span class="input-group-text " id="basic-addon1">Rs</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-floating mt-2 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    name="upiExpense" id="floatingInput"
+                                                                    placeholder="Total Expenditure" pattern="[0-9]+"
+                                                                    required>
+                                                                <label for="floatingInput">UPI Expense</label>
                                                             </div>
                                                             <span class="input-group-text " id="basic-addon1">Rs</span>
                                                         </div>

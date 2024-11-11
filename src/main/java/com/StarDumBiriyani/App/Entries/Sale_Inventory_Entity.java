@@ -1,16 +1,10 @@
 package com.StarDumBiriyani.App.Entries;
 
+import java.time.LocalDate;
 import java.util.Date;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table
@@ -28,6 +22,9 @@ public class Sale_Inventory_Entity {
 	private String updated = "No";
 	
 	private String Sale_Inventory_Date;
+
+	@Column(name = "event_date", columnDefinition = "DATE")
+	private LocalDate eventDate;
 
 	@ManyToOne
 	@JoinColumn(name = "shop_id")
@@ -105,5 +102,12 @@ public class Sale_Inventory_Entity {
 		this.updated = updated;
 	}
 
+	public LocalDate getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(LocalDate eventDate) {
+		this.eventDate = eventDate;
+	}
 	
 }

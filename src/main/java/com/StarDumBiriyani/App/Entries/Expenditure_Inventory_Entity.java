@@ -1,16 +1,10 @@
 package com.StarDumBiriyani.App.Entries;
 
+import java.time.LocalDate;
 import java.util.Date;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table
@@ -36,8 +30,14 @@ public class Expenditure_Inventory_Entity {
 	private int rice_Used;
 	private int oil_Used;
 	private int ginger_Garlic_used;
+	private int cashExpense;
+	private int upiExpense;
+	private int AutoTotalExpense;
 	private String updated = "No";
 	private String Inventory_Date;
+
+	@Column(name = "event_Date", columnDefinition = "DATE")
+	private LocalDate eventDate;
 
 	@ManyToOne
 	@JoinColumn(name = "shop_id")
@@ -238,6 +238,49 @@ public class Expenditure_Inventory_Entity {
 	}
 
 
+
+	public int getCashExpense() {
+		return cashExpense;
+	}
+
+
+
+	public void setCashExpense(int cashExpense) {
+		this.cashExpense = cashExpense;
+	}
+
+
+
+	public int getUpiExpense() {
+		return upiExpense;
+	}
+
+
+
+	public void setUpiExpense(int upiExpense) {
+		this.upiExpense = upiExpense;
+	}
+
+
+
+	public int getAutoTotalExpense() {
+		return AutoTotalExpense;
+	}
+
+
+
+	public void setAutoTotalExpense(int autoTotalExpense) {
+		AutoTotalExpense = autoTotalExpense;
+	}
+
+
+	public LocalDate getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(LocalDate eventDate) {
+		this.eventDate = eventDate;
+	}
 
 	
 }

@@ -1,5 +1,6 @@
 package com.StarDumBiriyani.App.Services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class Inventory_Service_class {
 			int totalExpenditure, int chickenExpense, int biriyaniChicken, int kababChicken, int gasExpense,
 			int saltExpense, int corianderMintExpense, int GreenChillyExpense, int curdExpense, int otherExpense,
 			String notes, int biriyani_chicken_Stock, int kabab_chicken_Stock, int riceUsed, int oilUsed,
-			int ginger_Garlic_Used, int id) {
+			int ginger_Garlic_Used, int cashExpense, int upiExpense, int id) {
 
 		try {
 
@@ -74,11 +75,12 @@ public class Inventory_Service_class {
 			
 
 			Sale_Inventory_Entity sale_Inventory = new Sale_Inventory_Entity();
-			
-			System.out.println("-------------- - --- " + totalExpenditure+"  -- -- "+ expenditure_Status  +" -- -- -"+"  --- Smiley : "+ Sale_Status);
 
 			if ("Yes".equals(expenditure_Status) || expenditure_Status != null && "Yes".equals(Sale_Status) || Sale_Status != null) {
 				
+				
+				int auto_total_expense = chickenExpense+gasExpense+corianderMintExpense+curdExpense+GreenChillyExpense+
+						otherExpense+saltExpense;
 				
 				
 				sale_Inventory_Repository.updateExisting(totalCash, cashBalance, totalSale, totalUPI, upiBalance,
@@ -86,7 +88,7 @@ public class Inventory_Service_class {
 				
 				expenditure_Inventory_Repository.updateExistingEntry(biriyaniChicken, biriyani_chicken_Stock, chickenExpense, 
 						corianderMintExpense, curdExpense, gasExpense, GreenChillyExpense, kababChicken, kabab_chicken_Stock, 
-						otherExpense, saltExpense, totalExpenditure,riceUsed, oilUsed, ginger_Garlic_Used, all_Shops.getId(), 
+						otherExpense, saltExpense, totalExpenditure,riceUsed, oilUsed, ginger_Garlic_Used, cashExpense, upiExpense, auto_total_expense,all_Shops.getId(), 
 						Essential_Operations.getToday_Date());				
 
 			} else {
@@ -99,6 +101,7 @@ public class Inventory_Service_class {
 				sale_Inventory.setCash_balance(cashBalance);
 				sale_Inventory.setUpi_balance(upiBalance);
 				sale_Inventory.setSale_Inventory_Date(Essential_Operations.getToday_Date());
+				sale_Inventory.setEventDate(LocalDate.now());
 				sale_Inventory.setUpdated("Yes");
 				sale_Inventory.setAll_Shops(all_Shops);
 
@@ -122,10 +125,14 @@ public class Inventory_Service_class {
 				Expenditure_Inventory.setRice_Used(riceUsed);
 				Expenditure_Inventory.setOil_Used(oilUsed);
 				Expenditure_Inventory.setGinger_Garlic_used(ginger_Garlic_Used);
+				Expenditure_Inventory.setCashExpense(cashExpense);
+				Expenditure_Inventory.setUpiExpense(upiExpense);
+				Expenditure_Inventory.setAutoTotalExpense(chickenExpense+gasExpense+saltExpense+corianderMintExpense+GreenChillyExpense+curdExpense+otherExpense);
 				Expenditure_Inventory.setInventory_Date(Essential_Operations.getToday_Date());
 				Expenditure_Inventory.setUpdated("Yes");
 				Expenditure_Inventory.setAll_Shops(all_Shops);
 				Expenditure_Inventory.setSale_Inventory(sale_Inventory);
+				Expenditure_Inventory.setEventDate(LocalDate.now());
 
 				Daily_Stock_Entity daily_Stock = new Daily_Stock_Entity();
 

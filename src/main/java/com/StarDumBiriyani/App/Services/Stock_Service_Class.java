@@ -53,14 +53,7 @@ public class Stock_Service_Class {
 				int ide = stock.stream().findFirst().get().getId();
 				
 				System.out.println("---------------------  "+ide);
-				
-
-//				
-//				int update_Set_Rice_Qty = Existing_Rice_Qty + riceQty;
-//				int update_Set_Oil_Qty = Existing_Oil_Qty + oilQty;
-//				int update_Set_Ginger_Garlic_Qty = Existing_Ginger_Garlic_Stock + gingerGarlicQty;
-				
-				
+							
 				// Daily Stock
 				
 				List<Daily_Stock_Entity>  daily_Stock= daily_Stock_Repository.getDailyStock(id);
@@ -101,17 +94,9 @@ public class Stock_Service_Class {
 					Integer Existing_Oil_Qty = stock.stream().findFirst().get().getOil_Qty();
 					Integer Existing_Ginger_Garlic_Stock = stock.stream().findFirst().get().getGingerGarlic_Qty();
 					
-//					int expenditure_rice_Used =expenditure_Inventory_Entities.stream().findFirst().get().getRice_Used();
-//					int expenditure_oil_Used = expenditure_Inventory_Entities.stream().findFirst().get().getOil_Used() ;
-//					int expenditure_ginger_garlic_Used = expenditure_Inventory_Entities.stream().findFirst().get().getGinger_Garlic_used();
-					
-					
-					
 					int updated_Rice_Qty = daily_rice_Qty + riceQty;
 					int updated_Oil_Qty = daily_oil_Qty + oilQty;
 					int updated_Ginger_Garlic_Qty = daily_ginger_garlic_Qty + gingerGarlicQty;
-					
-					
  //					
 					stock_Management_Repository.updateStock(TotalCarryBagExpense,eggTrayCount, eggStock, foodColour, foodContainerExpense,
 							foodContainerQty, gingerGarlicExpense, gingerGarlicQty, gravyCover, masalaItems, jeeraSweetExpense, largeCarryBag,
