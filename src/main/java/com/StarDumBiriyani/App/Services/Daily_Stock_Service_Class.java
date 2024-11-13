@@ -25,28 +25,21 @@ public class Daily_Stock_Service_Class {
 
 	public ResponseEntity<Daily_Stock_Entity> add_Stock_Item_Entries(int rice_Stock_Qty, int oil_Stock_Qty,
 			int ginger_Garlic_Stock_Qty, int id) {
-		
-		
 
 		All_Shops all_Shops = allShop_Repository.findById(id).get();
-
 		Daily_Stock_Entity daily_Stock = new Daily_Stock_Entity();
 
 		daily_Stock.setRice_Stock_Qty(rice_Stock_Qty);
-
 		daily_Stock.setOil_Stock_Qty(oil_Stock_Qty);
-
 		daily_Stock.setGinger_Garlic_Stock_Qty(ginger_Garlic_Stock_Qty);
 
 		daily_Stock.setAll_Shops(all_Shops);
-
 		daily_Stock_Repository.save(daily_Stock);
 
 		return ResponseEntity.ok(daily_Stock);
 
 	}
-	
-	
+
 	public List<Daily_Stock_Entity> getDaily_Stock(int id){
 		return daily_Stock_Repository.getDailyStock(id);
 	}

@@ -33,4 +33,5 @@ public interface Expenditure_Inventory_Repository extends JpaRepository<Expendit
 
 	@Query(value = "select * from expenditure_inventory_entity where shop_id = :id order by id desc limit 1;", nativeQuery = true)
 	List<Expenditure_Inventory_Entity> get_Expenditure_Inventory(int id);
+
 }

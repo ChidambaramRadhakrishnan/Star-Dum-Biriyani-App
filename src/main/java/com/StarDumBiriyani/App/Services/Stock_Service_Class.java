@@ -47,36 +47,34 @@ public class Stock_Service_Class {
 		Stock_Entity stock_entity = new Stock_Entity();
 		
 		//before insert rice, oil, ginger garlic qty
-		List<Stock_Entity> stock= stock_Management_Repository.getRice_Oil_GG_Qty();
+		/*
+		Try block is going to
+		firstly, check id is there or not in db
+		if it's there, it'll update it.
+		If record is not there, it'll create new record
+		 */
+//		List<Stock_Entity> stock= stock_Management_Repository.getRice_Oil_GG_Qty();
 			
 			try {
-				int ide = stock.stream().findFirst().get().getId();
+//				int ide = stock.stream().findFirst().get().getId();
 				
-				System.out.println("---------------------  "+ide);
+//				System.out.println("---------------------  "+ide);
 							
 				// Daily Stock
 				
-				List<Daily_Stock_Entity>  daily_Stock= daily_Stock_Repository.getDailyStock(id);
-				
-				int daily_rice_Qty= daily_Stock.stream().findFirst().get().getRice_Stock_Qty();
-				
-				int daily_oil_Qty =daily_Stock.stream().findFirst().get().getOil_Stock_Qty();
-				
-				int daily_ginger_garlic_Qty =daily_Stock.stream().findFirst().get().getGinger_Garlic_Stock_Qty();
-				
+				List<Stock_Entity> stock=stock_Management_Repository.getLastStockRecord(id);
+//				get previous date record
+				int daily_rice_Qty= stock.stream().findFirst().get().getRice_Qty();
+				int daily_oil_Qty =stock.stream().findFirst().get().getOil_Qty();
+				int daily_ginger_garlic_Qty =stock.stream().findFirst().get().getGingerGarlic_Qty();
+				System.out.println("-----------------------------------------------");
+				System.out.println(daily_oil_Qty+" drq"+daily_oil_Qty+" doq"+ daily_ginger_garlic_Qty+" dggq");
+//				adding the rice, oil and ginger qty with existing data
 				int updated_rice_Qty = riceQty + daily_rice_Qty;
-				
 				int updated_oil_Qty = oilQty + daily_oil_Qty;
-				
 				int updated_ginget_garlic_Qty = gingerGarlicQty + daily_ginger_garlic_Qty;
-				
 				//
-				
-				System.out.println("-----------------"+"after some line of code"+" id is --- "+ id);
-
 				String update_Status = stock_Management_Repository.getUpdateStatus(id, Essential_Operations.getToday_Date());
-				
-				System.out.println("--------------------------- updated   --   -> " + update_Status);
 				//
 				
 				//  
@@ -89,22 +87,16 @@ public class Stock_Service_Class {
 					
 					List<Expenditure_Inventory_Entity> expenditure_Inventory_Entities= expenditure_Inventory_Repository.get_Expenditure_Inventory(id);
 					
-					Integer Existing_Rice_Qty = stock.stream().findFirst().get().getRice_Qty();
-					
-					Integer Existing_Oil_Qty = stock.stream().findFirst().get().getOil_Qty();
-					Integer Existing_Ginger_Garlic_Stock = stock.stream().findFirst().get().getGingerGarlic_Qty();
-					
-					int updated_Rice_Qty = daily_rice_Qty + riceQty;
-					int updated_Oil_Qty = daily_oil_Qty + oilQty;
-					int updated_Ginger_Garlic_Qty = daily_ginger_garlic_Qty + gingerGarlicQty;
+//					Integer Existing_Rice_Qty = stock.stream().findFirst().get().getRice_Qty();
+//
+//					Integer Existing_Oil_Qty = stock.stream().findFirst().get().getOil_Qty();
+//					Integer Existing_Ginger_Garlic_Stock = stock.stream().findFirst().get().getGingerGarlic_Qty();
  //					
 					stock_Management_Repository.updateStock(TotalCarryBagExpense,eggTrayCount, eggStock, foodColour, foodContainerExpense,
-							foodContainerQty, gingerGarlicExpense, gingerGarlicQty, gravyCover, masalaItems, jeeraSweetExpense, largeCarryBag,
-							largeCover, mediumCarryBag, mediumCover, notes, oilExpense, oilQty, OnionExpense, OnionQty, parcelCoverExpense, plateCoverExpense,
-							plateCoverQty, riceExpense, riceQty, RubberExpense, smallCarryBag, smallCover, specialSalt, toothStickExpense, waterBottle,"Yes"
+							foodContainerQty, gingerGarlicExpense, updated_ginget_garlic_Qty, gravyCover, masalaItems, jeeraSweetExpense, largeCarryBag,
+							largeCover, mediumCarryBag, mediumCover, notes, oilExpense, updated_oil_Qty, OnionExpense, OnionQty, parcelCoverExpense, plateCoverExpense,
+							plateCoverQty, riceExpense, updated_rice_Qty, RubberExpense, smallCarryBag, smallCover, specialSalt, toothStickExpense, waterBottle,"Yes"
 							,id, Essential_Operations.getToday_Date());
-					
-					daily_Stock_Repository.updateDailyStock(updated_Rice_Qty, updated_Oil_Qty, updated_Ginger_Garlic_Qty, id, Essential_Operations.getToday_Date());
 					
 					System.out.println(" ---- -  + new updating stocks");
 					
@@ -200,7 +192,7 @@ public class Stock_Service_Class {
 					
 				}	
 				/*
-				 * A new and Fresh Record will placed.
+				 * A new and Fresh Record will place.
 				 */
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -273,18 +265,6 @@ public class Stock_Service_Class {
 				//
 				stock_entity.setAll_Shops(all_Shops);
 				
-				Daily_Stock_Entity daily_Stock = new Daily_Stock_Entity();
-				
-				daily_Stock.setGinger_Garlic_Stock_Qty(gingerGarlicQty);
-				daily_Stock.setOil_Stock_Qty(oilQty);
-				daily_Stock.setRice_Stock_Qty(riceQty);
-				daily_Stock.setStock_updated_Date(Essential_Operations.getToday_Date());
-				daily_Stock.setUpdated("Yes");
-
-				daily_Stock_Repository.save(daily_Stock);
-				
-				daily_Stock.setAll_Shops(all_Shops);
-				
 				stock_Management_Repository.save(stock_entity);
 				
 				page = "success";
@@ -294,5 +274,9 @@ public class Stock_Service_Class {
 	
 	public String getStockUpdateDate(int id) {
 		return stock_Management_Repository.getStockDate(id);
+	}
+
+	public List<Stock_Entity> getLastStockUpdateRecord(int id){
+		return stock_Management_Repository.getLastStockRecord(id);
 	}
 }

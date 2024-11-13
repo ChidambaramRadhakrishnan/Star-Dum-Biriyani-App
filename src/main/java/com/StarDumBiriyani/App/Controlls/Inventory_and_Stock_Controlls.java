@@ -1,6 +1,10 @@
 package com.StarDumBiriyani.App.Controlls;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.StarDumBiriyani.App.Entries.*;
+import com.StarDumBiriyani.App.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.stereotype.Controller;
@@ -11,17 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.StarDumBiriyani.App.Entries.All_Shops;
-import com.StarDumBiriyani.App.Entries.Daily_Stock_Entity;
-import com.StarDumBiriyani.App.Entries.Expenditure_Inventory_Entity;
-import com.StarDumBiriyani.App.Entries.Sale_Inventory_Entity;
 import com.StarDumBiriyani.App.Functionalities.Essential_Operations;
 import com.StarDumBiriyani.App.Repository.AllShop_Repository;
 import com.StarDumBiriyani.App.Repository.Sale_Inventory_Repository;
-import com.StarDumBiriyani.App.Services.All_Shop_Service;
-import com.StarDumBiriyani.App.Services.Daily_Stock_Service_Class;
-import com.StarDumBiriyani.App.Services.Inventory_Service_class;
-import com.StarDumBiriyani.App.Services.Stock_Service_Class;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -41,6 +37,33 @@ public class Inventory_and_Stock_Controlls {
 	Daily_Stock_Service_Class daily_Stock_Service;
 
 	@Autowired
+	shopReport_Service shop_report_Service;
+
+//	Admin
+
+	@GetMapping("admin/dashboard")
+	public String adminIndex(Model model){
+
+		System.out.println(" are you thre ");
+
+		// Admin Data Section
+
+		try{
+			List<Shop_ReportDTO>  all_Shop_Data = shop_report_Service.getShop_Report();
+			model.addAttribute("shopReport", all_Shop_Data);
+			System.out.println("---------------------------------------------------------");
+			all_Shop_Data.stream().map(e -> e.getBranchName()).forEach(System.out::println);
+			all_Shop_Data.stream().forEach(System.out::println);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
+		//
+		return "admin_dashboard";
+	}
+
+
+	// admin end
 
 	@GetMapping("/")
 	public String home() {
@@ -52,6 +75,9 @@ public class Inventory_and_Stock_Controlls {
 
 		List<All_Shops> shop_Data = all_Shop_Service.getShop_Data();
 		model.addAttribute("all_shop_Data", shop_Data);
+
+		System.out.println("---------------------------");
+
 		return "intial_Page";
 	}
 
@@ -94,11 +120,12 @@ public class Inventory_and_Stock_Controlls {
 		session.setAttribute("shop_Id", id);
 		String branch_Name = all_Shop_Service.getBranchName(id);
 		model.addAttribute("branchName", branch_Name);
+
+		System.out.println(" ----------------------------------------       Admin / Login ----------");
 		
 		session.setAttribute("shop_id", id);
 		
 		int session_id = (int)session.getAttribute("shop_id");
-		
 		//
 		String last_inventory_update_date = all_Shop_Service.getCommonDate(session_id);
 		
@@ -107,7 +134,7 @@ public class Inventory_and_Stock_Controlls {
 			String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(session_id);
 			model.addAttribute("last_Stock_Update_Date", last_Stock_Updated_Date);
 //			
-			List<Daily_Stock_Entity> all_Stock_details = daily_Stock_Service.getDaily_Stock(session_id);
+			List<Stock_Entity> all_Stock_details = stock_Service.getLastStockUpdateRecord(id);
 			model.addAttribute("daily_stock_details", all_Stock_details);
 			
 		}else {
@@ -117,7 +144,7 @@ public class Inventory_and_Stock_Controlls {
 		String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(session_id);
 		model.addAttribute("last_Stock_Update_Date", last_Stock_Updated_Date);
 		//
-		List<Daily_Stock_Entity> all_Stock_details = daily_Stock_Service.getDaily_Stock(session_id);
+		List<Stock_Entity> all_Stock_details = stock_Service.getLastStockUpdateRecord(id);
 		model.addAttribute("daily_stock_details", all_Stock_details);
 		
 		// Sale Inventory Data's
@@ -138,11 +165,11 @@ public class Inventory_and_Stock_Controlls {
 		
 		//Expenditure Inventory Data's
 		
-		List<Expenditure_Inventory_Entity> expenditure_Inventory_Details = inventory_Service_class.getAll_Expenditure_Inventory_Data(session_id);
+		List<Expenditure_Inventory_Entity> expenditure_Inventory_Details = inventory_Service_class.getAll_Expenditure_Inventory_Data(id);
 		
 		model.addAttribute("total_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getTotal_Expenditure()));
 		model.addAttribute("chicken_expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getChicken_Expenses()));
-		model.addAttribute("biriyani_Chicken_Kg", expenditure_Inventory_Details.stream().findFirst().get().getChicken_Expenses());
+		model.addAttribute("biriyani_Chicken_Kg", expenditure_Inventory_Details.stream().findFirst().get().getBiriyani_Chicken_Kg());
 		model.addAttribute("kabab_Chicken_Kg",expenditure_Inventory_Details.stream().findFirst().get().getKabab_Chicken_Kg());
 		model.addAttribute("gas_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getGas_Expenses()));
 		model.addAttribute("salt_expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getSalt_Expenses()));
@@ -163,9 +190,9 @@ public class Inventory_and_Stock_Controlls {
 		
 //		Daily Stock Data's
 		
-		model.addAttribute("rice_Qty", all_Stock_details.stream().findFirst().get().getRice_Stock_Qty());
-		model.addAttribute("oil_Qty", all_Stock_details.stream().findFirst().get().getOil_Stock_Qty());
-		model.addAttribute("ginger_Garlic_Qty", all_Stock_details.stream().findFirst().get().getGinger_Garlic_Stock_Qty());
+		model.addAttribute("rice_Qty", all_Stock_details.stream().findFirst().get().getRice_Qty());
+		model.addAttribute("oil_Qty", all_Stock_details.stream().findFirst().get().getOil_Qty());
+		model.addAttribute("ginger_Garlic_Qty", all_Stock_details.stream().findFirst().get().getGingerGarlic_Qty());
 		
 		}
 		

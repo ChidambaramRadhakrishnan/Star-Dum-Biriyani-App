@@ -1,73 +1,214 @@
-
-.highlight-container{
-    background-color: rgb(216, 255, 216);
-    border-radius: 10px;
+body{
+    background-color: #F4F5FA;
 }
 
-.highlight-container:hover{
-    box-shadow: rgba(187, 255, 187, 0.35) 0px 2px 5px -1px, rgba(45, 86, 45, 0.30) 0px 1px 3px 1.2px;
+/* 
+ */
+ .inventory_title{
+    font-size: 15px;
+    margin: 8px 0px;
+    font-weight: 600;
 }
 
-.sale-highlights .highlight-icon{
+textarea::placeholder{
+    font-size: 12px;
+}
+
+.nav-tabs .nav-item .nav-link{
+    border: none;
+    border-right: 0.5px solid #e2e2e2;
+    border-radius: 0px;
+    padding: 10px 10px;
+    /* margin-bottom: 15px; */
+    font-size: 13px;
+    font-weight: 700;
+    color: #5d5e5f;
+}
+
+.nav-tabs .nav-item .nav-link:hover{
+    background-color: #d6d6d6;
+}
+
+.nav-tabs .nav-item .nav-link.active{
+    color: #1F3BB3;
+    font-weight: 700;
+    background-color: #e9f1fd;
+}
+
+.nav-tabs .nav-item .nav-link .nav-text{
+    font-size: 12px;
+    text-decoration: none;
+}
+/* 
+DashBoard Title
+*/
+.dashboard_txt{
+    font-size: 1.5rem;
+    margin-left: 0.80rem;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.41);
+}
+
+.dashboard_sub_title{
+    margin-left: 0.3rem;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 0.90rem;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.41);
+}
+
+/*
+Shop report card start
+*/
+
+.card-indicator{
+    background-color: red;
+    height:3px;
+    width: 50px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, rgb(134, 140, 255) 0%, rgb(67, 24, 255) 100%);
+}
+
+.shop_reports_card{
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(29, 50, 59, 0.32) 0px 2px 16px 0px;
+}
+
+.shop_report_totalSale{
+    font-weight: 500;
+    font-size: 1.5625rem;
+    line-height: 1.235;
+    letter-spacing: 0.25px;
+    color: rgba(44, 41, 49, 0.87);
+    font-weight: 600;
+    font-size: 2.125rem !important;
+}
+
+.shop_report_inventorySaleDate{
+    font-weight: 400;
+    font-size: 0.85rem;
+    line-height: 1.66;
+    letter-spacing: 0.4px;
+    color: rgba(58, 53, 65, 0.68);
+    padding: 0px;
+}
+
+.shop_report_title{
+    font-weight: 400;
+    font-size: 1rem;
+    /* line-height: 1.5; */
+    letter-spacing: 0.15px;
+    color: rgba(58, 53, 65, 0.68);
+    color: rgba(58, 53, 65, 0.87);
+    margin-bottom: 0.45rem;
+    font-weight: 600;
+}
+
+.shop_report_value{
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    letter-spacing: 0.15px;
+    color: rgba(58, 53, 65, 0.68);
+    color: rgba(58, 53, 65, 0.87);
+    font-weight: 600;
     margin: 0;
-    border-radius: 10px;
-    color: lightgreen;
+    text-align: end;
+    padding: 0px;
 }
 
-/* .highlight-container:hover .store_sales{
-    font-size: 28.2px;
-    transition: font-size 0.5s ease;
-} */
+.shop_report_value_unit{
+    display: inline-block;
+    margin: 0; /* Removes any default margin */
+    padding: 0; /* Removes any default padding */
+    font-size: 0.875rem;
+    color: rgba(58, 53, 65, 0.87);
+    font-weight: 600;
+}
+
+
+.shop_report_sub_title{
+    font-weight: 400;
+    font-size: 0.85rem;
+    letter-spacing: 0.4px;
+    color: rgba(38, 35, 42, 0.68);
+}
+
+.view_more_arrow{
+    color: white;
+    padding: 13px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgb(134, 140, 255) 0%, rgb(67, 24, 255) 100%);
+}
+
+.rounded-button{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;  /* Makes the button rounded */
+    background: linear-gradient(135deg, rgb(134, 140, 255) 0%, rgb(67, 24, 255) 100%);
+    color: #fff;         /* Icon color */
+    text-decoration: none;
+}
+
+.rounded-button svg {
+    width: 16px;
+    height: 16px;
+}
 
 .store_name{
-    color: darkgreen;
-}
-.store_title{
-    color: rgb(2, 65, 95);
-}
-.sale_date{
-    color: rgb(2, 69, 66);
+    line-height: 1;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.0125em;
 }
 
-.store_icon{
-    color: green;
-}
-.store_sales{
-    color: rgb(45, 45, 45);
-    font-size: calc(1.3rem + .6vw);
-    transition: font-size 0.5s ease;
+/*
+Shop report card end
+*/
+
+/* Stock Report Card */
+
+.stock_report_card{
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(29, 50, 59, 0.32) 0px 2px 16px 0px;
+    background-color: #fff;
+    border-radius: 4px;
 }
 
-.inventory_title{
-    font-size: 25px;
-    color: rgb(110, 110, 110);
+.sale_report_sub_title{
+    font-weight: 400;
+    font-size: 0.85rem;
+    letter-spacing: 0.4px;
+    color: rgba(38, 35, 42, 0.68);
 }
 
-.branch_title{
-    font-size: 20px;
+.stock_report_inventorySaleDate{
+    font-weight: 400;
+    font-size: 0.90rem;
+    letter-spacing: 0.4px;
+    color: rgba(38, 35, 42, 0.68);
 }
 
-.branch_details{
-    font-size: 18px;
+.stock_report_inventorySaleDate_value{
+    font-weight: 600;
 }
+
+.stock_reports .shop_report_value{
+    padding: 0px;
+}
+
+/*  */
+
+
 
 
 @media (max-width: 768px) {
-    .inventory_title{
-        font-size: 10px;
-        font-weight: 800;
-    }
 
-    .inventory_details{
-        font-size: 10px;
-    }
+.dashboard_sub_title{
+    margin-left : 1.2rem;
+}
 
-    .branch_title{
-        font-size: 16px;
-    }
-
-    .branch_details{
-        font-size: 16px;
-    }
+.dashboard_txt{
+    margin-left : 1.1rem;
+}
 
 }

@@ -57,6 +57,9 @@ public class Stock_Entity {
 	private String stock_Fill_Date;
 	//
 	private String updated = "No";
+	//
+	private String inventoryDate;
+	//
 
 	@ManyToOne
 	@JoinColumn(name = "shop_id")
@@ -81,6 +84,15 @@ public class Stock_Entity {
 	public int getRice_Qty() {
 		return rice_Qty;
 	}
+
+	public String getInventoryDate() {
+		return inventoryDate;
+	}
+
+	public void setInventoryDate(String inventoryDate) {
+		this.inventoryDate = inventoryDate;
+	}
+
 
 	public void setRice_Qty(int rice_Qty) {
 		this.rice_Qty = rice_Qty;

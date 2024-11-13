@@ -3,18 +3,12 @@ package com.StarDumBiriyani.App.Services;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.StarDumBiriyani.App.Entries.*;
+import com.StarDumBiriyani.App.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.StarDumBiriyani.App.Entries.All_Shops;
-import com.StarDumBiriyani.App.Entries.Daily_Stock_Entity;
-import com.StarDumBiriyani.App.Entries.Expenditure_Inventory_Entity;
-import com.StarDumBiriyani.App.Entries.Sale_Inventory_Entity;
 import com.StarDumBiriyani.App.Functionalities.Essential_Operations;
-import com.StarDumBiriyani.App.Repository.AllShop_Repository;
-import com.StarDumBiriyani.App.Repository.Daily_Stock_Repository;
-import com.StarDumBiriyani.App.Repository.Expenditure_Inventory_Repository;
-import com.StarDumBiriyani.App.Repository.Sale_Inventory_Repository;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.servlet.http.HttpSession;
@@ -34,6 +28,9 @@ public class Inventory_Service_class {
 
 	@Autowired
 	Daily_Stock_Repository daily_Stock_Repository;
+
+	@Autowired
+	Stock_Management_Repository stockManagementRepository;
 	
 	
 	public List<Sale_Inventory_Entity> getAll_Sale_Inventory_Data(int id){
@@ -53,47 +50,61 @@ public class Inventory_Service_class {
 			int ginger_Garlic_Used, int cashExpense, int upiExpense, int id) {
 
 		try {
-
 			All_Shops all_Shops = allShop_Repository.findById(id).get();
 
 			String expenditure_Status = expenditure_Inventory_Repository.get_Update_StatusByID(all_Shops.getId(), Essential_Operations.getToday_Date());
 
 			String Sale_Status = sale_Inventory_Repository.get_Update_StatusByID(all_Shops.getId(),Essential_Operations.getToday_Date());
 
-			List<Daily_Stock_Entity> stock = daily_Stock_Repository.getDailyStock(id);
-			int Existing_Rice_Qty = stock.stream().findFirst().get().getRice_Stock_Qty();
-			
-			
-			int Existing_Oil_Qty = stock.stream().findFirst().get().getOil_Stock_Qty();
-			int Existing_Ginger_Garlic_Qty = stock.stream().findFirst().get().getGinger_Garlic_Stock_Qty();
-			
+			System.out.println(" ------------------------ <<<<<<<<<<<<<<<<<<<<< "+ id);
 
+			List<Stock_Entity> stock = stockManagementRepository.getLastStockRecord(id);
+
+			//Existing rice qty to get previous date stock inventories
+			int Existing_Rice_Qty = stock.stream().findFirst().get().getRice_Qty();
+			int Existing_Oil_Qty = stock.stream().findFirst().get().getOil_Qty();
+			int Existing_Ginger_Garlic_Qty = stock.stream().findFirst().get().getGingerGarlic_Qty();
+
+//			update rice qty means
+//			reduce existing record inventory - today rice qty
 			int update_Rice_Used_Qty = Existing_Rice_Qty - riceUsed;
 			int update_Oil_Used_Qty = Existing_Oil_Qty - oilUsed;
 			int update_Ginger_Garlic_Used_Qty = Existing_Ginger_Garlic_Qty - ginger_Garlic_Used;
-			
-			
 
 			Sale_Inventory_Entity sale_Inventory = new Sale_Inventory_Entity();
 
-			if ("Yes".equals(expenditure_Status) || expenditure_Status != null && "Yes".equals(Sale_Status) || Sale_Status != null) {
-				
-				
+			/*
+			update stock inventory
+			if record is already exist in database, this part of code will execute
+			won't create new record, just update existing one
+			 */
+			if ("Yes".equals(expenditure_Status) && "Yes".equals(Sale_Status)) {
+
+				//To calculate total expense (Systemised Total Expense)
+
+				System.out.println("Updating Existing Inventory");
+
 				int auto_total_expense = chickenExpense+gasExpense+corianderMintExpense+curdExpense+GreenChillyExpense+
 						otherExpense+saltExpense;
-				
-				
+				//
 				sale_Inventory_Repository.updateExisting(totalCash, cashBalance, totalSale, totalUPI, upiBalance,
 						all_Shops.getId(), Essential_Operations.getToday_Date());
 				
 				expenditure_Inventory_Repository.updateExistingEntry(biriyaniChicken, biriyani_chicken_Stock, chickenExpense, 
 						corianderMintExpense, curdExpense, gasExpense, GreenChillyExpense, kababChicken, kabab_chicken_Stock, 
 						otherExpense, saltExpense, totalExpenditure,riceUsed, oilUsed, ginger_Garlic_Used, cashExpense, upiExpense, auto_total_expense,all_Shops.getId(), 
-						Essential_Operations.getToday_Date());				
+						Essential_Operations.getToday_Date());
 
+				System.out.println("-------------------------------- updated Existing expenditure Entry");
+
+//				stockManagementRepository.updateDailyInventory(update_Rice_Used_Qty, update_Oil_Used_Qty,
+//						update_Ginger_Garlic_Used_Qty, Essential_Operations.getToday_Date(), id);
+
+//				if record is not present on today, it'll create new record
+//
 			} else {
 				
-				System.out.println("I'm second");
+				System.out.println("Added New Inventory");
 				
 				sale_Inventory.setTotal_sale(totalSale);
 				sale_Inventory.setCash(totalCash);
@@ -106,7 +117,6 @@ public class Inventory_Service_class {
 				sale_Inventory.setAll_Shops(all_Shops);
 
 				sale_Inventory_Repository.save(sale_Inventory);
-
 				Expenditure_Inventory_Entity Expenditure_Inventory = new Expenditure_Inventory_Entity();
 
 				Expenditure_Inventory.setTotal_Expenditure(totalExpenditure);
@@ -134,16 +144,11 @@ public class Inventory_Service_class {
 				Expenditure_Inventory.setSale_Inventory(sale_Inventory);
 				Expenditure_Inventory.setEventDate(LocalDate.now());
 
-				Daily_Stock_Entity daily_Stock = new Daily_Stock_Entity();
+				//
+				stockManagementRepository.updateDailyInventory(update_Rice_Used_Qty, update_Oil_Used_Qty,
+						update_Ginger_Garlic_Used_Qty, Essential_Operations.getToday_Date(), id);
 
-				daily_Stock.setRice_Stock_Qty(update_Rice_Used_Qty);
-				daily_Stock.setOil_Stock_Qty(update_Oil_Used_Qty);
-				daily_Stock.setGinger_Garlic_Stock_Qty(update_Ginger_Garlic_Used_Qty);
-				daily_Stock.setStock_updated_Date(Essential_Operations.getToday_Date());
-				daily_Stock.setUpdated("Yes");
-				daily_Stock.setAll_Shops(all_Shops);
-
-				daily_Stock_Repository.save(daily_Stock);
+				System.out.println(" --------------- UPdated");
 
 				expenditure_Inventory_Repository.save(Expenditure_Inventory);
 			}

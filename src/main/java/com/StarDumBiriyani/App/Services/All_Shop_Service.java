@@ -2,6 +2,8 @@ package com.StarDumBiriyani.App.Services;
 
 import java.util.List;
 
+import com.StarDumBiriyani.App.Entries.Expenditure_Inventory_Entity;
+import com.StarDumBiriyani.App.Entries.Shop_ReportDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

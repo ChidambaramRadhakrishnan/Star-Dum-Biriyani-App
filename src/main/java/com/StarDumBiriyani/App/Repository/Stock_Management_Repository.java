@@ -12,9 +12,9 @@ import jakarta.transaction.Transactional;
 
 public interface Stock_Management_Repository extends JpaRepository<Stock_Entity, Integer>{
 
-	@Query(value = "select * from stock_entity order by id desc limit 1;",nativeQuery = true)
-	List<Stock_Entity> getRice_Oil_GG_Qty();
-	
+	@Query(value = "select * from stock_entity where shop_id =:id order by id desc limit 1;",nativeQuery = true)
+	List<Stock_Entity> getLastStockRecord(int id);
+
 	@Query(value ="select stock_fill_date from stock_entity where shop_id = :id order by id desc limit 1;",nativeQuery =  true)
 	String getStockDate(int id);
 	
@@ -43,4 +43,19 @@ public interface Stock_Management_Repository extends JpaRepository<Stock_Entity,
 			int plate_cover_qty, int rice_amount, int rice_qty, int rubber_band_amount, int small_carry_bag_qty, int small_parcel_cover_qty,
 			int special_salt_amount, int tooth_stick_amount, int water_bottle_amount, String updated
 			,int id, String stock_date);
+
+
+	@Modifying
+	@Transactional
+	@Query( value ="UPDATE stock_entity\n" +
+			"SET rice_qty =:riceQty,\n" +
+			"oil_qty =:oilQty, ginger_garlic_qty =:gingerGarlicQty, inventory_date=:inventoryDate\n" +
+			"WHERE id = (\n" +
+			"    SELECT max_id FROM (\n" +
+			"        SELECT MAX(id) AS max_id \n" +
+			"        FROM stock_entity\n" +
+			"        WHERE shop_id = :id\n" +
+			"    ) AS last_record\n" +
+			");\n", nativeQuery = true)
+	int updateDailyInventory(int riceQty, int oilQty, int gingerGarlicQty, String inventoryDate, int id);
 }
