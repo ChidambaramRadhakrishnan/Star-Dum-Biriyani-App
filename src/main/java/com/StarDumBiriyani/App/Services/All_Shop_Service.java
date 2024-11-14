@@ -51,4 +51,12 @@ public class All_Shop_Service {
 	public String getCommonDate(int id) {
 		return allShop_Repository.getMatchDate(id);
 	}
+
+	public String addNewBranch(String branchName, int shopCode){
+		All_Shops allShops = new All_Shops();
+		allShops.setBranchName(branchName);
+		allShops.setShopCode(shopCode);
+		allShop_Repository.save(allShops);
+		return "success";
+	}
 }

@@ -53,7 +53,6 @@ public class Stock_Service_Class {
 		if it's there, it'll update it.
 		If record is not there, it'll create new record
 		 */
-//		List<Stock_Entity> stock= stock_Management_Repository.getRice_Oil_GG_Qty();
 			
 			try {
 //				int ide = stock.stream().findFirst().get().getId();
@@ -67,6 +66,7 @@ public class Stock_Service_Class {
 				int daily_rice_Qty= stock.stream().findFirst().get().getRice_Qty();
 				int daily_oil_Qty =stock.stream().findFirst().get().getOil_Qty();
 				int daily_ginger_garlic_Qty =stock.stream().findFirst().get().getGingerGarlic_Qty();
+				String last_Inventory_Date = stock.stream().findFirst().get().getInventoryDate();
 				System.out.println("-----------------------------------------------");
 				System.out.println(daily_oil_Qty+" drq"+daily_oil_Qty+" doq"+ daily_ginger_garlic_Qty+" dggq");
 //				adding the rice, oil and ginger qty with existing data
@@ -172,19 +172,9 @@ public class Stock_Service_Class {
 					//
 					stock_entity.setUpdated("Yes");
 					//
+					stock_entity.setInventoryDate(last_Inventory_Date);
+					//
 					stock_entity.setAll_Shops(all_Shops);
-					
-					Daily_Stock_Entity daily_Stock_Entity = new Daily_Stock_Entity();
-					
-					daily_Stock_Entity.setGinger_Garlic_Stock_Qty(updated_ginget_garlic_Qty);
-					daily_Stock_Entity.setOil_Stock_Qty(updated_oil_Qty);
-					daily_Stock_Entity.setRice_Stock_Qty(updated_rice_Qty);
-					daily_Stock_Entity.setStock_updated_Date(Essential_Operations.getToday_Date());
-					daily_Stock_Entity.setUpdated("Yes");
-
-					daily_Stock_Repository.save(daily_Stock_Entity);
-					
-					daily_Stock_Entity.setAll_Shops(all_Shops);
 					
 					stock_Management_Repository.save(stock_entity);
 					

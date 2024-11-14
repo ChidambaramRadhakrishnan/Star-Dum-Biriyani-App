@@ -51,19 +51,13 @@ public class Expenditure_Inventory_Entity {
 		return id;
 	}
 
-	
-
 	public String getInventory_Date() {
 		return Inventory_Date;
 	}
 
-
-
 	public void setInventory_Date(String inventory_Date) {
 		Inventory_Date = inventory_Date;
 	}
-
-
 
 	public void setId(int id) {
 		this.id = id;
@@ -189,79 +183,53 @@ public class Expenditure_Inventory_Entity {
 		this.sale_Inventory = sale_Inventory;
 	}
 
-
-
 	public String getUpdated() {
 		return updated;
 	}
-
-
 
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
 
-
-
 	public int getGinger_Garlic_used() {
 		return ginger_Garlic_used;
 	}
-
-
 
 	public void setGinger_Garlic_used(int ginger_Garlic_used) {
 		this.ginger_Garlic_used = ginger_Garlic_used;
 	}
 
-
-
 	public int getOil_Used() {
 		return oil_Used;
 	}
-
-
 
 	public void setOil_Used(int oil_Used) {
 		this.oil_Used = oil_Used;
 	}
 
-
-
 	public int getRice_Used() {
 		return rice_Used;
 	}
-
-
 
 	public void setRice_Used(int rice_Used) {
 		this.rice_Used = rice_Used;
 	}
 
-
-
 	public int getCashExpense() {
 		return cashExpense;
 	}
-
-
 
 	public void setCashExpense(int cashExpense) {
 		this.cashExpense = cashExpense;
 	}
 
-
-
 	public int getUpiExpense() {
 		return upiExpense;
 	}
 
-
-
 	public void setUpiExpense(int upiExpense) {
 		this.upiExpense = upiExpense;
 	}
-
-
 
 	public int getAutoTotalExpense() {
 		return AutoTotalExpense;

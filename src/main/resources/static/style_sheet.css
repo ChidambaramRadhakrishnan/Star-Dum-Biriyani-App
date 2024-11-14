@@ -179,11 +179,6 @@
             color: white;
         }
 
-        .shop-link svg {
-            margin-left: 40px;
-            transition: margin-left 0.3s ease;
-        }
-
         .dashboard-link svg {
             margin-right: 10px;
             color: lightcoral;
@@ -247,9 +242,9 @@
             transition: margin-left 0.3s ease;
         }
 
-        .nav-item .sidebar-link:active svg {
+        /* .nav-item .sidebar-link:active svg {
             margin-left: 140px;
-        }
+        } */
 
         .nav-item a:hover {
             background-color: #898bfc;

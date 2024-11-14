@@ -45,7 +45,7 @@ DashBoard Title
 .dashboard_txt{
     font-size: 1.5rem;
     margin-left: 0.80rem;
-    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.41);
+    text-shadow: 1px 0px 5px rgba(71, 70, 70, 0.5);
 }
 
 .dashboard_sub_title{

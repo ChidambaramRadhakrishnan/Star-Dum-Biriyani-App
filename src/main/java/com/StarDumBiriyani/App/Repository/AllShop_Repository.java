@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.StarDumBiriyani.App.Entries.Expenditure_Inventory_Entity;
 import org.hibernate.annotations.processing.Find;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import com.StarDumBiriyani.App.Entries.All_Shops;
 
 @Repository
 public interface AllShop_Repository extends JpaRepository<All_Shops, Integer>{
+
 	
 	@Query(value = "select * from branch_name where id=:id;", nativeQuery = true)
 	List<All_Shops> findByid(int id);

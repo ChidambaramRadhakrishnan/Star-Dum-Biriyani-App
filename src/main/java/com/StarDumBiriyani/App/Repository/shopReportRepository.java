@@ -15,26 +15,26 @@ public interface shopReportRepository extends JpaRepository<Shop_ReportDTO, Inte
     @Query(value = "SELECT \n" +
             "    a.id, \n" +
             "    a.branch_name, \n" +
-            "    s.total_sale,\n" +
-            "    s.sale_inventory_date,\n" +
-            "    e.biriyani_chicken_kg,\n" +
-            "    e.biriyani_chicken_stock,\n" +
-            "    e.kabab_chicken_kg,\n" +
-            "    e.kabab_chicken_stock,\n" +
-            "    e.auto_total_expense,\n" +
-            "    e.rice_used\n" +
+            "    COALESCE(s.total_sale, 0) as total_sale, \n" +
+            "    s.sale_inventory_date, \n" +
+            "    COALESCE(e.biriyani_chicken_kg, 0) as biriyani_chicken_kg,\n" +
+            "    COALESCE(e.biriyani_chicken_stock, 0) as biriyani_chicken_stock,\n" +
+            "    COALESCE(e.kabab_chicken_kg, 0) as kabab_chicken_kg,\n" +
+            "    COALESCE(e.kabab_chicken_stock, 0) as kabab_chicken_stock,\n" +
+            "    COALESCE(e.auto_total_expense, 0) as auto_total_expense,\n" +
+            "    COALESCE(e.rice_used, 0) as rice_used\n" +
             "FROM \n" +
             "    branch_name a\n" +
             "LEFT JOIN sale_inventory_entity s \n" +
             "    ON a.id = s.shop_id \n" +
             "    AND s.sale_inventory_date = (SELECT MAX(sale_inventory_date) \n" +
-            "                         FROM sale_inventory_entity \n" +
-            "                         WHERE shop_id = a.id)\n" +
+            "                                  FROM sale_inventory_entity \n" +
+            "                                  WHERE shop_id = a.id)\n" +
             "LEFT JOIN expenditure_inventory_entity e \n" +
             "    ON a.id = e.shop_id \n" +
             "    AND e.inventory_date = (SELECT MAX(inventory_date) \n" +
-            "                         FROM expenditure_inventory_entity \n" +
-            "                         WHERE shop_id = a.id);\n",nativeQuery = true)
+            "                            FROM expenditure_inventory_entity \n" +
+            "                            WHERE shop_id = a.id);",nativeQuery = true)
     List<Shop_ReportDTO> getShopReport();
 
 }

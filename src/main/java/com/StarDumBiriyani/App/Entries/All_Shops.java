@@ -5,6 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "Branch_Name")
@@ -17,6 +21,17 @@ public class All_Shops {
 	public String BranchName;
 	
 	private int shopCode;
+
+	@UpdateTimestamp
+	private LocalDate LastModifiedDate;
+
+	public LocalDate getLastModifiedDate() {
+		return LastModifiedDate;
+	}
+
+	public void setLastModifiedDate(LocalDate lastModifiedDate) {
+		LastModifiedDate = lastModifiedDate;
+	}
 	
 	public int getId() {
 		return id;

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.StarDumBiriyani.App.Entries.*;
+import com.StarDumBiriyani.App.Repository.stock_ReportDTO_Repository;
 import com.StarDumBiriyani.App.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
@@ -39,6 +40,10 @@ public class Inventory_and_Stock_Controlls {
 	@Autowired
 	shopReport_Service shop_report_Service;
 
+	@Autowired
+	stockReport_DTO_Service stockReportDtoService;
+
+
 //	Admin
 
 	@GetMapping("admin/dashboard")
@@ -51,15 +56,26 @@ public class Inventory_and_Stock_Controlls {
 		try{
 			List<Shop_ReportDTO>  all_Shop_Data = shop_report_Service.getShop_Report();
 			model.addAttribute("shopReport", all_Shop_Data);
-			System.out.println("---------------------------------------------------------");
-			all_Shop_Data.stream().map(e -> e.getBranchName()).forEach(System.out::println);
-			all_Shop_Data.stream().forEach(System.out::println);
+
+			List<Stock_ReportDTO_Entities> stock_Report = stockReportDtoService.getStock_Report();
+			model.addAttribute("stockReport", stock_Report);
+
+
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 
 		//
 		return "admin_dashboard";
+	}
+
+	@GetMapping("admin/shops")
+	public String shop_Management(Model model){
+
+        List<All_Shops> allBranch_Details = all_Shop_Service.getAllBranch();
+        model.addAttribute("allBranch_Details",allBranch_Details);
+
+        return "shops";
 	}
 
 
@@ -79,6 +95,14 @@ public class Inventory_and_Stock_Controlls {
 		System.out.println("---------------------------");
 
 		return "intial_Page";
+	}
+
+	@GetMapping("admin/addNewShop")
+	public String addNew_Shop(@RequestParam("branchName") String branchName,
+							  @RequestParam("shopCode") int shopCode){
+		System.out.println(" ------------ ----------------------- ------------------- ");
+		System.out.println(" Rendering the whole module.. - - ");
+		return all_Shop_Service.addNewBranch(branchName, shopCode);
 	}
 
 	@GetMapping("/navigateToInventoryManagement")
