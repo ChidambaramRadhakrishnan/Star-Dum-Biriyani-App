@@ -100,7 +100,7 @@ public class Stock_Service_Class {
 					
 					System.out.println(" ---- -  + new updating stocks");
 					
-					page = "success";
+					page = "redirect:/loggedInventory?stockUpdateSuccess";
 
 					/*
 					 * If there is no record found in database
@@ -177,8 +177,8 @@ public class Stock_Service_Class {
 					stock_entity.setAll_Shops(all_Shops);
 					
 					stock_Management_Repository.save(stock_entity);
-					
-					page = "success";
+
+					page = "redirect:/loggedInventory?stockSuccess";
 					
 				}	
 				/*
@@ -186,10 +186,6 @@ public class Stock_Service_Class {
 				 */
 			}catch (Exception e) {
 				// TODO: handle exception
-				
-				e.printStackTrace();
-				
-				System.out.println(" doing here --------------................................... ");
 				
 				// Rice 
 				stock_entity.setRice_Amount(riceExpense);
@@ -256,8 +252,8 @@ public class Stock_Service_Class {
 				stock_entity.setAll_Shops(all_Shops);
 				
 				stock_Management_Repository.save(stock_entity);
-				
-				page = "success";
+
+				page = "redirect:/loggedInventory?stockSuccess";
 			}
 		return page;
 	}

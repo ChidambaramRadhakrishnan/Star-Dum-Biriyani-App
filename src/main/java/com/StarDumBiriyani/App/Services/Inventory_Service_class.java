@@ -43,11 +43,16 @@ public class Inventory_Service_class {
 	
 	
 
-	public void addNewInventory(Integer totalSale, int totalCash, int totalUPI, int cashBalance, int upiBalance,
+	public String addNewInventory(Integer totalSale, int totalCash, int totalUPI, int cashBalance, int upiBalance,
 			int totalExpenditure, int chickenExpense, int biriyaniChicken, int kababChicken, int gasExpense,
 			int saltExpense, int corianderMintExpense, int GreenChillyExpense, int curdExpense, int otherExpense,
 			String notes, int biriyani_chicken_Stock, int kabab_chicken_Stock, int riceUsed, int oilUsed,
 			int ginger_Garlic_Used, int cashExpense, int upiExpense, int id) {
+
+		String page = "";
+
+		System.out.println("--------------------------------");
+		System.out.println(" ------------------------ <<<<<<<<<<<<<<<<<<<<< "+ id);
 
 		try {
 			All_Shops all_Shops = allShop_Repository.findById(id).get();
@@ -101,6 +106,8 @@ public class Inventory_Service_class {
 //						update_Ginger_Garlic_Used_Qty, Essential_Operations.getToday_Date(), id);
 
 //				if record is not present on today, it'll create new record
+
+				page = "redirect:/loggedInventory?inventoryUpdateSuccess";
 //
 			} else {
 				
@@ -151,12 +158,16 @@ public class Inventory_Service_class {
 				System.out.println(" --------------- UPdated");
 
 				expenditure_Inventory_Repository.save(Expenditure_Inventory);
+
+				page = "redirect:/loggedInventory?inventorySuccess";
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+
+		return page;
 
 	}
 

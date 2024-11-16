@@ -1,5 +1,6 @@
 package com.StarDumBiriyani.App.Services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.StarDumBiriyani.App.Entries.Expenditure_Inventory_Entity;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.StarDumBiriyani.App.Entries.All_Shops;
 import com.StarDumBiriyani.App.Repository.AllShop_Repository;
+import org.springframework.ui.Model;
 
 @Service
 public class All_Shop_Service {
@@ -52,11 +54,22 @@ public class All_Shop_Service {
 		return allShop_Repository.getMatchDate(id);
 	}
 
+	public String updateBranchDetails(String branchName, int shopCode, LocalDate date, int id){
+		allShop_Repository.updateBranchInfo(branchName, shopCode, date,id);
+		return "redirect:/admin/shops?updateSuccess";
+	}
+
 	public String addNewBranch(String branchName, int shopCode){
 		All_Shops allShops = new All_Shops();
 		allShops.setBranchName(branchName);
 		allShops.setShopCode(shopCode);
 		allShop_Repository.save(allShops);
-		return "success";
+		return "redirect:/admin/shops?newBranchSuccess";
+	}
+
+	public String deleteBranch(int id, Model model){
+		allShop_Repository.deleteById(id);
+		model.addAttribute("deleteSuccess", true);
+		return "redirect:/admin/shops?deleteSuccess";
 	}
 }

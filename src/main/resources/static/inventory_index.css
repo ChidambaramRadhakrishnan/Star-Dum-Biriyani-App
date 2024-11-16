@@ -1,28 +1,42 @@
+body {
+    background-color: #F4F5FA;
+}
 
-.submenu-stock, .submenu-inventory{
+.submenu-stock,
+.submenu-inventory {
     font-size: 12px;
     font-weight: 600;
 }
 
-.submenu-inventory svg{
+.success_alt{
+    font-size: 12px;
+}
+
+.success_alt button{
+    height: 3px;
+    width: 8px;
+}
+
+
+.submenu-inventory svg {
     color: blueviolet;
 }
 
-.page_title{
+.page_title {
     font-size: 16px;
 }
 
-.inventory_title{
+.inventory_title {
     font-size: 15px;
     margin: 8px 0px;
     font-weight: 600;
 }
 
-textarea::placeholder{
+textarea::placeholder {
     font-size: 12px;
 }
 
-.nav-tabs .nav-item .nav-link{
+.nav-tabs .nav-item .nav-link {
     border: none;
     border-right: 0.5px solid #e2e2e2;
     border-radius: 0px;
@@ -33,17 +47,17 @@ textarea::placeholder{
     color: #5d5e5f;
 }
 
-.nav-tabs .nav-item .nav-link:hover{
+.nav-tabs .nav-item .nav-link:hover {
     background-color: #d6d6d6;
 }
 
-.nav-tabs .nav-item .nav-link.active{
+.nav-tabs .nav-item .nav-link.active {
     color: #1F3BB3;
     font-weight: 700;
     background-color: #e9f1fd;
 }
 
-.nav-tabs .nav-item .nav-link .nav-text{
+.nav-tabs .nav-item .nav-link .nav-text {
     font-size: 12px;
     text-decoration: none;
 }
@@ -53,8 +67,7 @@ textarea::placeholder{
 #accordionExample .sale-accordion .accordion-button,
 #accordionExample .stock-chicken-accordion .accordion-button,
 #accordionExample .expenditure-accordion .accordion-button,
-#accordionExample .stock-usage-accordion .accordion-button
-{
+#accordionExample .stock-usage-accordion .accordion-button {
     font-size: 14px;
     font-weight: 700;
     padding: 14px;
@@ -68,8 +81,7 @@ textarea::placeholder{
 #accordionExample2 .sale-accordion .accordion-button,
 #accordionExample2 .stock-chicken-accordion .accordion-button,
 #accordionExample2 .expenditure-accordion .accordion-button,
-#accordionExample2 .stock-usage-accordion .accordion-button
-{
+#accordionExample2 .stock-usage-accordion .accordion-button {
     font-size: 14px;
     font-weight: 700;
     padding: 14px;
@@ -80,24 +92,27 @@ textarea::placeholder{
     border-radius: 0px;
 }
 
-.sale-accordion input, span{
+.sale-accordion input,
+span {
     padding: 4px 12px;
     border-radius: 0px;
     height: 30px;
 }
 
-#myTabContent .daily_stock span{
+#myTabContent .daily_stock span {
     padding: 0px;
 }
 
-.sale-accordion .accordion-button:focus, .expenditure-accordion .accordion-button:focus, .stock-usage-accordion .accordion-button:focus
-, .stock-chicken-accordion .accordion-button:focus{
+.sale-accordion .accordion-button:focus,
+.expenditure-accordion .accordion-button:focus,
+.stock-usage-accordion .accordion-button:focus,
+.stock-chicken-accordion .accordion-button:focus {
     border-color: transparent;
     box-shadow: none;
 }
 
 
-#myTabContent .accordion{
+#myTabContent .accordion {
     --bs-accordion-border-color: none;
     --bs-accordion-border-radius: 0px;
     --bs-accordion-inner-border-radius: 0px;
@@ -106,20 +121,26 @@ textarea::placeholder{
 
 /* form styles */
 
-.inventory_page .form-control, .stock_page .form-control{
+.inventory_page .form-control,
+.stock_page .form-control {
     font-weight: 500;
 }
 
-.inventory_page .form-control:target{
+.inventory_page .form-control:target {
     background-color: #338f6a;
 }
 
-.fl-input input{
+.fl-input input {
     padding: 4px 8px;
     height: 10px;
 }
 
-.form-floating .form-control, .sales span, .expenditure span, .product-usage span, .stock-chicken span, .daily-neccesities span{
+.form-floating .form-control,
+.sales span,
+.expenditure span,
+.product-usage span,
+.stock-chicken span,
+.daily-neccesities span {
     min-height: 10px;
     height: 45px;
     border-radius: 2px;
@@ -128,7 +149,7 @@ textarea::placeholder{
 
 /* Sale Accordion Style */
 
-.sale-accordion .sales span{
+.sale-accordion .sales span {
     border-color: #E4FFF4;
     background-color: #E4FFF4;
     color: #1bb776;
@@ -139,7 +160,8 @@ textarea::placeholder{
 
 /* Model Style */
 
-#modalBody ul, #modalBody1 ul{
+#modalBody ul,
+#modalBody1 ul {
     font-size: 14px;
     font-weight: 500;
     color: #5d5e5f;
@@ -151,11 +173,11 @@ textarea::placeholder{
 
 /* Expenditure Accordion Style */
 
-.expenditure .chicken_ex .input-group{
+.expenditure .chicken_ex .input-group {
     width: 33%;
 }
 
-.expenditure-accordion .expenditure span{
+.expenditure-accordion .expenditure span {
     border-color: #ededff;
     background-color: #ededff;
     color: #696cff;
@@ -184,7 +206,7 @@ textarea::placeholder{
     background-color: #fff9ec;
 } */
 
-.stock-usage-accordion .product-usage span{
+.stock-usage-accordion .product-usage span {
     border-color: #fff9ec;
     background-color: #fff9ec;
     color: #df9501;
@@ -205,10 +227,10 @@ textarea::placeholder{
     background-color: #fae9e6 ;
 } */
 
-.stock-chicken-accordion .stock-chicken span{
+.stock-chicken-accordion .stock-chicken span {
     border-color: #fae9e6;
     background-color: #fae9e6;
-    color: #ff3e1d ;
+    color: #ff3e1d;
     border-radius: 2px;
     font-weight: 600;
     font-size: 12px;
@@ -216,30 +238,30 @@ textarea::placeholder{
 
 /*  */
 
-.form-floating label{
+.form-floating label {
     padding: 8px 8px;
     font-size: 13px;
     font-weight: 500;
     color: #5d5e5f;
 }
 
-.form-floating>.form-control:not(:placeholder-shown)~label::after{
+.form-floating>.form-control:not(:placeholder-shown)~label::after {
     background-color: transparent;
 }
 
-.note_title{
+.note_title {
     font-size: 16px;
     font-weight: 600;
     color: #5d5e5f;
 }
 
-.note-text{
+.note-text {
     border-radius: 2px;
     border-color: #ababab;
 }
 
 
-.submit-btn{
+.submit-btn {
     border-radius: 2px;
     padding: 8px 20px;
     background-color: #1F3BB3;
@@ -247,7 +269,7 @@ textarea::placeholder{
     font-weight: 600;
 }
 
-.submit-btn:hover{
+.submit-btn:hover {
     background-color: #192f8d;
 }
 
@@ -256,11 +278,11 @@ textarea::placeholder{
 
 /* Stock Management Inventory */
 
-.stock-accordion .daily-neccesities .input-group{
+.stock-accordion .daily-neccesities .input-group {
     width: 30%;
 }
 
-.stock-accordion .daily-neccesities span{
+.stock-accordion .daily-neccesities span {
     border-color: #E4FFF4;
     background-color: #E4FFF4;
     color: #1bb776;
@@ -271,7 +293,7 @@ textarea::placeholder{
 
 /*  */
 
-.stock-usage-accordion .multi .input-group{
+.stock-usage-accordion .multi .input-group {
     width: 50%;
 }
 
@@ -279,122 +301,86 @@ textarea::placeholder{
 
 /* Overview */
 
-.daily_stock .cards{
+.daily_stock .cards {
     flex-direction: row;
     background-color: #e7e7ff;
     border: 1px solid #EEF1C6;
     border-radius: 5px;
+    background: linear-gradient(135deg, rgb(115, 120, 220) 0%, rgb(67, 24, 255) 100%);
+    box-shadow: rgba(175, 175, 244, 0.25) 0px 2px 5px -1px, rgba(203, 116, 116, 0.3) 0px 1px 3px -1px;
+    border-color: rgb(115, 120, 220);
+    border-radius: 12px;
 }
 
 /* Stock Details */
 
-.daily_stock h6{
+.daily_stock h6 {
     font-size: 15px;
     font-weight: 600;
-    color: #696cff;
+    color: white;
 }
 
-
-.daily_stock span{
+.daily_stock span {
     font-size: 16px;
     font-weight: 700;
-    color: #384551;
+    color: white;
 }
 
-.daily_stock .cards:hover{
-    box-shadow: #9799ff 0px 1px 4px;
+.daily_stock .card-1 h6 {
+    /* color: #384551; */
 }
 
-.daily_stock .card-2:hover{
-    box-shadow: #6bc1c1 0px 1px 4px;
-}
 
-.daily_stock .card-3:hover{
-    box-shadow: #e7b4a9 0px 1px 4px;
-}
 
-.daily_stock .card-1{
-    background-color: #EEF1C6;
-}
-
-.daily_stock .card-1 h6{
-    color: #384551;
-}
-
-.daily_stock .card-1:hover{
-    box-shadow: #cbcf9e 0px 1px 4px;
-}
-
-.daily_stock .card-2{
-    background-color: #C8EAEA;
-    border-color: #C8EAEA;
-}
-
-.daily_stock .card-2 h6{
-    color: #384551;
-}
-
-.daily_stock .card-3{
-    background-color: #EDE5E3;
-    border-color: #EDE5E3;
-}
-
-.daily_stock .card-3 h6{
-    color: #384551;
-}
-
-.daily_stock_title, .update_date_title, .last_inventory_title{
+.daily_stock_title,
+.update_date_title,
+.last_inventory_title {
     font-size: 18px;
     color: #384551;
     font-weight: 600;
+    text-shadow: 2px 0px 5px rgba(65, 65, 65, 0.5);
 }
 
 /* update  */
 
-.update_date_card{
-    background-color: #effee7;
+.update_date_card {
+    background: linear-gradient(135deg, rgb(134, 140, 255) 0%, rgb(67, 24, 255) 100%);
+    border-color: rgb(134, 140, 255);
     /* color: #ff3e1d; */
-    border: 1px solid #f4feef;
-    box-shadow: rgba(26, 73, 8, 0.345) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 12px;
+    box-shadow: rgba(175, 175, 244, 0.25) 0px 2px 5px -1px, rgba(203, 116, 116, 0.3) 0px 1px 3px -1px;
 }
 
-.update_date_card:hover{
-    box-shadow: #adff82 0px 1px 4px;
+
+.update_date_card h6 {
+    color: white;
 }
 
-.update_date_card h6{
-    color: #384551;
-}
-
-.update_date_card h5{
+.update_date_card h5 {
     font-size: 16px;
+    color: white;
 }
 
- .update-card-1{
-    background-color: #E4DDE9;
-    border-color: #E4DDE9;
-    box-shadow: rgba(166, 148, 182, 0.345) 0px 1px 3px 0px, rgba(165, 102, 184, 0.06) 0px 1px 2px 0px;
-}
 
-.update-card-1:hover{
+.update-card-1:hover {
     box-shadow: #d7ade3 0px 1px 4px;
 }
 
 /*  */
 
-.last_inventory h6{
-    color: #747474;
+.last_inventory h6 {
+    color: rgb(27, 37, 89);
     font-size: 16px;
 }
 
-.last_inventory dt{
+.last_inventory dt {
     font-size: 14px;
     font-weight: 500;
     color: #384551;
 }
 
 
-.last_inventory dd{
+.last_inventory dd {
     font-size: 14px;
     font-weight: 600;
     color: #31374a;
@@ -402,8 +388,9 @@ textarea::placeholder{
 
 /*  */
 
-.last_inventory .card{
-    background-color: #f5f7fa;
+.last_inventory .card {
+    background-color: white;
+    box-shadow: rgba(175, 175, 244, 0.25) 0px 2px 5px -1px, rgba(203, 116, 116, 0.3) 0px 1px 3px -1px;
 }
 
 /*  */
@@ -414,16 +401,16 @@ textarea::placeholder{
 
 /* Always show sidebar on large screens */
 @media (max-width: 768px) {
-    
-    .expenditure .chicken_ex .input-group{
+
+    .expenditure .chicken_ex .input-group {
         width: 100%;
     }
 
-    .stock-accordion .daily-neccesities .input-group{
+    .stock-accordion .daily-neccesities .input-group {
         width: 100%;
     }
 
-    .stock-accordion .multi .input-group{
+    .stock-accordion .multi .input-group {
         width: 50%;
     }
 

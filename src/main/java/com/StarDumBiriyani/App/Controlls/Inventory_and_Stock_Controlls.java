@@ -1,24 +1,22 @@
 package com.StarDumBiriyani.App.Controlls;
 
+import java.net.http.HttpResponse;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.StarDumBiriyani.App.Entries.*;
-import com.StarDumBiriyani.App.Repository.stock_ReportDTO_Repository;
 import com.StarDumBiriyani.App.Services.*;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.StarDumBiriyani.App.Functionalities.Essential_Operations;
-import com.StarDumBiriyani.App.Repository.AllShop_Repository;
-import com.StarDumBiriyani.App.Repository.Sale_Inventory_Repository;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -45,6 +43,12 @@ public class Inventory_and_Stock_Controlls {
 
 
 //	Admin
+
+	@GetMapping("admin/addNewShop")
+	public String addNew_Shop(@RequestParam("branchName") String branchName,
+							  @RequestParam("shopCode") int shopCode){
+		return all_Shop_Service.addNewBranch(branchName, shopCode);
+	}
 
 	@GetMapping("admin/dashboard")
 	public String adminIndex(Model model){
@@ -74,11 +78,22 @@ public class Inventory_and_Stock_Controlls {
 
         List<All_Shops> allBranch_Details = all_Shop_Service.getAllBranch();
         model.addAttribute("allBranch_Details",allBranch_Details);
-
         return "shops";
 	}
 
+	@GetMapping("admin/ModifyBranch")
+	public String modify_Branch_Details(@RequestParam("shopId") int shopid,@RequestParam("branchNameUpdate") String branchName,
+						@RequestParam("shopCodeUpdate") int shopCode){
 
+		return all_Shop_Service.updateBranchDetails(branchName, shopCode, LocalDate.now(),shopid);
+	}
+
+	@RequestMapping(value = "admin/delete/{id}",method = RequestMethod.GET)
+	public String deleteBranch(@RequestParam("shopId2") int id, Model model ) {
+		List<All_Shops> allBranch_Details = all_Shop_Service.getAllBranch();
+		model.addAttribute("allBranch_Details",allBranch_Details);
+		return all_Shop_Service.deleteBranch(id,model);  // Deletes the branch by ID;  // Redirect to the page displaying the list of branches
+	}
 	// admin end
 
 	@GetMapping("/")
@@ -97,20 +112,32 @@ public class Inventory_and_Stock_Controlls {
 		return "intial_Page";
 	}
 
-	@GetMapping("admin/addNewShop")
-	public String addNew_Shop(@RequestParam("branchName") String branchName,
-							  @RequestParam("shopCode") int shopCode){
-		System.out.println(" ------------ ----------------------- ------------------- ");
-		System.out.println(" Rendering the whole module.. - - ");
-		return all_Shop_Service.addNewBranch(branchName, shopCode);
-	}
-
 	@GetMapping("/navigateToInventoryManagement")
 	public String navigateToInventoryManagement(Model model, HttpSession session) {
 		model.addAttribute("shop_Name", (String) session.getAttribute("shop_Name"));
 
 		System.out.println("----------------" + (String) session.getAttribute("shop_Name"));
 		return "inventory";
+	}
+
+	@GetMapping("/logout")
+	public String Logout(HttpSession session, HttpServletRequest request,
+						 HttpServletResponse response) {
+		if (session != null) {
+			session.invalidate(); // Invalidate the session completely
+
+		}
+
+		// Clear the session cookie
+		Cookie cookie = new Cookie("JSESSIONID", null);
+		cookie.setPath(request.getContextPath());
+		cookie.setHttpOnly(true);
+		cookie.setMaxAge(0); // Immediately expire the cookie
+		response.addCookie(cookie);
+
+		System.out.println(" -----------------  "+"ur logged out.");
+
+		return "indess";
 	}
 
 	@GetMapping("/navigateToBranch")
@@ -138,24 +165,33 @@ public class Inventory_and_Stock_Controlls {
 		return "stock_management";
 	}
 
-	@GetMapping("/loginInventory")
+	@PostMapping("/loginInventory")
 	public String loginshopinventory(@RequestParam("branch_id") int id, @RequestParam("shop_Code") int shopCode,
 			HttpSession session, Model model) {
 		session.setAttribute("shop_Id", id);
+		session.setAttribute("shopCode", shopCode);
 		String branch_Name = all_Shop_Service.getBranchName(id);
 		model.addAttribute("branchName", branch_Name);
 
 		System.out.println(" ----------------------------------------       Admin / Login ----------");
 		
-		session.setAttribute("shop_id", id);
-		
-		int session_id = (int)session.getAttribute("shop_id");
+		Integer shop_Id = (int)session.getAttribute("shop_Id");
+		Integer shop_Code = (int)session.getAttribute("shopCode");
+
+		System.out.println("-------------------------------");
+		System.out.println(shop_Id+" session id");
+		System.out.println(shop_Code+" shop code");
+		System.out.println("-------------------------------");
+
+		if (shop_Id == null || shop_Code == null) {
+			return "redirect:/navigatetoLogin";
+		}
 		//
-		String last_inventory_update_date = all_Shop_Service.getCommonDate(session_id);
+		String last_inventory_update_date = all_Shop_Service.getCommonDate(shop_Id);
 		
 		if(last_inventory_update_date == null || last_inventory_update_date.isEmpty()) {
 			
-			String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(session_id);
+			String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(shop_Id);
 			model.addAttribute("last_Stock_Update_Date", last_Stock_Updated_Date);
 //			
 			List<Stock_Entity> all_Stock_details = stock_Service.getLastStockUpdateRecord(id);
@@ -165,7 +201,7 @@ public class Inventory_and_Stock_Controlls {
 			
 		model.addAttribute("last_inventory_updated_Date", last_inventory_update_date);
 		//
-		String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(session_id);
+		String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(shop_Id);
 		model.addAttribute("last_Stock_Update_Date", last_Stock_Updated_Date);
 		//
 		List<Stock_Entity> all_Stock_details = stock_Service.getLastStockUpdateRecord(id);
@@ -173,7 +209,7 @@ public class Inventory_and_Stock_Controlls {
 		
 		// Sale Inventory Data's
 		
-		List<Sale_Inventory_Entity> sale_Inventory_Details = inventory_Service_class.getAll_Sale_Inventory_Data(session_id);
+		List<Sale_Inventory_Entity> sale_Inventory_Details = inventory_Service_class.getAll_Sale_Inventory_Data(shop_Id);
 		
 		int total_Sale = sale_Inventory_Details.stream().findFirst().get().getTotal_sale();
 		int total_cash = sale_Inventory_Details.stream().findFirst().get().getCash();
@@ -210,8 +246,7 @@ public class Inventory_and_Stock_Controlls {
 		model.addAttribute("ginger_garlic_used", expenditure_Inventory_Details.stream().findFirst().get().getGinger_Garlic_used());
 		model.addAttribute("cashExpense", expenditure_Inventory_Details.stream().findFirst().get().getCashExpense());
 		model.addAttribute("upiExpense", expenditure_Inventory_Details.stream().findFirst().get().getUpiExpense());
-		
-		
+
 //		Daily Stock Data's
 		
 		model.addAttribute("rice_Qty", all_Stock_details.stream().findFirst().get().getRice_Qty());
@@ -220,10 +255,91 @@ public class Inventory_and_Stock_Controlls {
 		
 		}
 		
+		return all_Shop_Service.validateShopCode(shop_Id, shopCode);
+	}
+
+	@GetMapping("/loggedInventory")
+	public String loginTo(HttpSession session, Model model) {
+		int id = (int) session.getAttribute("shop_Id");
+		int shopCode = (int) session.getAttribute("shopCode");
+		String branch_Name = all_Shop_Service.getBranchName(id);
+		model.addAttribute("branchName", branch_Name);
+
+		System.out.println(" ----------------------------------------       Admin / Login ----------");
+
+		int session_id = (int) session.getAttribute("shop_Id");
+		//
+		String last_inventory_update_date = all_Shop_Service.getCommonDate(id);
+
+		if(last_inventory_update_date == null || last_inventory_update_date.isEmpty()) {
+
+			String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(id);
+			model.addAttribute("last_Stock_Update_Date", last_Stock_Updated_Date);
+//
+			List<Stock_Entity> all_Stock_details = stock_Service.getLastStockUpdateRecord(id);
+			model.addAttribute("daily_stock_details", all_Stock_details);
+
+		}else {
+
+			model.addAttribute("last_inventory_updated_Date", last_inventory_update_date);
+			//
+			String last_Stock_Updated_Date=stock_Service.getStockUpdateDate(id);
+			model.addAttribute("last_Stock_Update_Date", last_Stock_Updated_Date);
+			//
+			List<Stock_Entity> all_Stock_details = stock_Service.getLastStockUpdateRecord(id);
+			model.addAttribute("daily_stock_details", all_Stock_details);
+
+			// Sale Inventory Data's
+
+			List<Sale_Inventory_Entity> sale_Inventory_Details = inventory_Service_class.getAll_Sale_Inventory_Data(id);
+
+			int total_Sale = sale_Inventory_Details.stream().findFirst().get().getTotal_sale();
+			int total_cash = sale_Inventory_Details.stream().findFirst().get().getCash();
+			int total_upi = sale_Inventory_Details.stream().findFirst().get().getUpi();
+			int cash_Balance = sale_Inventory_Details.stream().findFirst().get().getCash_balance();
+			int upi_Balance = sale_Inventory_Details.stream().findFirst().get().getUpi_balance();
+
+			model.addAttribute("total_Sales", Essential_Operations.RupeeConvertion(total_Sale));
+			model.addAttribute("total_Cash", Essential_Operations.RupeeConvertion(total_cash));
+			model.addAttribute("total_UPI", Essential_Operations.RupeeConvertion(total_upi));
+			model.addAttribute("cash_Balance", Essential_Operations.RupeeConvertion(cash_Balance));
+			model.addAttribute("upi_Balance", Essential_Operations.RupeeConvertion(upi_Balance));
+
+			//Expenditure Inventory Data's
+
+			List<Expenditure_Inventory_Entity> expenditure_Inventory_Details = inventory_Service_class.getAll_Expenditure_Inventory_Data(id);
+
+			model.addAttribute("total_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getTotal_Expenditure()));
+			model.addAttribute("chicken_expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getChicken_Expenses()));
+			model.addAttribute("biriyani_Chicken_Kg", expenditure_Inventory_Details.stream().findFirst().get().getBiriyani_Chicken_Kg());
+			model.addAttribute("kabab_Chicken_Kg",expenditure_Inventory_Details.stream().findFirst().get().getKabab_Chicken_Kg());
+			model.addAttribute("gas_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getGas_Expenses()));
+			model.addAttribute("salt_expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getSalt_Expenses()));
+			model.addAttribute("corianderandmint_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getCorianderLeaf_Mint_Expenses()));
+			model.addAttribute("greenchilly_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getGreenChilly_Expenses()));
+			model.addAttribute("curd_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getCurd_Expenses()));
+			model.addAttribute("other_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getOther_Expenses()));
+
+			model.addAttribute("chicken_Stock", expenditure_Inventory_Details.stream().findFirst().get().getBiriyani_Chicken_Stock());
+			model.addAttribute("Kabab_Stock", expenditure_Inventory_Details.stream().findFirst().get().getKabab_Chicken_Stock());
+
+			model.addAttribute("riceUsed", expenditure_Inventory_Details.stream().findFirst().get().getRice_Used());
+			model.addAttribute("oilUsed", expenditure_Inventory_Details.stream().findFirst().get().getOil_Used());
+			model.addAttribute("ginger_garlic_used", expenditure_Inventory_Details.stream().findFirst().get().getGinger_Garlic_used());
+			model.addAttribute("cashExpense", expenditure_Inventory_Details.stream().findFirst().get().getCashExpense());
+			model.addAttribute("upiExpense", expenditure_Inventory_Details.stream().findFirst().get().getUpiExpense());
+
+			//Daily Stock Data's
+
+			model.addAttribute("rice_Qty", all_Stock_details.stream().findFirst().get().getRice_Qty());
+			model.addAttribute("oil_Qty", all_Stock_details.stream().findFirst().get().getOil_Qty());
+			model.addAttribute("ginger_Garlic_Qty", all_Stock_details.stream().findFirst().get().getGingerGarlic_Qty());
+
+		}
 		return all_Shop_Service.validateShopCode(id, shopCode);
 	}
 
-	@GetMapping("/addNew_Inventory")
+	@PostMapping("/addNew_Inventory")
 	public String addnew_Inventory(@RequestParam("totalSale") int totalSale, @RequestParam("totalCash") int totalCash,
 			@RequestParam("totalUPI") int totalUPI, @RequestParam("cashBalance") int cashBalance,
 			@RequestParam("upiBalance") int upiBalance, @RequestParam("totalExpenditure") int totalExpenditure,
@@ -240,12 +356,14 @@ public class Inventory_and_Stock_Controlls {
 
 		session.setAttribute("rice_used_Qty", riceUsed);
 
-		inventory_Service_class.addNewInventory(totalSale, totalCash, totalUPI, cashBalance, upiBalance,
+		System.out.println((int)session.getAttribute("shop_Id")+"------------");
+		int id = (int) session.getAttribute("shop_Id");
+
+		return inventory_Service_class.addNewInventory(totalSale, totalCash, totalUPI, cashBalance, upiBalance,
 				totalExpenditure, chickenExpense, biriyaniChicken, kababChicken, gasExpense, saltExpense,
 				corianderMintExpense, GreenChillyExpense, curdExpense, otherExpense, notes, biriyani_chicken_Stock,
-				kabab_chicken_Stock, riceUsed, oilUsed, ginger_garlic_Used,cashExpense, upiExpense, (Integer) session.getAttribute("shop_Id"));
+				kabab_chicken_Stock, riceUsed, oilUsed, ginger_garlic_Used,cashExpense, upiExpense, (int) session.getAttribute("shop_Id"));
 
-		return "success";
 	}
 
 	@GetMapping("/stockUpdation")

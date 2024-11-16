@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="./style_sheet.css">
     <link rel="stylesheet" href="./admin_dashboard_style.css">
     <link rel="stylesheet" href="./inventory_index.css">
+
+    <link rel="stylesheet" href="/src/main/resources/static/style_sheet.css">
+    <link rel="stylesheet" href="/src/main/resources/static/admin_dashboard_style.css">
+    <link rel="stylesheet" href="/src/main/resources/static/inventory_index.css">
 </head>
 
 <body>
@@ -63,7 +67,7 @@
                             </svg>
                         </a>
                         <ul class="dropdown-menu user-dropdown">
-                            <li><a class="dropdown-item fw-bold text-center p-0" href="#">Logout</a></li>
+                            <li><a class="dropdown-item fw-bold text-center p-0" th:href="@{/logout}">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -95,6 +99,22 @@
                         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
                             <h3 class="inventory_title">Overview</h3>
                             <div class="container update_date mb-1">
+                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt" role="alert" th:if="${param.inventorySuccess}" id="successAlert">
+                                    New Inventory has been Added!
+                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt" role="alert" th:if="${param.stockSuccess}" id="successAlert">
+                                    New Stock has been Added!
+                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt" role="alert" th:if="${param.inventoryUpdateSuccess}" id="successAlert">
+                                    Inventory has been updated!
+                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt" role="alert" th:if="${param.stockUpdateSuccess}" id="successAlert">
+                                    Stock has been updated!
+                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                                 <div class="row py-2 px-1 gap-2">
                                     <h5 class="update_date_title ps-2">Update Status</h5>
                                     <div class="col-lg-5 col-sm-12 card p-3 update_date_card">
@@ -113,15 +133,15 @@
                                     th:each="stock_details :${daily_stock_details}">
                                     <div class="col-lg-3 col-12  p-2 cards card-1">
                                         <h6>Rice [Kg]</h6>
-                                        <span th:text="${stock_details.rice_Qty}"></span>
+                                        <span th:text="${stock_details.rice_Qty}">300</span>
                                     </div>
                                     <div class="col-lg-3 col-12  p-2 cards card-2">
                                         <h6>Oil [Liters]</h6>
-                                        <span th:text="${stock_details.oil_Qty}"></span>
+                                        <span th:text="${stock_details.oil_Qty}">100</span>
                                     </div>
                                     <div class="col-lg-3 col-12 p-2 cards card-3">
                                         <h6>Ginger & Garlic [Kg]</h6>
-                                        <span th:text="${stock_details.gingerGarlic_Qty}"></span>
+                                        <span th:text="${stock_details.gingerGarlic_Qty}">200</span>
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +222,7 @@
                         <div class="tab-pane fade inventory_page" id="Inventory" role="tabpanel"
                             aria-labelledby="profile-tab">
                             <h3 class="inventory_title">Manage Inventory</h3>
-                            <form action="addNew_Inventory" method="get" class="" id="stockForm"
+                            <form action="/addNew_Inventory" method="post" class="" id="stockForm"
                                 oninput="checkInputs()">
                                 <div class="accordion" id="accordionExample">
                                     <div class="accordion-item sale-accordion mb-1">
