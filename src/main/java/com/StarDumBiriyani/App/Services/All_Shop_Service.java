@@ -37,6 +37,8 @@ public class All_Shop_Service {
 		if(shopCode == actual_Shop_Code) {
 			System.out.println("--------------------- shop id is not fonud");
 			page = "Inventory_index";
+		}else{
+			page = "redirect:/navigatetoLogin?shopCodeError";
 		}
 		return page;
 	}

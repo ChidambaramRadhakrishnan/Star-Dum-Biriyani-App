@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="./style_sheet.css">
 	<link rel="stylesheet" href="./admin_dashboard_style.css">
 	<link rel="stylesheet" href="./admin_or_login.css">
+	<link rel="stylesheet" href="./inventory_index.css">
 
 </head>
 
@@ -90,6 +91,10 @@
 				<!-- Branch Selection -->
 				<div class="col-12 d-flex justify-content-center">
 					<div class="form-group col-lg-3 col-8">
+						<div class="alert alert-danger alert-dismissible fade show col-10 p-1 ms-4 success_alt" role="alert" th:if="${param.shopCodeError}" id="successAlert">
+							Incorrect shopCode
+							<button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
 						<label for="branchSelect" class="fw-medium label_text">Select
 							Branch</label>
 						<select id="branchSelect" class="form-control mt-2 p-2" name="branch_id">
@@ -104,7 +109,7 @@
 					<!-- Management Selection (initially hidden) -->
 					<div id="shopCode" class="form-group d-none mt-3 col-lg-3 col-8">
 						<label for="exampleInputPassword1" class="fw-medium label_text">Shop Code</label>
-						<input type="password" class="form-control" name="shop_Code" id="exampleInputPassword1">
+						<input type="password" class="form-control" name="shop_Code" id="exampleInputPassword1" required>
 					</div>
 				</div>
 				<div class="col-12 d-flex justify-content-center">
@@ -117,7 +122,7 @@
 	</div>
 		<!-- Footer -->
 		<footer class="bg-light text-dark">
-			<p>&copy; 2024 Admin Dashboard. All rights reserved.</p>
+			<p>Star Dum Biriyani &copy; 2024 Admin Dashboard. All rights reserved.</p>
 		</footer>
 
 		<!-- JavaScript to handle visibility -->
