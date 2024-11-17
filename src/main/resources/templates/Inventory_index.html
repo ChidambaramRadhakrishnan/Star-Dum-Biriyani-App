@@ -99,29 +99,37 @@
                         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
                             <h3 class="inventory_title">Overview</h3>
                             <div class="container update_date mb-1">
-                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt" role="alert" th:if="${param.inventorySuccess}" id="successAlert">
+                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt"
+                                    role="alert" th:if="${param.inventorySuccess}" id="successAlert">
                                     New Inventory has been Added!
-                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
                                 </div>
-                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt" role="alert" th:if="${param.stockSuccess}" id="successAlert">
+                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt"
+                                    role="alert" th:if="${param.stockSuccess}" id="successAlert">
                                     New Stock has been Added!
-                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
                                 </div>
-                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt" role="alert" th:if="${param.inventoryUpdateSuccess}" id="successAlert">
+                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt"
+                                    role="alert" th:if="${param.inventoryUpdateSuccess}" id="successAlert">
                                     Inventory has been updated!
-                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
                                 </div>
-                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt" role="alert" th:if="${param.stockUpdateSuccess}" id="successAlert">
+                                <div class="alert alert-success alert-dismissible fade show col-10 p-1 ms-4 success_alt"
+                                    role="alert" th:if="${param.stockUpdateSuccess}" id="successAlert">
                                     Stock has been updated!
-                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close p-1 fs-6 mt-2 me-1" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
                                 </div>
-                                <div class="row py-2 px-1 gap-2">
+                                <div class="row py-2 px-1 gap-2 justify-content-lg-start justify-content-center">
                                     <h5 class="update_date_title ps-2">Update Status</h5>
-                                    <div class="col-lg-5 col-sm-12 card p-3 update_date_card">
+                                    <div class="col-lg-5 col-11 card p-3 update_date_card">
                                         <h6 class="m-0">Last Inventory Updated Date</h6>
                                         <h5 class="my-2" th:text="${last_inventory_updated_Date}">24/04/2024</h5>
                                     </div>
-                                    <div class="col-lg-5 col-sm-12 card p-3 update_date_card update-card-1">
+                                    <div class="col-lg-5 col-11 card p-3 update_date_card update-card-1">
                                         <h6 class="m-0">Last Stock Updated Date</h6>
                                         <h5 class="my-2" th:text="${last_Stock_Update_Date}">25/05/2024</h5>
                                     </div>
@@ -129,24 +137,26 @@
                             </div>
                             <div class="container daily_stock">
                                 <h5 class="daily_stock_title ">Your Shop Stocks</h5>
-                                <div class="row justify-content-lg-start justify-content-sm-center align-items-center py-1 gap-3 px-1"
+                                <div class="row justify-content-lg-start justify-content-center align-items-center py-1 gap-3 px-1"
                                     th:each="stock_details :${daily_stock_details}">
-                                    <div class="col-lg-3 col-12  p-2 cards card-1">
-                                        <h6>Rice [Kg]</h6>
-                                        <span th:text="${stock_details.rice_Qty}">300</span>
+                                    <div class="col-lg-3 col-11  p-2 cards card-1">
+                                        <h6>Rice</h6>
+                                        <span th:text="${stock_details.rice_Qty}">300</span><span class="ms-1">Kg</span>
                                     </div>
-                                    <div class="col-lg-3 col-12  p-2 cards card-2">
-                                        <h6>Oil [Liters]</h6>
-                                        <span th:text="${stock_details.oil_Qty}">100</span>
+                                    <div class="col-lg-3 col-11  p-2 cards card-2">
+                                        <h6>Oil</h6>
+                                        <span th:text="${stock_details.oil_Qty}">100</span><span
+                                            class="ms-1">Liters</span>
                                     </div>
-                                    <div class="col-lg-3 col-12 p-2 cards card-3">
-                                        <h6>Ginger & Garlic [Kg]</h6>
-                                        <span th:text="${stock_details.gingerGarlic_Qty}">200</span>
+                                    <div class="col-lg-3 col-11 p-2 cards card-3">
+                                        <h6>Ginger & Garlic</h6>
+                                        <span th:text="${stock_details.gingerGarlic_Qty}">200</span><span
+                                            class="ms-1">Kg</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="container mt-2 mb-5 last_inventory">
-                                <h5 class="p-0 last_inventory_title">Your Last Inventory</h5>
+                                <h5 class="p-0 last_inventory_title mb-3">Your Last Inventory</h5>
                                 <div class="col-lg-7 col-sm-6 card p-3">
                                     <div class="row text-start p-2">
                                         <!-- Sales Container -->
@@ -174,14 +184,14 @@
                                             <dd class="col-6 col-lg-6" th:text="${chicken_expense}"></dd>
                                             <!--  -->
                                             <dt class="col-6 col-lg-6">Cash Expense</dt>
-                                            <dd class="col-6 col-lg-6" th:text="${cashExpense}"></dd>
+                                            <dd class="col-6 col-lg-6 currency" th:text="${cashExpense}">200</dd>
                                             <dt class="col-6 col-lg-6">UPI Expense</dt>
-                                            <dd class="col-6 col-lg-6" th:text="${upiExpense}"></dd>
+                                            <dd class="col-6 col-lg-6 currency" th:text="${upiExpense}">499</dd>
                                             <!--  -->
-                                            <dt class="col-6 col-lg-6">Biriyani Chicken [Kg]</dt>
-                                            <dd class="col-6 col-lg-6" th:text="${biriyani_Chicken_Kg}"></dd>
-                                            <dt class="col-6 col-lg-6">Kabab Chicken [Kg]</dt>
-                                            <dd class="col-6 col-lg-6" th:text="${kabab_Chicken_Kg}"></dd>
+                                            <dt class="col-6 col-lg-6">Biriyani Chicken</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${biriyani_Chicken_Kg} + ' Kg'">90</dd>
+                                            <dt class="col-6 col-lg-6">Kabab Chicken</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${kabab_Chicken_Kg} + ' Kg'">30</dd>
                                             <dt class="col-6 col-lg-6">Gas Expense</dt>
                                             <dd class="col-6 col-lg-6" th:text="${gas_Expense}">544.00</dd>
                                             <dt class="col-6 col-lg-6">Salt Expense</dt>
@@ -198,22 +208,22 @@
                                         <hr>
                                         <h6 class="fw-bold">Stock Usage</h6>
                                         <div class="row">
-                                        <dt class="col-6 col-lg-6">Rice Used [Kg]</dt>
-                                        <dd class="col-6 col-lg-6" th:text="${riceUsed}">5</dd>
-                                        <dt class="col-6 col-lg-6">Oil Used[Kg]</dt>
-                                        <dd class="col-6 col-lg-6" th:text="${oilUsed}">3</dd>
-                                        <dt class="col-6 col-lg-6">Ginger & Garlic Used [Kg]</dt>
-                                        <dd class="col-6 col-lg-6" th:text="${ginger_garlic_used}">3</dd>
+                                            <dt class="col-6 col-lg-6">Rice Used [Kg]</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${riceUsed} + ' Kg'">5</dd>
+                                            <dt class="col-6 col-lg-6">Oil Used[Kg]</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${oilUsed} + ' Liters'">3</dd>
+                                            <dt class="col-6 col-lg-6">Ginger & Garlic Used [Kg]</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${ginger_garlic_used} + ' Kg'">3</dd>
                                         </div>
                                         <hr>
                                         <h6 class="fw-bold">Stock Chicken</h6>
                                         <div class="row">
-                                        <dt class="col-6 col-lg-6">Biriyani Chicken Stock [Kg]</dt>
-                                        <dd class="col-6 col-lg-6" th:text="${chicken_Stock}">5</dd>
-                                        <dt class="col-6 col-lg-6">Kabab Chicken Stock [Kg]</dt>
-                                        <dd class="col-6 col-lg-6" th:text="${Kabab_Stock}">3</dd>
+                                            <dt class="col-6 col-lg-6">Biriyani Chicken Stock [Kg]</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${chicken_Stock} + ' Kg'">5</dd>
+                                            <dt class="col-6 col-lg-6">Kabab Chicken Stock [Kg]</dt>
+                                            <dd class="col-6 col-lg-6" th:text="${Kabab_Stock} + ' Kg'">3</dd>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -568,9 +578,11 @@
                                     </div>
                                     <div class="container justify-content-center">
                                         <div class="row">
-                                            <button type="submit" class="btn btn-primary submit-btn col-auto">Submit</button>
+                                            <button type="submit"
+                                                class="btn btn-primary submit-btn col-auto">Submit</button>
                                             <button type="button" id="viewInventoryBtn"
-                                                class="btn col-auto submit-btn ms-2 text-white" onclick="showModal()">ViewInventory</button>
+                                                class="btn col-auto submit-btn ms-2 text-white"
+                                                onclick="showModal()">ViewInventory</button>
                                         </div>
                                     </div>
                                 </div>
@@ -626,7 +638,8 @@
                                                 Daily Necessities
                                             </button>
                                         </h2>
-                                        <div id="collapse1" class="accordion-collapse collapse show stock-accordion" data-bs-parent="#accordionExample2">
+                                        <div id="collapse1" class="accordion-collapse collapse show stock-accordion"
+                                            data-bs-parent="#accordionExample2">
                                             <div class="accordion-body m-0 p-1">
                                                 <div class="daily-neccesities">
                                                     <div class="row form-floating mt-2 mb-2 ">
@@ -742,9 +755,10 @@
                                                     <div class="row row-cols-2 form-floating mt-2 mb-2">
                                                         <div class="input-group mb-lg-0 mb-2">
                                                             <div class="form-floating">
-                                                             <input type="text" class="form-control" id="floatingInput"
-                                                                name="masalaItems" placeholder="Masala Item Expense"
-                                                                pattern="[0-9]+" required>
+                                                                <input type="text" class="form-control"
+                                                                    id="floatingInput" name="masalaItems"
+                                                                    placeholder="Masala Item Expense" pattern="[0-9]+"
+                                                                    required>
                                                                 <label for="floatingInput">Masala Items Expense</label>
                                                             </div>
                                                             <span class="input-group-text " id="basic-addon1">Rs</span>
@@ -762,7 +776,8 @@
                                                 Essential
                                             </button>
                                         </h2>
-                                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
+                                        <div id="collapse2" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample2">
                                             <div class="accordion-body m-0 p-1">
                                                 <div class="expenditure">
                                                     <div class="form-floating mt-2 mb-2">
@@ -844,7 +859,8 @@
                                                 Packing
                                             </button>
                                         </h2>
-                                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
+                                        <div id="collapse3" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample2">
                                             <div class="accordion-body p-1 m-0">
                                                 <div class="product-usage">
                                                     <!--  -->
@@ -1021,12 +1037,14 @@
                                     </div>
                                     <div class="container justify-content-center">
                                         <div class="row">
-                                            <button type="submit" class="btn btn-primary submit-btn col-auto">Submit</button>
-                                            <button type="button" id="viewStockBtn" class="btn btn-info col-auto submit-btn text-white ms-2"
+                                            <button type="submit"
+                                                class="btn btn-primary submit-btn col-auto">Submit</button>
+                                            <button type="button" id="viewStockBtn"
+                                                class="btn btn-info col-auto submit-btn text-white ms-2"
                                                 onclick="showModal1()">View Inventory</button>
                                         </div>
                                     </div>
-                                    
+
 
                                 </div>
                             </form>
@@ -1091,6 +1109,39 @@
         console.log("Script is working / Loading");
 
         //
+
+        //Price Convertion
+
+        // Function to format numbers as Rupees (INR)
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Select all elements with the class 'currency'
+            const elements = document.querySelectorAll(".currency");
+
+            console.log("Found currency elements: ", elements.length);
+
+            // Loop through each element and format its content as Indian currency
+            elements.forEach(function (element) {
+                // Parse the raw number from the element's text content
+                let number = parseFloat(element.textContent.trim());
+
+                console.log("Raw number extracted: ", number);
+
+                // Check if the parsed value is a valid number
+                if (!isNaN(number)) {
+                    // Format the number and update the element's content
+                    element.textContent = number.toLocaleString('en-IN', {
+                        style: 'currency',
+                        currency: 'INR',
+                        maximumFractionDigits: 2
+                    });
+                } else {
+                    console.error("Invalid number in element: ", element);
+                }
+            });
+        });
+
+        // 
 
         function showModal() {
             const inputs = document.querySelectorAll('#Inventory input');
@@ -1160,8 +1211,7 @@
 
         // Price Convertion 
 
-        // Function to format numbers as Rupees (INR)
-    
+        
 
 
         //

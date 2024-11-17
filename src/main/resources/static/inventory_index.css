@@ -336,7 +336,7 @@ span {
 .daily_stock_title,
 .update_date_title,
 .last_inventory_title {
-    font-size: 18px;
+    font-size: 14px;
     color: #384551;
     font-weight: 600;
     text-shadow: 2px 0px 5px rgba(65, 65, 65, 0.5);

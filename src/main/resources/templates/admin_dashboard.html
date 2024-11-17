@@ -45,7 +45,8 @@
             </li>
             <hr class="dropdown-divider">
             <li class="nav-item py-0 shop-link">
-                <a th:href="@{/admin/shops}" class="sidebar-link nav-link ps-3 d-flex fs-6 align-items-center m-0" data-bs-target="#settingsSubmenu" aria-expanded="false">
+                <a th:href="@{/admin/shops}" class="sidebar-link nav-link ps-3 d-flex fs-6 align-items-center m-0"
+                    data-bs-target="#settingsSubmenu" aria-expanded="false">
                     <div class="store_icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="currentColor"
                             class="bi bi-shop mb-1" viewBox="0 0 16 16">
@@ -136,12 +137,12 @@
                             <h3 class="mt-1 dashboard_sub_title text-uppercase">Shop Reports</h3>
                             <div
                                 class="row row-cols-3 flex-wrap gap-4 justify-content-center justify-content-lg-start py-2 px-3">
-                               <div class="col-11 col-lg-4 shop_reports_card p-3 mt-1"
-                                        th:each="shop_Report :${shopReport}">
+                                <div class="col-11 col-lg-4 shop_reports_card p-3 mt-1"
+                                    th:each="shop_Report :${shopReport}">
                                     <div class="row align-items-center">
                                         <div class="col-6">
-                                           <h4 class="m-0 store_name mt-1 mb-1" th:text="${shop_Report.branchName}">
-                                               KodiPalya</h4>
+                                            <h4 class="m-0 store_name mt-1 mb-1" th:text="${shop_Report.branchName}">
+                                                KodiPalya</h4>
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-end">
                                             <span
@@ -160,35 +161,35 @@
                                     </div>
                                     <div class="highlight-text">
                                         <span class="shop_report_inventorySaleDate">Total Sales </span>
-                                       <h3 class="m-0 col-3 shop_report_totalSale currency"
-                                           th:text="${shop_Report.totalSale}">
-                                           17000</h3>
+                                        <h3 class="m-0 col-3 shop_report_totalSale currency"
+                                            th:text="${shop_Report.totalSale}">
+                                            17000</h3>
                                         <div class="align-items-center mb-2">
-                                           <span class="shop_report_inventorySaleDate">Shop report date on </span><span
-                                               class="shop_report_inventorySaleDate text-dark"
-                                               th:text="${shop_Report.saleInventoryDate}">11-11-2024</span>
+                                            <span class="shop_report_inventorySaleDate">Shop report date on </span><span
+                                                class="shop_report_inventorySaleDate text-dark"
+                                                th:text="${shop_Report.saleInventoryDate}">11-11-2024</span>
                                         </div>
                                         <div class="row">
                                             <div class="row">
                                                 <h5 class="shop_report_title col-7">Total Expense</h5>
-                                               <h6 th:text="${shop_Report.autoTotalExpense}"
-                                                   class="shop_report_value col-5 currency">500.00
-                                               </h6>
+                                                <h6 th:text="${shop_Report.autoTotalExpense}"
+                                                    class="shop_report_value col-5 currency">500.00
+                                                </h6>
                                             </div>
                                             <h6 class="shop_report_title">Chicken Supply</h6>
                                             <div class="row align-items-center">
                                                 <h6 class="shop_report_sub_title col-8">Biriyani Chicken</h6>
                                                 <div class="col-4 text-end shop_report_value_card p-0">
-                                                   <span th:text="${shop_Report.biriyaniChickenKg}"
-                                                       class="shop_report_value">50</span>
+                                                    <span th:text="${shop_Report.biriyaniChickenKg}"
+                                                        class="shop_report_value">50</span>
                                                     <span class="shop_report_value_unit">Kg</span>
                                                 </div>
                                             </div>
                                             <div class="row align-items-center">
                                                 <h6 class="shop_report_sub_title col-8">Kabab Chicken</h6>
                                                 <div class="col-4 text-end shop_report_value_card p-0">
-                                                   <span th:text="${shop_Report.kababChickenKg}"
-                                                       class="shop_report_value">4</span>
+                                                    <span th:text="${shop_Report.kababChickenKg}"
+                                                        class="shop_report_value">4</span>
                                                     <span class="shop_report_value_unit">Kg</span>
                                                 </div>
                                             </div>
@@ -196,16 +197,16 @@
                                             <div class="row align-items-center">
                                                 <h6 class="shop_report_sub_title col-8"> Biriyani Chicken Stock</h6>
                                                 <div class="col-4 text-end shop_report_value_card p-0">
-                                                   <span th:text="${shop_Report.biriyaniChickenStock}"
-                                                       class="shop_report_value">4</span>
+                                                    <span th:text="${shop_Report.biriyaniChickenStock}"
+                                                        class="shop_report_value">4</span>
                                                     <span class="shop_report_value_unit">Kg</span>
                                                 </div>
                                             </div>
                                             <div class="row align-items-center">
                                                 <h6 class="shop_report_sub_title col-8">Kabab Chicken Stock</h6>
                                                 <div class="col-4 text-end shop_report_value_card p-0">
-                                                   <span th:text="${shop_Report.kababChickenStock}"
-                                                       class="shop_report_value">5</span>
+                                                    <span th:text="${shop_Report.kababChickenStock}"
+                                                        class="shop_report_value">5</span>
                                                     <span class="shop_report_value_unit">Kg</span>
                                                 </div>
                                             </div>
@@ -213,8 +214,8 @@
                                             <div class="row align-items-center">
                                                 <h6 class="shop_report_sub_title col-8">Rice Used Qty</h6>
                                                 <div class="col-4 text-end shop_report_value_card p-0">
-                                                   <span th:text="${shop_Report.rice_used}"
-                                                       class="shop_report_value">4</span>
+                                                    <span th:text="${shop_Report.rice_used}"
+                                                        class="shop_report_value">4</span>
                                                     <span class="shop_report_value_unit">Kg</span>
                                                 </div>
                                             </div>
@@ -224,6 +225,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <ul>
+                                    <a href=""></a>
+                                    <a href=""></a>
+                                </ul>
+                                <div class="mb-5 mt-5"></div>
                             </div>
                         </div>
                     </div>
@@ -231,8 +237,10 @@
                         aria-labelledby="profile-tab">
                         <div class="stock_reports ms-0 ms-lg-2">
                             <h3 class="mt-1 dashboard_sub_title text-uppercase">Stock Reports</h3>
-                            <div class="row row-cols-3 justify-content-lg-start justify-content-center mt-1  px-3 py-2 gap-2">
-                                <div class="col-11 col-lg-5 stock_report_card p-3" th:each="stock_Report :${stockReport}">
+                            <div
+                                class="row row-cols-3 justify-content-lg-start justify-content-center mt-1  px-3 py-2 gap-2">
+                                <div class="col-11 col-lg-5 stock_report_card p-3"
+                                    th:each="stock_Report :${stockReport}">
                                     <div class="row align-items-center">
                                         <div class="col-6">
                                             <h4 class="m-0 store_name mt-1 mb-1" th:text="${stock_Report.branchName}">
@@ -294,10 +302,16 @@
                                 </div>
                             </div>
                         </div>
+                        <ul>
+                            <a href=""></a>
+                            <a href=""></a>
+                        </ul>
+                        <div class="mb-5 mt-5"></div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -356,10 +370,10 @@
             });
         });
 
-    window.onload = function() {
-    document.getElementById('loading-spinner').style.display = 'none';
-    document.getElementById('content').style.display = 'block';
-    };
+        window.onload = function () {
+            document.getElementById('loading-spinner').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        };
 
     </script>
 </body>
