@@ -123,19 +123,28 @@ public class Inventory_and_Stock_Controlls {
 	@GetMapping("/logout")
 	public String Logout(HttpSession session, HttpServletRequest request,
 						 HttpServletResponse response) {
+
+		session.removeAttribute("shop_Id");
+
+		System.out.println("Seession shop id has removed");
+
 		if (session != null) {
 			session.invalidate(); // Invalidate the session completely
-
 		}
 
-		// Clear the session cookie
-		Cookie cookie = new Cookie("JSESSIONID", null);
-		cookie.setPath(request.getContextPath());
-		cookie.setHttpOnly(true);
-		cookie.setMaxAge(0); // Immediately expire the cookie
-		response.addCookie(cookie);
 
-		System.out.println(" -----------------  "+"ur logged out.");
+
+		// Clear cookies
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				cookie.setValue(null);
+				cookie.setMaxAge(0);
+				cookie.setPath("/"); // Ensure the cookie path matches the original path
+				response.addCookie(cookie);
+			}
+			System.out.println("Cookies Cleared --");
+		}
 
 		return "indess";
 	}

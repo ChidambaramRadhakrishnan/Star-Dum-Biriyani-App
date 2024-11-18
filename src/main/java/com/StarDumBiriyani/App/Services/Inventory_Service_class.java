@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.StarDumBiriyani.App.Entries.*;
 import com.StarDumBiriyani.App.Repository.*;
+import com.StarDumBiriyani.App.Whatsapp.Whatsapp_Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -107,6 +108,53 @@ public class Inventory_Service_class {
 
 //				if record is not present on today, it'll create new record
 
+				// whatsapp
+
+				String msg = "Daily Inventory Report on "+Essential_Operations.getToday_Date()+"\n" +
+						"From "+all_Shops.getBranchName()+"\n" +
+						"This is Updated Record \n"+
+						"----------------------- \n" +
+						"Sales Details \n" +
+						"----------------------- \n" +
+						"Total Sale : "+Essential_Operations.RupeeConvertion(totalSale)+"\n" +
+						"Total Cash (Sales) : "+Essential_Operations.RupeeConvertion(totalCash)+"\n" +
+						"Total Upi (Sales) : "+Essential_Operations.RupeeConvertion(totalUPI)+"\n" +
+						"Total Cash Balance : "+Essential_Operations.RupeeConvertion(cashBalance)+"\n" +
+						"Total UPI Balance : "+Essential_Operations.RupeeConvertion(upiBalance)+"\n" +
+						"----------------------- \n" +
+						"Expenses & Stock Details \n" +
+						"----------------------- \n" +
+						"Total Expense : "+Essential_Operations.RupeeConvertion(totalExpenditure)+"\n" +
+						"System Generated Total Expense : "+Essential_Operations.RupeeConvertion(auto_total_expense)+"\n"+
+						"Total Cash Expense (Sales and Balance) : "+Essential_Operations.RupeeConvertion(cashExpense)+"\n" +
+						"Chicken Expense : "+Essential_Operations.RupeeConvertion(upiExpense)+"\n" +
+						"Biriyani Chicken (Purchase) : "+biriyaniChicken+"Kg \n" +
+						"Kabab Chicken (Purchase) : "+kababChicken+"Kg \n" +
+						"Gas Expense : "+Essential_Operations.RupeeConvertion(gasExpense)+"\n" +
+						"Salt Expense : "+Essential_Operations.RupeeConvertion(saltExpense)+"\n" +
+						"Coriander & Mint Leaf Expense : "+Essential_Operations.RupeeConvertion(corianderMintExpense)+"\n" +
+						"Green Chilly Expense : "+Essential_Operations.RupeeConvertion(GreenChillyExpense)+"\n" +
+						"Curd Expense : "+Essential_Operations.RupeeConvertion(curdExpense)+"\n" +
+						"Other Expense : "+Essential_Operations.RupeeConvertion(otherExpense)+"\n" +
+						"------------------------ \n" +
+						"Stock Usage Details \n" +
+						"------------------------ \n" +
+						"Rice Used : "+riceUsed+"Kg \n" +
+						"Oil Used : "+oilUsed+"Kg \n" +
+						"Ginger & Garlic Used : "+ginger_Garlic_Used+"Kg \n" +
+						"----------------------- \n" +
+						"Chicken Stock Details \n" +
+						"----------------------- \n" +
+						"Biriyani Chicken Stock : "+biriyani_chicken_Stock+"Kg \n" +
+						"Kabab Chicken Stock : "+kabab_chicken_Stock+"Kg \n" +
+						"----------------------- \n" +
+						"Notes : "+notes+"\n" +
+						"----------------------- \n" +
+						"if any queries contact your shop. \n" +
+						"Note: Updated record not going to affect/modify anything in Stocks.";
+
+				Whatsapp_Configuration.sendMsg(msg);
+
 				page = "redirect:/loggedInventory?inventoryUpdateSuccess";
 //
 			} else {
@@ -158,6 +206,51 @@ public class Inventory_Service_class {
 				System.out.println(" --------------- UPdated");
 
 				expenditure_Inventory_Repository.save(Expenditure_Inventory);
+
+				String msg = "Daily Inventory Report on "+Expenditure_Inventory.getInventory_Date()+"\n" +
+						"From "+all_Shops.getBranchName()+"\n"+
+						"-------------------------- \n" +
+						"Sales Details \n" +
+						"-------------------------- \n" +
+						"Total Sale : "+Essential_Operations.RupeeConvertion(sale_Inventory.getTotal_sale())+"\n" +
+						"Total Cash (Sales) : "+Essential_Operations.RupeeConvertion(sale_Inventory.getCash())+"\n" +
+						"Total Upi (Sales) : "+Essential_Operations.RupeeConvertion(sale_Inventory.getUpi())+"\n" +
+						"Total Cash Balance : "+Essential_Operations.RupeeConvertion(sale_Inventory.getCash_balance())+"\n" +
+						"Total UPI Balance : "+Essential_Operations.RupeeConvertion(sale_Inventory.getUpi_balance())+"\n" +
+						"-------------------------- \n" +
+						"Expenses & Stock Details \n" +
+						"-------------------------- \n" +
+						"Total Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getTotal_Expenditure())+"\n" +
+						"System Generated Total Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getAutoTotalExpense())+"\n"+
+						"Total Cash Expense (Sales and Balance) : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getCashExpense())+"\n" +
+						"Total UPI Expense (Sales and Balance) : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getUpiExpense())+"\n" +
+						"Chicken Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getChicken_Expenses())+"\n" +
+						"Biriyani Chicken (Purchase) : "+Expenditure_Inventory.getBiriyani_Chicken_Kg()+"Kg \n" +
+						"Kabab Chicken (Purchase) : "+Expenditure_Inventory.getKabab_Chicken_Kg()+"Kg \n" +
+						"Gas Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getGas_Expenses())+"\n" +
+						"Salt Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getSalt_Expenses())+"\n" +
+						"Coriander & Mint Leaf Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getCorianderLeaf_Mint_Expenses())+"\n" +
+						"Green Chilly Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getGreenChilly_Expenses())+"\n" +
+						"Curd Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getCurd_Expenses())+"\n" +
+						"Other Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getOther_Expenses())+"\n" +
+						"-------------------------- \n" +
+						"Stock Usage Details \n" +
+						"-------------------------- \n" +
+						"Rice Used : "+Expenditure_Inventory.getRice_Used()+"Kg \n" +
+						"Oil Used : "+Expenditure_Inventory.getOil_Used()+"Kg \n" +
+						"Ginger & Garlic Used : "+Expenditure_Inventory.getGinger_Garlic_used()+"Kg \n" +
+						"------------------------- \n" +
+						"Chicken Stock Details \n" +
+						"------------------------- \n" +
+						"Biriyani Chicken Stock : "+Expenditure_Inventory.getBiriyani_Chicken_Stock()+"Kg \n" +
+						"Kabab Chicken Stock : "+Expenditure_Inventory.getKabab_Chicken_Stock()+"Kg \n" +
+						"------------------------- \n" +
+						"Notes : "+Expenditure_Inventory.getNote()+"\n" +
+						"------------------------- \n" +
+						"if any queries contact your shop. \n" +
+						"Note : If your shop inventory manager try to update. Stock won't be affect/Modify.";
+
+				Whatsapp_Configuration.sendMsg(msg);
 
 				page = "redirect:/loggedInventory?inventorySuccess";
 			}
