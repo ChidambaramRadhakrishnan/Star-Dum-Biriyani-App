@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.StarDumBiriyani.App.Entries.*;
 import com.StarDumBiriyani.App.Services.*;
+import com.StarDumBiriyani.App.Whatsapp.Whatsapp_Configuration;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -242,8 +244,7 @@ public class Inventory_and_Stock_Controlls {
 		model.addAttribute("kabab_Chicken_Kg",expenditure_Inventory_Details.stream().findFirst().get().getKabab_Chicken_Kg());
 		model.addAttribute("gas_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getGas_Expenses()));
 		model.addAttribute("salt_expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getSalt_Expenses()));
-		model.addAttribute("corianderandmint_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getCorianderLeaf_Mint_Expenses()));
-		model.addAttribute("greenchilly_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getGreenChilly_Expenses()));
+		model.addAttribute("vegetable_expenses", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getVegetables_Expenses()));
 		model.addAttribute("curd_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getCurd_Expenses()));
 		model.addAttribute("other_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getOther_Expenses()));
 		
@@ -268,7 +269,7 @@ public class Inventory_and_Stock_Controlls {
 	}
 
 	@GetMapping("/loggedInventory")
-	public String loginTo(HttpSession session, Model model) {
+	public String loginTo(HttpSession session, Model model) throws JsonProcessingException {
 		int id = (int) session.getAttribute("shop_Id");
 		int shopCode = (int) session.getAttribute("shopCode");
 		String branch_Name = all_Shop_Service.getBranchName(id);
@@ -324,8 +325,7 @@ public class Inventory_and_Stock_Controlls {
 			model.addAttribute("kabab_Chicken_Kg",expenditure_Inventory_Details.stream().findFirst().get().getKabab_Chicken_Kg());
 			model.addAttribute("gas_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getGas_Expenses()));
 			model.addAttribute("salt_expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getSalt_Expenses()));
-			model.addAttribute("corianderandmint_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getCorianderLeaf_Mint_Expenses()));
-			model.addAttribute("greenchilly_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getGreenChilly_Expenses()));
+			model.addAttribute("vegetable_expenses", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getVegetables_Expenses()));
 			model.addAttribute("curd_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getCurd_Expenses()));
 			model.addAttribute("other_Expense", Essential_Operations.RupeeConvertion(expenditure_Inventory_Details.stream().findFirst().get().getOther_Expenses()));
 
@@ -340,9 +340,37 @@ public class Inventory_and_Stock_Controlls {
 
 			//Daily Stock Data's
 
+			int rice_Stock = all_Stock_details.stream().findFirst().get().getRice_Qty();
+			int oil_Stock = all_Stock_details.stream().findFirst().get().getOil_Qty();
+			int gingerGarlic_Stock = all_Stock_details.stream().findFirst().get().getGingerGarlic_Qty();
+
 			model.addAttribute("rice_Qty", all_Stock_details.stream().findFirst().get().getRice_Qty());
 			model.addAttribute("oil_Qty", all_Stock_details.stream().findFirst().get().getOil_Qty());
 			model.addAttribute("ginger_Garlic_Qty", all_Stock_details.stream().findFirst().get().getGingerGarlic_Qty());
+
+			String warning_Msg = "";
+			if(rice_Stock <=50 || oil_Stock <=50 || gingerGarlic_Stock <=50){
+				warning_Msg = "Gentle Remainder have low stock. Better to Refill.";
+			}else{
+				warning_Msg = "";
+			}
+
+			//Whatsapp
+			String msg =
+					"----------------------- \n" +
+					"Stock Report \n" +
+					"----------------------- \n" +
+					"Report Date "+Essential_Operations.getToday_Date()+"\n"+
+					"From "+branch_Name+"\n"+
+					"Rice Stock : "+rice_Stock+"Kg \n" +
+					"Oil Stock : "+oil_Stock+"Liters \n" +
+					"Ginger Garlic Stock : "+gingerGarlic_Stock+"Kg \n" +
+					"Last Stock Used on : "+all_Stock_details.stream().findFirst().get().getInventoryDate()+"\n" +
+					"Last Stock filled on : "+all_Stock_details.stream().findFirst().get().getStock_Fill_Date()+"\n" +
+					"------------------------- \n" +
+					"Note : "+warning_Msg+"";
+
+			Whatsapp_Configuration.sendMsg(msg);
 
 		}
 		return all_Shop_Service.validateShopCode(id, shopCode);
@@ -354,8 +382,7 @@ public class Inventory_and_Stock_Controlls {
 			@RequestParam("upiBalance") int upiBalance, @RequestParam("totalExpenditure") int totalExpenditure,
 			@RequestParam("chickenExpense") int chickenExpense, @RequestParam("biriyaniChicken") int biriyaniChicken,
 			@RequestParam("kababChicken") int kababChicken, @RequestParam("gasExpense") int gasExpense,
-			@RequestParam("saltExpense") int saltExpense, @RequestParam("corianderMintExpense") int corianderMintExpense,
-			@RequestParam("GreenChillyExpense") int GreenChillyExpense, @RequestParam("curdExpense") int curdExpense,
+			@RequestParam("saltExpense") int saltExpense, @RequestParam("vegetables_Expenses") int vegetables_Expenses, @RequestParam("curdExpense") int curdExpense,
 			@RequestParam("otherExpense") int otherExpense, @RequestParam("notes") String notes,
 			@RequestParam("biriyani_chicken_Stock") int biriyani_chicken_Stock,
 			@RequestParam("kabab_chicken_Stock") int kabab_chicken_Stock, @RequestParam("riceUsed") int riceUsed,
@@ -370,7 +397,7 @@ public class Inventory_and_Stock_Controlls {
 
 		return inventory_Service_class.addNewInventory(totalSale, totalCash, totalUPI, cashBalance, upiBalance,
 				totalExpenditure, chickenExpense, biriyaniChicken, kababChicken, gasExpense, saltExpense,
-				corianderMintExpense, GreenChillyExpense, curdExpense, otherExpense, notes, biriyani_chicken_Stock,
+				vegetables_Expenses, curdExpense, otherExpense, notes, biriyani_chicken_Stock,
 				kabab_chicken_Stock, riceUsed, oilUsed, ginger_garlic_Used,cashExpense, upiExpense, (int) session.getAttribute("shop_Id"));
 
 	}

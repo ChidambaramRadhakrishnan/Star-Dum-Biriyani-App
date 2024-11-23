@@ -20,8 +20,7 @@ public class Expenditure_Inventory_Entity {
 	private int kabab_Chicken_Kg;
 	private int gas_Expenses;
 	private int salt_Expenses;
-	private int corianderLeaf_Mint_Expenses;
-	private int greenChilly_Expenses;
+	private int vegetables_Expenses;
 	private int curd_Expenses;
 	private int other_Expenses;
 	private String note;
@@ -46,6 +45,14 @@ public class Expenditure_Inventory_Entity {
 	@ManyToOne
 	@JoinColumn(name = "sale_inventory_id")
 	private Sale_Inventory_Entity sale_Inventory;
+
+	public int getVegetables_Expenses() {
+		return vegetables_Expenses;
+	}
+
+	public void setVegetables_Expenses(int vegetables_Expenses) {
+		this.vegetables_Expenses = vegetables_Expenses;
+	}
 
 	public int getId() {
 		return id;
@@ -109,22 +116,6 @@ public class Expenditure_Inventory_Entity {
 
 	public void setSalt_Expenses(int salt_Expenses) {
 		this.salt_Expenses = salt_Expenses;
-	}
-
-	public int getCorianderLeaf_Mint_Expenses() {
-		return corianderLeaf_Mint_Expenses;
-	}
-
-	public void setCorianderLeaf_Mint_Expenses(int corianderLeaf_Mint_Expenses) {
-		this.corianderLeaf_Mint_Expenses = corianderLeaf_Mint_Expenses;
-	}
-
-	public int getGreenChilly_Expenses() {
-		return greenChilly_Expenses;
-	}
-
-	public void setGreenChilly_Expenses(int greenChilly_Expenses) {
-		this.greenChilly_Expenses = greenChilly_Expenses;
 	}
 
 	public int getCurd_Expenses() {

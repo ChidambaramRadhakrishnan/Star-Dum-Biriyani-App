@@ -28,10 +28,8 @@ public class Inventory_Service_class {
 	Expenditure_Inventory_Repository expenditure_Inventory_Repository;
 
 	@Autowired
-	Daily_Stock_Repository daily_Stock_Repository;
-
-	@Autowired
 	Stock_Management_Repository stockManagementRepository;
+
 	
 	
 	public List<Sale_Inventory_Entity> getAll_Sale_Inventory_Data(int id){
@@ -46,7 +44,7 @@ public class Inventory_Service_class {
 
 	public String addNewInventory(Integer totalSale, int totalCash, int totalUPI, int cashBalance, int upiBalance,
 			int totalExpenditure, int chickenExpense, int biriyaniChicken, int kababChicken, int gasExpense,
-			int saltExpense, int corianderMintExpense, int GreenChillyExpense, int curdExpense, int otherExpense,
+			int saltExpense, int vegetables_Expenses, int curdExpense, int otherExpense,
 			String notes, int biriyani_chicken_Stock, int kabab_chicken_Stock, int riceUsed, int oilUsed,
 			int ginger_Garlic_Used, int cashExpense, int upiExpense, int id) {
 
@@ -66,7 +64,7 @@ public class Inventory_Service_class {
 
 			List<Stock_Entity> stock = stockManagementRepository.getLastStockRecord(id);
 
-			//Existing rice qty to get previous date stock inventories
+			// Existing rice qty to get previous date stock inventories
 			int Existing_Rice_Qty = stock.stream().findFirst().get().getRice_Qty();
 			int Existing_Oil_Qty = stock.stream().findFirst().get().getOil_Qty();
 			int Existing_Ginger_Garlic_Qty = stock.stream().findFirst().get().getGingerGarlic_Qty();
@@ -79,6 +77,8 @@ public class Inventory_Service_class {
 
 			Sale_Inventory_Entity sale_Inventory = new Sale_Inventory_Entity();
 
+			List<Stock_Entity> stock_Report = stockManagementRepository.getLastStockRecord(id);
+
 			/*
 			update stock inventory
 			if record is already exist in database, this part of code will execute
@@ -90,14 +90,13 @@ public class Inventory_Service_class {
 
 				System.out.println("Updating Existing Inventory");
 
-				int auto_total_expense = chickenExpense+gasExpense+corianderMintExpense+curdExpense+GreenChillyExpense+
+				int auto_total_expense = chickenExpense+gasExpense+vegetables_Expenses+curdExpense+
 						otherExpense+saltExpense;
 				//
 				sale_Inventory_Repository.updateExisting(totalCash, cashBalance, totalSale, totalUPI, upiBalance,
 						all_Shops.getId(), Essential_Operations.getToday_Date());
 				
-				expenditure_Inventory_Repository.updateExistingEntry(biriyaniChicken, biriyani_chicken_Stock, chickenExpense, 
-						corianderMintExpense, curdExpense, gasExpense, GreenChillyExpense, kababChicken, kabab_chicken_Stock, 
+				expenditure_Inventory_Repository.updateExistingEntry(biriyaniChicken, biriyani_chicken_Stock, chickenExpense, curdExpense, gasExpense, vegetables_Expenses, kababChicken, kabab_chicken_Stock,
 						otherExpense, saltExpense, totalExpenditure,riceUsed, oilUsed, ginger_Garlic_Used, cashExpense, upiExpense, auto_total_expense,all_Shops.getId(), 
 						Essential_Operations.getToday_Date());
 
@@ -109,7 +108,6 @@ public class Inventory_Service_class {
 //				if record is not present on today, it'll create new record
 
 				// whatsapp
-
 				String msg = "Daily Inventory Report on "+Essential_Operations.getToday_Date()+"\n" +
 						"From "+all_Shops.getBranchName()+"\n" +
 						"This is Updated Record \n"+
@@ -127,13 +125,13 @@ public class Inventory_Service_class {
 						"Total Expense : "+Essential_Operations.RupeeConvertion(totalExpenditure)+"\n" +
 						"System Generated Total Expense : "+Essential_Operations.RupeeConvertion(auto_total_expense)+"\n"+
 						"Total Cash Expense (Sales and Balance) : "+Essential_Operations.RupeeConvertion(cashExpense)+"\n" +
-						"Chicken Expense : "+Essential_Operations.RupeeConvertion(upiExpense)+"\n" +
+						"Total UPI Expense (Sales and Balance) : "+Essential_Operations.RupeeConvertion(upiExpense)+"\n"+
+						"Chicken Expense : "+Essential_Operations.RupeeConvertion(chickenExpense)+"\n" +
 						"Biriyani Chicken (Purchase) : "+biriyaniChicken+"Kg \n" +
 						"Kabab Chicken (Purchase) : "+kababChicken+"Kg \n" +
 						"Gas Expense : "+Essential_Operations.RupeeConvertion(gasExpense)+"\n" +
 						"Salt Expense : "+Essential_Operations.RupeeConvertion(saltExpense)+"\n" +
-						"Coriander & Mint Leaf Expense : "+Essential_Operations.RupeeConvertion(corianderMintExpense)+"\n" +
-						"Green Chilly Expense : "+Essential_Operations.RupeeConvertion(GreenChillyExpense)+"\n" +
+						"Vetables Expense : "+Essential_Operations.RupeeConvertion(vegetables_Expenses)+"\n" +
 						"Curd Expense : "+Essential_Operations.RupeeConvertion(curdExpense)+"\n" +
 						"Other Expense : "+Essential_Operations.RupeeConvertion(otherExpense)+"\n" +
 						"------------------------ \n" +
@@ -149,7 +147,7 @@ public class Inventory_Service_class {
 						"Kabab Chicken Stock : "+kabab_chicken_Stock+"Kg \n" +
 						"----------------------- \n" +
 						"Notes : "+notes+"\n" +
-						"----------------------- \n" +
+						"----------------------------------------------------------- \n"+
 						"if any queries contact your shop. \n" +
 						"Note: Updated record not going to affect/modify anything in Stocks.";
 
@@ -180,8 +178,7 @@ public class Inventory_Service_class {
 				Expenditure_Inventory.setKabab_Chicken_Kg(kababChicken);
 				Expenditure_Inventory.setGas_Expenses(gasExpense);
 				Expenditure_Inventory.setSalt_Expenses(saltExpense);
-				Expenditure_Inventory.setCorianderLeaf_Mint_Expenses(corianderMintExpense);
-				Expenditure_Inventory.setGreenChilly_Expenses(GreenChillyExpense);
+				Expenditure_Inventory.setVegetables_Expenses(vegetables_Expenses);
 				Expenditure_Inventory.setCurd_Expenses(curdExpense);
 				Expenditure_Inventory.setOther_Expenses(otherExpense);
 				Expenditure_Inventory.setNote(notes);
@@ -192,13 +189,12 @@ public class Inventory_Service_class {
 				Expenditure_Inventory.setGinger_Garlic_used(ginger_Garlic_Used);
 				Expenditure_Inventory.setCashExpense(cashExpense);
 				Expenditure_Inventory.setUpiExpense(upiExpense);
-				Expenditure_Inventory.setAutoTotalExpense(chickenExpense+gasExpense+saltExpense+corianderMintExpense+GreenChillyExpense+curdExpense+otherExpense);
+				Expenditure_Inventory.setAutoTotalExpense(chickenExpense+gasExpense+saltExpense+vegetables_Expenses+curdExpense+otherExpense);
 				Expenditure_Inventory.setInventory_Date(Essential_Operations.getToday_Date());
 				Expenditure_Inventory.setUpdated("Yes");
 				Expenditure_Inventory.setAll_Shops(all_Shops);
 				Expenditure_Inventory.setSale_Inventory(sale_Inventory);
 				Expenditure_Inventory.setEventDate(LocalDate.now());
-
 				//
 				stockManagementRepository.updateDailyInventory(update_Rice_Used_Qty, update_Oil_Used_Qty,
 						update_Ginger_Garlic_Used_Qty, Essential_Operations.getToday_Date(), id);
@@ -229,8 +225,7 @@ public class Inventory_Service_class {
 						"Kabab Chicken (Purchase) : "+Expenditure_Inventory.getKabab_Chicken_Kg()+"Kg \n" +
 						"Gas Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getGas_Expenses())+"\n" +
 						"Salt Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getSalt_Expenses())+"\n" +
-						"Coriander & Mint Leaf Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getCorianderLeaf_Mint_Expenses())+"\n" +
-						"Green Chilly Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getGreenChilly_Expenses())+"\n" +
+						"Vagetable Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getVegetables_Expenses())+"\n" +
 						"Curd Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getCurd_Expenses())+"\n" +
 						"Other Expense : "+Essential_Operations.RupeeConvertion(Expenditure_Inventory.getOther_Expenses())+"\n" +
 						"-------------------------- \n" +
@@ -247,6 +242,8 @@ public class Inventory_Service_class {
 						"------------------------- \n" +
 						"Notes : "+Expenditure_Inventory.getNote()+"\n" +
 						"------------------------- \n" +
+						"Stock Report" +
+						"----------------------------------------------------------- \n"+
 						"if any queries contact your shop. \n" +
 						"Note : If your shop inventory manager try to update. Stock won't be affect/Modify.";
 
