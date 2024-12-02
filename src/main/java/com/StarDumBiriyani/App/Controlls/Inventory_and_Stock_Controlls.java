@@ -2,6 +2,7 @@ package com.StarDumBiriyani.App.Controlls;
 
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 import com.StarDumBiriyani.App.Entries.*;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -83,6 +85,21 @@ public class Inventory_and_Stock_Controlls {
         return "shops";
 	}
 
+	@GetMapping("admin/reports")
+	public String reports(Model model){
+
+		List<All_Shops> shop_Data = all_Shop_Service.getShop_Data();
+		model.addAttribute("all_shop_Data", shop_Data);
+
+		return "shop_R6eport";
+	}
+
+	@GetMapping("admin/shopReports")
+	public String shopReports(@RequestParam("branch_id") int id,Model model){
+		System.out.println(" -------------------- + "+id);
+		return "shop_Report";
+	}
+
 	@GetMapping("admin/ModifyBranch")
 	public String modify_Branch_Details(@RequestParam("shopId") int shopid,@RequestParam("branchNameUpdate") String branchName,
 						@RequestParam("shopCodeUpdate") int shopCode){
@@ -133,9 +150,6 @@ public class Inventory_and_Stock_Controlls {
 		if (session != null) {
 			session.invalidate(); // Invalidate the session completely
 		}
-
-
-
 		// Clear cookies
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -147,7 +161,6 @@ public class Inventory_and_Stock_Controlls {
 			}
 			System.out.println("Cookies Cleared --");
 		}
-
 		return "indess";
 	}
 
@@ -370,7 +383,7 @@ public class Inventory_and_Stock_Controlls {
 					"------------------------- \n" +
 					"Note : "+warning_Msg+"";
 
-			Whatsapp_Configuration.sendMsg(msg);
+//			Whatsapp_Configuration.sendMsg(msg);
 
 		}
 		return all_Shop_Service.validateShopCode(id, shopCode);

@@ -1,6 +1,8 @@
 package com.StarDumBiriyani.App.Services;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.Date;
 import java.util.List;
 
 import com.StarDumBiriyani.App.Entries.*;
@@ -29,8 +31,6 @@ public class Inventory_Service_class {
 
 	@Autowired
 	Stock_Management_Repository stockManagementRepository;
-
-	
 	
 	public List<Sale_Inventory_Entity> getAll_Sale_Inventory_Data(int id){
 		return sale_Inventory_Repository.getSale_Inventory_All_Data(id);
@@ -79,6 +79,42 @@ public class Inventory_Service_class {
 
 			List<Stock_Entity> stock_Report = stockManagementRepository.getLastStockRecord(id);
 
+//			LocalDate today = LocalDate.now();
+
+//			LocalDate today = LocalDate.now();
+			LocalDate today = LocalDate.of(2024,11,5);
+
+			Month current_Month = today.getMonth();
+
+			List<Expenditure_Inventory_Entity> expenditureInventory =expenditure_Inventory_Repository.get_Expenditure_Inventory(id);
+			List<Sale_Inventory_Entity> saleInventoryEntities = sale_Inventory_Repository.getSale_Inventory_All_Data(id);
+
+//			LocalDate last_eventDate = expenditureInventory.stream().findFirst().get().getEventDate();
+			LocalDate last_eventDate = LocalDate.of(2024,11,1);
+
+			Month last_eventMonth = last_eventDate.getMonth();
+//			LocalDate last_eventMonth = LocalDate.of(2024, 12,5);
+
+			System.out.println("-------------");
+			System.out.println(today+" today");
+			System.out.println(current_Month +" --- current month");
+			System.out.println(last_eventMonth +" --- last event Month");
+			System.out.println("-------------");
+
+			int total_cashBalance = saleInventoryEntities.stream().findFirst().get().getCash_balance();
+			int total_upiBalance = saleInventoryEntities.stream().findFirst().get().getUpi_balance();
+			int update_Cash_Balance = 0;
+			int update_Upi_Balance = 0;
+			int updated_Total_Cash = totalCash + total_cashBalance - cashExpense;
+			int updated_Total_UPI = totalUPI + total_upiBalance - upiExpense;
+
+			// Check if the month has changed
+			// Same month as dbDate
+			System.out.println("Inner Else");
+			update_Cash_Balance = updated_Total_Cash;
+			update_Upi_Balance = updated_Total_UPI;
+			System.out.println(" --- Cash Balance after deduct expense : "+ update_Cash_Balance);
+			System.out.println(" --- Cash Balance after deduct expense : "+ update_Upi_Balance);
 			/*
 			update stock inventory
 			if record is already exist in database, this part of code will execute
@@ -86,10 +122,8 @@ public class Inventory_Service_class {
 			 */
 			if ("Yes".equals(expenditure_Status) && "Yes".equals(Sale_Status)) {
 
-				//To calculate total expense (Systemised Total Expense)
-
+				// To calculate total expense (System Calculate Total Expense)
 				System.out.println("Updating Existing Inventory");
-
 				int auto_total_expense = chickenExpense+gasExpense+vegetables_Expenses+curdExpense+
 						otherExpense+saltExpense;
 				//
@@ -151,7 +185,7 @@ public class Inventory_Service_class {
 						"if any queries contact your shop. \n" +
 						"Note: Updated record not going to affect/modify anything in Stocks.";
 
-				Whatsapp_Configuration.sendMsg(msg);
+//				Whatsapp_Configuration.sendMsg(msg);
 
 				page = "redirect:/loggedInventory?inventoryUpdateSuccess";
 //
@@ -162,8 +196,8 @@ public class Inventory_Service_class {
 				sale_Inventory.setTotal_sale(totalSale);
 				sale_Inventory.setCash(totalCash);
 				sale_Inventory.setUpi(totalUPI);
-				sale_Inventory.setCash_balance(cashBalance);
-				sale_Inventory.setUpi_balance(upiBalance);
+				sale_Inventory.setCash_balance(update_Cash_Balance);
+				sale_Inventory.setUpi_balance(update_Upi_Balance);
 				sale_Inventory.setSale_Inventory_Date(Essential_Operations.getToday_Date());
 				sale_Inventory.setEventDate(LocalDate.now());
 				sale_Inventory.setUpdated("Yes");
@@ -247,7 +281,7 @@ public class Inventory_Service_class {
 						"if any queries contact your shop. \n" +
 						"Note : If your shop inventory manager try to update. Stock won't be affect/Modify.";
 
-				Whatsapp_Configuration.sendMsg(msg);
+//				Whatsapp_Configuration.sendMsg(msg);
 
 				page = "redirect:/loggedInventory?inventorySuccess";
 			}

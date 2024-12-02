@@ -58,7 +58,7 @@
                 </a>
             </li>
             <li class="nav-item py-0 report-link">
-                <a class="nav-link text-decoration-none" href="#">
+                <a class="nav-link text-decoration-none" th:href="@{/admin/reports}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="currentColor"
                         class="bi bi-clipboard2-data mb-1" viewBox="0 0 16 16">
                         <path
@@ -101,14 +101,14 @@
                             class="bi bi-person-fill text-dark me-1" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
                         </svg>
-                        Karthick<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        Admin<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-caret-down ms-2" viewBox="0 0 16 16">
                             <path
                                 d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659" />
                         </svg>
                     </a>
                     <ul class="dropdown-menu user-dropdown">
-                        <li><a class="dropdown-item fw-bold text-center p-0" href="#">Logout</a></li>
+                        <li><a class="dropdown-item fw-bold text-center p-0" th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -145,8 +145,7 @@
                                                 KodiPalya</h4>
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-end">
-                                            <span
-                                                class="shop_report_sub_title col-9 d-flex align-items-center justify-content-end pe-1">View
+                                            <span class="shop_report_sub_title col-9 d-flex align-items-center justify-content-end pe-1">View
                                                 More</span>
                                             <a href="#"
                                                 class="view_more_arrow rounded-button d-flex justify-content-center align-items-center col-3">
