@@ -14,7 +14,6 @@ public class Stock_ReportDTO_Entities {
     private int rice_Qty;
     private int oil_Qty;
     private int gingerGarlic_Qty;
-    private String inventoryDate;
     private String stock_Fill_Date;
 
     public int getId() {
@@ -55,14 +54,6 @@ public class Stock_ReportDTO_Entities {
 
     public void setGingerGarlic_Qty(int gingerGarlic_Qty) {
         this.gingerGarlic_Qty = gingerGarlic_Qty;
-    }
-
-    public String getInventoryDate() {
-        return inventoryDate;
-    }
-
-    public void setInventoryDate(String inventoryDate) {
-        this.inventoryDate = inventoryDate;
     }
 
     public String getStock_Fill_Date() {

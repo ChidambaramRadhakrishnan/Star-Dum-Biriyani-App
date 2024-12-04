@@ -138,6 +138,12 @@ public class Inventory_and_Stock_Controlls {
 
 		model.addAttribute("stockReport",stocks);
 
+		List<Stock_Entity> lastStock = stock_Service.getLastStockUpdateRecord(id);
+
+		model.addAttribute("riceStock",lastStock.stream().findFirst().get().getRice_Qty());
+		model.addAttribute("oilStock",lastStock.stream().findFirst().get().getOil_Qty());
+		model.addAttribute("gingerGarlicStock",lastStock.stream().findFirst().get().getGingerGarlic_Qty());
+
 		return "shop_Report";
 	}
 

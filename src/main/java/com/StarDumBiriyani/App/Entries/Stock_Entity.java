@@ -57,6 +57,15 @@ public class Stock_Entity {
 	private String notes;
 	//
 	private String stock_Fill_Date;
+
+	public LocalDate getEventDate() {
+		return EventDate;
+	}
+
+	public void setEventDate(LocalDate eventDate) {
+		EventDate = eventDate;
+	}
+
 	//
 	@Column(name = "event_date", columnDefinition = "DATE")
 	private LocalDate EventDate;
