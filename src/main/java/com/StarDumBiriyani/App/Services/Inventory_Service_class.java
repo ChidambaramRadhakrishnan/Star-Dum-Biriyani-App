@@ -292,7 +292,14 @@ public class Inventory_Service_class {
 		}
 
 		return page;
+	}
 
+	public int getTotal_Sale(int id){
+		return sale_Inventory_Repository.getTotalSale(id);
+	}
+
+	public int getTotalExpense(int id){
+		return expenditure_Inventory_Repository.getTotal_Expense(id);
 	}
 
 }

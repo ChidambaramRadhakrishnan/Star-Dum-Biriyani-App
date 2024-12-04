@@ -1,5 +1,6 @@
 package com.StarDumBiriyani.App.Services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -264,5 +265,9 @@ public class Stock_Service_Class {
 
 	public List<Stock_Entity> getLastStockUpdateRecord(int id){
 		return stock_Management_Repository.getLastStockRecord(id);
+	}
+
+	public List<Stock_Entity> getStockReport(int id){
+		return stock_Management_Repository.getStockReport(id);
 	}
 }

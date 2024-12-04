@@ -26,5 +26,16 @@ public interface Sale_Inventory_Repository extends JpaRepository<Sale_Inventory_
 	
 	@Query(value = "select * from sale_inventory_entity where shop_id = :id order by id desc limit 1;", nativeQuery = true)
 	List<Sale_Inventory_Entity> getSale_Inventory_All_Data(int id);
+
+	@Query(value = "SELECT \n" +
+			"    SUM(total_sale) AS total_sale\n" +
+			"FROM \n" +
+			"    sale_inventory_entity\n" +
+			"WHERE \n" +
+			"    shop_id = :shopID\n" +
+			"    AND MONTH(event_date) = MONTH(CURRENT_DATE())\n" +
+			"    AND YEAR(event_date) = YEAR(CURRENT_DATE());",nativeQuery = true)
+	int getTotalSale(int shopID);
+
 	
 }

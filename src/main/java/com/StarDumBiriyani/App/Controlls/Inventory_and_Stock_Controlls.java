@@ -3,9 +3,12 @@ package com.StarDumBiriyani.App.Controlls;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.StarDumBiriyani.App.Entries.*;
+import com.StarDumBiriyani.App.Repository.SaleInventoryReport_DTO;
+import com.StarDumBiriyani.App.Repository.Sale_Inventory_Repository;
 import com.StarDumBiriyani.App.Services.*;
 import com.StarDumBiriyani.App.Whatsapp.Whatsapp_Configuration;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -44,6 +47,9 @@ public class Inventory_and_Stock_Controlls {
 
 	@Autowired
 	stockReport_DTO_Service stockReportDtoService;
+
+	@Autowired
+	SaleInventoryReport_DTO saleInventoryReportDto;
 
 
 //	Admin
@@ -87,16 +93,51 @@ public class Inventory_and_Stock_Controlls {
 
 	@GetMapping("admin/reports")
 	public String reports(Model model){
-
 		List<All_Shops> shop_Data = all_Shop_Service.getShop_Data();
 		model.addAttribute("all_shop_Data", shop_Data);
 
-		return "shop_R6eport";
+		return "shop_Report";
 	}
 
 	@GetMapping("admin/shopReports")
 	public String shopReports(@RequestParam("branch_id") int id,Model model){
-		System.out.println(" -------------------- + "+id);
+		List<All_Shops> shop_Data = all_Shop_Service.getShop_Data();
+		model.addAttribute("all_shop_Data", shop_Data);
+
+		List<SalesInventoryReportsDTO> sales = saleInventoryReportDto.findsaleReports(id);
+
+		int total_sale = inventory_Service_class.getTotal_Sale(id);
+
+		int total_Expense = inventory_Service_class.getTotalExpense(id);
+
+		List<Sale_Inventory_Entity> sale_Inventory = inventory_Service_class.getAll_Sale_Inventory_Data(id);
+
+		int total_CashBalance = sale_Inventory.stream().findFirst().get().getCash_balance();
+		int total_UpiBalance = sale_Inventory.stream().findFirst().get().getUpi_balance();
+
+		int total_balance = total_CashBalance + total_UpiBalance;
+
+		LocalDate currentDate = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/EEEE-MM/MMMM-yyyy");
+
+		String formattedDate = currentDate.format(formatter);
+
+		model.addAttribute("Date",formattedDate);
+
+		model.addAttribute("sales_Report",sales);
+		model.addAttribute("totalSale",total_sale);
+		model.addAttribute("totalExpense",total_Expense);
+
+		model.addAttribute("cashBalance",total_CashBalance);
+		model.addAttribute("upiBalance",total_UpiBalance);
+
+		model.addAttribute("totalBalance", total_balance);
+
+//		Stock Reports
+		List<Stock_Entity> stocks = stock_Service.getStockReport(id);
+
+		model.addAttribute("stockReport",stocks);
+
 		return "shop_Report";
 	}
 

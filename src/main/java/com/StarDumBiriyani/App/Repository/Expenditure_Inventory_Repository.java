@@ -33,4 +33,14 @@ public interface Expenditure_Inventory_Repository extends JpaRepository<Expendit
 	@Query(value = "select * from expenditure_inventory_entity where shop_id = :id order by id desc limit 1;", nativeQuery = true)
 	List<Expenditure_Inventory_Entity> get_Expenditure_Inventory(int id);
 
+	@Query(value = "SELECT \n" +
+			"    SUM(auto_total_expense) AS total_sales_for_current_month\n" +
+			"FROM \n" +
+			"    expenditure_inventory_entity\n" +
+			"WHERE \n" +
+			"    shop_id = 1\n" +
+			"    AND MONTH(event_date) = MONTH(CURRENT_DATE())\n" +
+			"    AND YEAR(event_date) = YEAR(CURRENT_DATE());",nativeQuery = true)
+	int getTotal_Expense(int id);
+
 }

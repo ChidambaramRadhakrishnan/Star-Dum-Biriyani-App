@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.time.LocalDate;
+
 @Entity
 @Table
 public class Stock_Entity {
@@ -56,6 +58,9 @@ public class Stock_Entity {
 	//
 	private String stock_Fill_Date;
 	//
+	@Column(name = "event_date", columnDefinition = "DATE")
+	private LocalDate EventDate;
+
 	private String updated = "No";
 	//
 	private String inventoryDate;

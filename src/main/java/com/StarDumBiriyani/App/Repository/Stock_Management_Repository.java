@@ -20,6 +20,16 @@ public interface Stock_Management_Repository extends JpaRepository<Stock_Entity,
 	
 	@Query(value = "select updated from stock_entity where shop_id =:id and stock_fill_date =:stock_date order by id desc limit 1;",nativeQuery = true)
 	String getUpdateStatus(int id, String stock_date);
+
+	@Query(value = "SELECT \n" +
+			"    *\n" +
+			"FROM \n" +
+			"    stock_entity\n" +
+			"WHERE \n" +
+			"    shop_id =:shopID\n" +
+			"    AND MONTH(event_date) = MONTH(CURRENT_DATE())\n" +
+			"    AND YEAR(event_date) = YEAR(CURRENT_DATE());",nativeQuery = true)
+	List<Stock_Entity> getStockReport(int shopID);
 	
 	
 	@Modifying
