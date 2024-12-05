@@ -153,6 +153,7 @@ public class Inventory_Service_class {
 						"Total Upi (Sales) : "+Essential_Operations.RupeeConvertion(totalUPI)+"\n" +
 						"Total Cash Balance : "+Essential_Operations.RupeeConvertion(cashBalance)+"\n" +
 						"Total UPI Balance : "+Essential_Operations.RupeeConvertion(upiBalance)+"\n" +
+						"Total Balance : "+Essential_Operations.RupeeConvertion(cashBalance+upiBalance)+"\n" +
 						"----------------------- \n" +
 						"Expenses & Stock Details \n" +
 						"----------------------- \n" +
@@ -185,7 +186,7 @@ public class Inventory_Service_class {
 						"if any queries contact your shop. \n" +
 						"Note: Updated record not going to affect/modify anything in Stocks.";
 
-//				Whatsapp_Configuration.sendMsg(msg);
+				Whatsapp_Configuration.sendMsg(msg);
 
 				page = "redirect:/loggedInventory?inventoryUpdateSuccess";
 //

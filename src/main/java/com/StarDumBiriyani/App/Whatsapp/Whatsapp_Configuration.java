@@ -31,24 +31,25 @@ public class Whatsapp_Configuration {
 
         var objectMapper = new ObjectMapper();
 
-        Map<String, String> payload = new HashMap<>();
-        payload.put("chatId", "919066351136@c.us");
-        payload.put("message", msg);
+        String[] chatIds = {"919066351136@c.us", "917899254495@c.us"};  // Add more chat IDs as needed
 
-        var jsonBody = objectMapper.writeValueAsString(payload);
+        for (String chatId : chatIds) {
+            Map<String, String> payload = new HashMap<>();
+            payload.put("chatId", chatId);
+            payload.put("message", msg);
 
-//		var jsonBody = "{\r\n\t\"chatId\": \"919066351136@c.us\","
-//				+ "\r\n\t\"message\": \"Kodipalya Report on 24-09-2024 \\n Total Sale : 18000 \\n Total Expense : 45000\"\r\n}";
+            String jsonBody = objectMapper.writeValueAsString(payload);
 
-        var requestEntity = new HttpEntity<>(jsonBody, headers);
+            // Send message to each user via POST request
+            var requestEntity = new HttpEntity<>(jsonBody, headers);
+            var response = restTemplate.exchange(requestUrl.toString(), HttpMethod.POST, requestEntity, String.class);
+            System.out.println(response);
 
-        var response = restTemplate.exchange(requestUrl.toString(), HttpMethod.POST, requestEntity, String.class);
-        System.out.println(response);
-
-        if(response.getStatusCode().is2xxSuccessful()) {
-            System.out.println("Success");
-        }else {
-            System.out.println("Not success");
+            if(response.getStatusCode().is2xxSuccessful()) {
+                System.out.println("Success");
+            }else {
+                System.out.println("Not success");
+            }
         }
     }
 

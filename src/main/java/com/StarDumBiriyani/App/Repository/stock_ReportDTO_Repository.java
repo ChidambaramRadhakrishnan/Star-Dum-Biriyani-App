@@ -18,7 +18,8 @@ public interface stock_ReportDTO_Repository extends JpaRepository<Stock_ReportDT
             "    COALESCE(stk.oil_qty, 0) AS oil_qty, \n" +
             "    COALESCE(stk.ginger_garlic_qty, 0) AS ginger_garlic_qty,\n" +
             "    stk.event_date,  -- Changed from stock_fill_date to event_date\n" +
-            "    stk.stock_fill_date\n" +
+            "    stk.stock_fill_date,\n" +
+            "    stk.inventory_date\n" +
             "FROM \n" +
             "    branch_name a\n" +
             "LEFT JOIN stock_entity stk\n" +

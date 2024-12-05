@@ -430,7 +430,7 @@ public class Inventory_and_Stock_Controlls {
 					"------------------------- \n" +
 					"Note : "+warning_Msg+"";
 
-//			Whatsapp_Configuration.sendMsg(msg);
+			Whatsapp_Configuration.sendMsg(msg);
 
 		}
 		return all_Shop_Service.validateShopCode(id, shopCode);
